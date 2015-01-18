@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/lpbamasa_ci/';
+$config['base_url']	= '';
+//$config['base_url']	= 'http://localhost/lpbamasa_ci/';
 //$config[‘base_url’] ="http://".$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 /*
 |--------------------------------------------------------------------------

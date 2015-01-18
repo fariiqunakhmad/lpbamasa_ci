@@ -9,10 +9,10 @@ class User extends CI_Model {
   
     function login($username, $password) {
         //create query to connect user login database
-        $this->db->select('idk, namak');
-        $this->db->from('kota');
-        $this->db->where('idk', $username);
-        $this->db->where('namak', $password);
+        $this->db->select('*');
+        $this->db->from('pegawai');
+        $this->db->where('nip', $username);
+        $this->db->where('passp', $password);
         $this->db->limit(1);
           
         //get query and processing

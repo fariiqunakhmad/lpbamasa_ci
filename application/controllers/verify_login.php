@@ -3,9 +3,7 @@
 class Verify_login extends CI_Controller {
     function __construct() {
         parent::__construct();
-        //load session and connect to database
         $this->load->model('user','',TRUE);
-        
     }
   
     function index() {
@@ -27,15 +25,18 @@ class Verify_login extends CI_Controller {
         //Field validation succeeded.  Validate against database
         $username = $this->input->post('username');
         //query the database
-        $result = $this->user->login($username, $password);
+        //echo $username, $password;
+        $result = $this->user->login($username,md5($password));
         if($result) {
             $sess_array = array();
             foreach($result as $row) {
                 //create the session
                 $sess_array = array(
-                    'id' => $row->idk,
-                    'username' => $row->namak
+                    'id' => $row->NIP,
+                    'username' => $row->NAMAP
                 );
+                $sess_array['id'];
+                $sess_array['username'];
                 //set session with value from database
                 $this->session->set_userdata('logged_in', $sess_array);
             }
