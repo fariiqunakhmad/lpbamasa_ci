@@ -320,8 +320,14 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>kbk">Komponen Biaya Kuliah</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>jabatan">Jabatan</a>
+                                </li>
                                 <li>
                                     <a href="blank.html">Blank Page</a>
                                 </li>

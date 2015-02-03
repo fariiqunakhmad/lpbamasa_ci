@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,20 +16,21 @@ class tsl extends CI_Controller{
     function __construct()
     {
       parent::__construct();
-      $this->load->model('tslm','',TRUE);
-      $this->load->model('kkm','',TRUE);
+      $this->load->model('tsl_m','',TRUE);
+      $this->load->model('kk_m','',TRUE);
     }
     
     function index()
     {
      $data = array();
 
-     if($query = $this->tslm->get_records())
+     if($query = $this->tsl_m->get_records())
      {
       $data['records'] = $query;
      }
      //$this->load->view('clientresource');
      $this->load->view('maincss');
+     
      $this->load->view('nav');
      $this->load->view('daftar_tsl', $data);
      $this->load->view('mainjs');
@@ -38,12 +39,12 @@ class tsl extends CI_Controller{
         $data = array();
         if ($param==NULL){
             //echo 'param kosong';
-            if($query = $this->kkm->get_records()){
+            if($query = $this->kk_m->get_records()){
                 $data['records'] = $query;
             }
         }else{
             //echo $param;
-            if($query = $this->kkm->get_records_dd($param)){
+            if($query = $this->kk_m->get_records_dd($param)){
                 $data['records'] = $query;
             }
         }
@@ -66,7 +67,7 @@ class tsl extends CI_Controller{
       'STATTSL' => $this->input->post('rstattsl'),
      );
      echo $data['IDTSL'], $data['NIP'], $data['IDKK'], $data['TGLTSL'], $data['URAIANTSL'], $data['DKTSL'], $data['NILAITSL'], $data['STATTSL']; 
-     $this->tslm->add_record($data);
+     $this->tsl_m->add_record($data);
      redirect('tsl', 'refresh');
     }
 

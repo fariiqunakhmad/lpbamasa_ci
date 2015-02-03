@@ -22,17 +22,18 @@ class Home extends CI_Controller{
 
     function index()
     {
-      if($this->session->userdata('logged_in'))
-      {
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
+//      if($this->session->userdata('logged_in'))
+//      {
+//        $session_data = $this->session->userdata('logged_in');
+//        $data['username'] = $session_data['username'];
+        $data['username'] = "admin";
         $this->load->view('home', $data);
-      }
-      else
-      {
-        //Jika tidak ada session di kembalikan ke halaman login
-        redirect('home/login', 'refresh');
-      }
+//      }
+//      else
+//      {
+//        //Jika tidak ada session di kembalikan ke halaman login
+//        redirect('home/login', 'refresh');
+//      }
     }
 
     function login()

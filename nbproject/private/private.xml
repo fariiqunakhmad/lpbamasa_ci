@@ -4,24 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/tsl.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/test_view.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_penggajian.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/tables.html</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_pendaftaran_bmh.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_pendaftaran_wisuda.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_kasbon.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_pembayaran_bk.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_gaji_bulanan.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_pendaftaran_bmh.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_tsl.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_pembayaran_bk.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_absensi_pegawai.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_kasbon.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_absensi_mengajar.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_penggajian.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/config/routes.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_tsl.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_pendaftaran_wisuda.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/system/core/Loader.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/config/database.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/models/kk_m.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/models/user_m.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/home.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/nav.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/kbk.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/config/config.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/models/bmh_m.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/models/tsl_m.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/bmh.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/models/kbk_m.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_kbk.php</file>
         </group>
     </open-files>
 </project-private>

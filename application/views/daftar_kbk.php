@@ -16,46 +16,36 @@ and open the template in the editor.
 	<div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Transaksi Sektor Lain</h1>
+                    <h1 class="page-header">Komponen Biaya Kuliah</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url(); ?>tsl/load_form">Add</a>
+                    <a href="<?php echo base_url(); ?>kbk/load_form">Add</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
                         </div>
                         <div class="panel-body">
-                            <div class="table-responsive">	
+                            <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Tanggal</th>
-                                            <th>Kelompok</th>
-                                            <th>Uraian</th>
-                                            <th>D/K</th>
-                                            <th>Nilai</th>
+                                            <th>Nama</th>
                                             <th>Status</th>
-                                            <th>Pegawai</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if(isset($records)) : foreach($records as $row) : ?>
                                         <tr class="odd gradeX">
-                                            <td><?php echo $row->IDTSL; ?></td>
-                                            <td><?php echo $row->TGLTSL; ?></td>
-                                            <td><?php echo $row->IDKK; ?></td>
-                                            <td><?php echo $row->URAIANTSL; ?></td>
-                                            <td><?php echo $row->DKTSL; ?></td>
-                                            <td><?php echo $row->NILAITSL; ?></td>
-                                            <td><?php echo $row->STATTSL; ?></td>
-                                            <td><?php echo $row->NIP; ?></td>
-                                            <td><?php echo anchor("tsl/delete/$row->IDTSL", 'Delete'); ?> | <?php echo anchor("tsl/update/$row->IDTSL", 'Update'); ?></td>
+                                            <td><?php echo $row->IDKBK; ?></td>
+                                            <td><?php echo $row->NAMAKBK; ?></td>
+                                            <td><?php echo $row->STATR; ?></td>
+                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKBK", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDKBK", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>
 
