@@ -255,11 +255,11 @@ class MY_Model extends CI_Model
             $data = $this->validate($data);
         }
 
-        if ($data !== FALSE)
-        {
-            $result = $this->_database->where($this->primary_key, $primary_value)
-                               ->set($data)
-                               ->update($this->_table);
+        if ($data !== FALSE) {
+            $params=array($this->primary_key, $primary_value);
+            $this->_set_where($params);
+            $this->_database->set($data);
+            $result = $this->_database->update($this->_table);
 
             $this->trigger('after_update', array($data, $result));
 
@@ -279,7 +279,7 @@ class MY_Model extends CI_Model
         $data = $this->trigger('before_update', $data);
 
         if ($skip_validation === FALSE)
-        {
+        {   
             $data = $this->validate($data);
         }
 
@@ -340,12 +340,13 @@ class MY_Model extends CI_Model
     /**
      * Delete a row from the table by the primary value
      */
-    public function delete($id)
+    public function delete($primary_value)
     {
-        $this->trigger('before_delete', $id);
-
-        $this->_database->where($this->primary_key, $id);
-
+        $this->trigger('before_delete', $primary_value);
+        
+        $params=array($this->primary_key, $primary_value);
+        $this->_set_where($params);
+        
         if ($this->soft_delete)
         {
             $result = $this->_database->update($this->_table, array( $this->soft_delete_key => TRUE ));
@@ -610,6 +611,13 @@ class MY_Model extends CI_Model
     {
         return $this->_table;
     }
+    /**
+     * Getter for the primary_key
+     */
+    public function primary_key()
+    {
+        return $this->primary_key;
+    }
 
     /* --------------------------------------------------------------
      * GLOBAL SCOPES
@@ -865,7 +873,7 @@ class MY_Model extends CI_Model
      */
     private function _fetch_primary_key()
     {
-        if($this->primary_key == NULl)
+        if($this->primary_key == NULL)
         {
             $this->primary_key = $this->_database->query("SHOW KEYS FROM `".$this->_table."` WHERE Key_name = 'PRIMARY'")->row()->Column_name;
         }
@@ -874,17 +882,17 @@ class MY_Model extends CI_Model
     /**
      * Set WHERE parameters, cleverly
      */
-    protected function _set_where($params)
+    protected function _set_where($params) 
     {
-        if (count($params) == 1 && is_array($params[0]))
+        if (count($params) == 1 && is_array($params[0])) 
         {
-            foreach ($params[0] as $field => $filter)
+            foreach ($params[0] as $field => $filter) 
             {
-                if (is_array($filter))
+                if (is_array($filter)) 
                 {
                     $this->_database->where_in($field, $filter);
                 }
-                else
+                else 
                 {
                     if (is_int($field))
                     {
@@ -902,20 +910,38 @@ class MY_Model extends CI_Model
             $this->_database->where($params[0]);
         }
     	else if(count($params) == 2)
-		{
+        {    
             if (is_array($params[1]))
             {
-                $this->_database->where_in($params[0], $params[1]);    
+                if(is_array($params[0]))
+                {
+                    $nkey=count($params[0]);
+                    for($i=0;$i<$nkey;$i++)
+                    {
+                        if(is_array($params[1][$i]))
+                        {
+                            $this->_database->where_in($params[0][$i], $params[1][$i]);
+                        }
+                        else
+                        {    
+                            $this->_database->where($params[0][$i], $params[1][$i]);
+                        }        
+                    }
+                }
+                else 
+                {
+                    $this->_database->where_in($params[0], $params[1]);
+                }
             }
             else
             {
                 $this->_database->where($params[0], $params[1]);
             }
-		}
-		else if(count($params) == 3)
-		{
-			$this->_database->where($params[0], $params[1], $params[2]);
-		}
+        }
+        else if(count($params) == 3)
+        {
+            $this->_database->where($params[0], $params[1], $params[2]);
+        }
         else
         {
             if (is_array($params[1]))

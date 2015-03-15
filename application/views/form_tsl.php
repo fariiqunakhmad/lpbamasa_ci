@@ -46,17 +46,15 @@ and open the template in the editor.
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Kelompok</label>
-
-
-                                                        <select class="form-control" name="txtidkk" id="txtidkk">
-                                                            <option value="">Pilih Kelompok</option>
+                                                    <select class="form-control" name="txtidkk" id="txtidkk">
+                                                        <option value="">Pilih Kelompok</option>
                                                         <?php if(isset($records)) : foreach($records as $row) : ?> 
                                                             <option value="<?php echo $row->IDKK; ?>"><?php echo $row->NAMAKK; ?> </option>
                                                             <?php endforeach; ?>
                                                             <?php else : ?> 
                                                             <h2>No records were returned.</h2>
                                                         <?php endif; ?>
-                                                        </select>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Uraian</label>

@@ -1,16 +1,4 @@
-<?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of tsl
- *
- * @author Akhmad Fariiqun Awwa
- */
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Tsl_m extends CI_Model{
     //put your code here
     function __construct() {

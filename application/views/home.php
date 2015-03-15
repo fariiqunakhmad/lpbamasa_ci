@@ -1,22 +1,4 @@
-<?php //if(!$this->session->userdata('logged_in'))echo 'variable is not set';?>
-<!DOCTYPE html>
- <head>
-   <title>Simple Login with CodeIgniter - Private Area</title>
-   <?php include 'clientresource.php'; ?>
- </head>
- <body>
-   
-<div id="wrapper">
-        <?php include 'nav.php'; ?>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
@@ -549,8 +531,3 @@
                 <!-- /.col-lg-4 -->
             </div>
             <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-</div>
- </body>
-</html>
