@@ -21,9 +21,9 @@
                                         <?php $no=1; if(isset($records)) : foreach($records as $row) : ?>
                                         <tr class="gradeA">
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $row->IDKBK; ?></td>
-                                            <td><?php echo $row->NAMAKBK; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
+                                            <td><?php echo $row->NIP; ?></td>
+                                            <td><?php echo $row->NAMAP; ?></td>
+                                            <td><?php echo $row->JKP; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKBK", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDKBK", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>
