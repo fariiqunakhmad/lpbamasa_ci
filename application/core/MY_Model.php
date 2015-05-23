@@ -3,6 +3,7 @@
  * A base model with a series of CRUD functions (powered by CI's query builder),
  * validation-in-model support, event callbacks and more.
  *
+ * made by Jamie Rumbelow and modified by Akhmad Fariiqun Awwaluddin
  * @link http://github.com/jamierumbelow/codeigniter-base-model
  * @copyright Copyright (c) 2012, Jamie Rumbelow <http://jamierumbelow.net>
  */
@@ -36,8 +37,8 @@ class MY_Model extends CI_Model
     /**
      * Support for soft deletes and this model's 'deleted' key
      */
-    protected $soft_delete = FALSE;
-    protected $soft_delete_key = 'deleted';
+    protected $soft_delete = TRUE;
+    protected $soft_delete_key = 'STATR';
     protected $_temporary_with_deleted = FALSE;
     protected $_temporary_only_deleted = FALSE;
 

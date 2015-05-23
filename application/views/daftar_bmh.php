@@ -17,7 +17,7 @@
                                             <th>Mulai</th>
                                             <th>Berakhir</th>
                                             <th>Biaya</th>
-                                            <th>Status</th>
+                                            <th>Ketua Pelaksana</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -31,7 +31,7 @@
                                             <td><?php echo $row->TGLMULAIBMH; ?></td>
                                             <td><?php echo $row->TGLAKHIRBMH; ?></td>
                                             <td><?php echo $row->BIAYABMH; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
+                                            <td><?php echo $row->pegawai->NAMAP; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDBMH", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDBMH", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

@@ -11,7 +11,7 @@ class Kbk extends MY_Controller {
     function get_data_from_form() {
         $data=array(
             'NAMAKBK'   => $this->input->post('txtnamakbk'),
-            'STATR'     => 1
+            'STATR'     => 0
         );
         return $data;
     }

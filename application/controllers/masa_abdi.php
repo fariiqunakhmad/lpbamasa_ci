@@ -10,10 +10,10 @@ class Masa_abdi extends MY_Controller {
     
     function get_data_from_form(){
         $data=array(
-            'TAHUNMINMA'   => $this->input->post('txttahunmin'),
-            'TAHUNMAXMA'   => $this->input->post('txttahunmax'),
-            'NOMINALTA'   => $this->input->post('txtnominalta'),
-            'STATR'     => 1
+            'IDMA'   => $this->input->post('idma'),
+            'TAHUNMINMA'   => $this->input->post('tahunminma'),
+            'NOMINALTA'   => $this->input->post('nominalta'),
+            'STATR'     => 0
         );
         return $data;
     }

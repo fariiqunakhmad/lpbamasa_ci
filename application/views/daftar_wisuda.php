@@ -13,9 +13,10 @@
                                             <th>No.</th>
                                             <th>ID</th>
                                             <th>Tanggal</th>
+                                            <th>Wisuda ke</th>
+                                            <th>Ketua Pelaksana</th>
                                             <th>Tempat</th>
                                             <th>Biaya</th>
-                                            <th>Status</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -25,9 +26,10 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDW; ?></td>
                                             <td><?php echo $row->TGLW; ?></td>
+                                            <td><?php echo $row->PERIODEW; ?></td>
+                                            <td><?php echo $row->pegawai->NAMAP; ?></td>
                                             <td><?php echo $row->TEMPATW; ?></td>
                                             <td><?php echo $row->BIAYAW; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDW", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDW", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

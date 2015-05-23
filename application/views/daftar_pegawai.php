@@ -13,7 +13,7 @@
                                             <th>No.</th>
                                             <th>NIP</th>
                                             <th>Nama</th>
-                                            <th>Status</th>
+                                            <th>Jabatan</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -21,10 +21,10 @@
                                         <?php $no=1; if(isset($records)) : foreach($records as $row) : ?>
                                         <tr class="gradeA">
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $row->NIP; ?></td>
+                                            <td><?php echo anchor($this->uri->slash_segment(1)."detail/$row->NIP", $row->NIP); ?></td>
                                             <td><?php echo $row->NAMAP; ?></td>
-                                            <td><?php echo $row->JKP; ?></td>
-                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKBK", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDKBK", 'Update'); ?></td>
+                                            <td><?php echo $row->jabatan->NAMAJAB; ?></td>
+                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->NIP", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->NIP", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else : ?> 

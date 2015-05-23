@@ -13,9 +13,7 @@
                                             <th>No.</th>
                                             <th>ID</th>
                                             <th>Tahun Min</th>
-                                            <th>Tahun Max</th>
                                             <th>Tunjangan Abdi</th>
-                                            <th>Status</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -25,9 +23,7 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDMA; ?></td>
                                             <td><?php echo $row->TAHUNMINMA; ?></td>
-                                            <td><?php echo $row->TAHUNMAXMA; ?></td>
                                             <td><?php echo $row->NOMINALTA; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDMA", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDMA", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

@@ -10,9 +10,10 @@ class Jabatan extends MY_Controller {
     
     function get_data_from_form(){
         $data=array(
-            'NAMAJAB'   => $this->input->post('txtnamajab'),
-            'NOMINALTJ' => $this->input->post('txttunjanganjab'),
-            'STATR'     => 1
+            'IDJAB'     => $this->input->post('idjab'),
+            'NAMAJAB'   => $this->input->post('namajab'),
+            'NOMINALTJ' => $this->input->post('nominaltj'),
+            'STATR'     => 0
         );
         return $data;
     }

@@ -3,4 +3,6 @@
 class Angkatan_m extends MY_Model{
     public $_table = 'angkatan';
     public $primary_key = 'IDA';
-}
+}   
+/* End of file angkatan_m.php */
+/* Location: ./application/models/angkatan_m.php */

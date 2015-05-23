@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <div id="wrapper">
-	<div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Pendaftaran Wisuda</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <a href="<?php echo base_url(); ?>tsl/load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
                         </div>
                         <div class="panel-body">
-                            <div class="table-responsive">	
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -43,17 +22,17 @@ and open the template in the editor.
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if(isset($records)) : foreach($records as $row) : ?>
-                                        <tr class="odd gradeX">
-                                            <td><?php echo $row->IDTSL; ?></td>
-                                            <td><?php echo $row->TGLTSL; ?></td>
-                                            <td><?php echo $row->IDKK; ?></td>
-                                            <td><?php echo $row->URAIANTSL; ?></td>
-                                            <td><?php echo $row->DKTSL; ?></td>
-                                            <td><?php echo $row->NILAITSL; ?></td>
-                                            <td><?php echo $row->STATTSL; ?></td>
-                                            <td><?php echo $row->NIP; ?></td>
-                                            <td><?php echo anchor("tsl/delete/$row->IDTSL", 'Delete'); ?> | <?php echo anchor("tsl/update/$row->IDTSL", 'Update'); ?></td>
+                                        <?php $no=1; if(isset($records)) : foreach($records as $row) : ?>
+                                        <tr class="odd gradeX">                                            
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $row->IDPW; ?></td>
+                                            <td><?php echo $row->TGLPW; ?></td>
+                                            <td><?php echo $row->mahasiswa->NAMAM; ?></td>
+                                            <td><?php echo $row->CATATANPW; ?></td>
+                                            <td><?php echo $row->IDW; ?></td>
+                                            <td><?php echo $row->BAYARPW; ?></td>
+                                            <td><?php echo $row->pegawai->NAMAP; ?></td>
+                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDPW/$row->NIM", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDPW/$row->NIM", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>
 
@@ -62,9 +41,7 @@ and open the template in the editor.
                                         <?php endif; ?>
                                     </tbody>
                                 </table>
- 
- 
-                                </div>
+                            </div>
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->
@@ -74,20 +51,3 @@ and open the template in the editor.
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-           
-        </div>
-        <!-- /#page-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-    <p>&nbsp;</p>
-    <!-- DataTables JavaScript -->
-    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').dataTable();
-    });
-    </script>
-    </body>
-</html>

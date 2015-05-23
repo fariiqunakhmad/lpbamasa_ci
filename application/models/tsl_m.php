@@ -1,32 +1,21 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Tsl_m extends CI_Model{
-    //put your code here
-    function __construct() {
-        parent::__construct();
-        $this->load->database();
-    }
-    function get_records()
-    {
-     $query = $this->db->get('tsl');
-     return $query->result();
-    }
-
-    function add_record($tsl) 
-    {
-     $this->db->insert('tsl', $tsl);
-     return;
-    }
-
-    function update_record($tsl) 
-    {
-     $this->db->where('idtsl', 12);
-     $this->db->update('tsl', $tsl);
-    }
-
-    function delete_row()
-    {
-     $this->db->where('idtsl', $this->uri->segment(3));
-     $this->db->delete('tsl');
-    }
-    
-}
+class Tsl_m extends MY_Model{
+    public $_table = 'tsl';
+    public $primary_key = 'IDTSL';
+    public $belongs_to = array( 
+        'kk'        => array(
+            'model' => 'kk_m',
+            'primary_key' => 'IDKK' 
+            ),
+        'pegawai'   => array(
+            'model' => 'pegawai_m',
+            'primary_key' => 'NIP' 
+            ),
+        'peg_pegawai'   => array(
+            'model' => 'pegawai_m',
+            'primary_key' => 'PEG_NIP' 
+            )
+        );
+}   
+/* End of file Tsl_m.php */
+/* Location: ./application/models/Tsl_m.php */

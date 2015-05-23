@@ -13,7 +13,6 @@
                                             <th>No.</th>
                                             <th>ID</th>
                                             <th>Nama</th>
-                                            <th>Status</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -23,7 +22,6 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDKK; ?></td>
                                             <td><?php echo $row->NAMAKK; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKK", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDKK", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

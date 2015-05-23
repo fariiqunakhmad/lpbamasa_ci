@@ -7,13 +7,20 @@
 class Wisuda extends MY_Controller {
     protected $title    = "Periode Wisuda";
     protected $model    = 'wisuda_m';
-    
+    protected $related_model= array(
+        'pegawai'  
+    );
+    protected $dd_model = array(
+        'pegawai_m'         => 'NAMAP'
+    );
     function get_data_from_form(){
         $data=array(
-            'TGLW'      => $this->input->post('txttglw'),
-            'TEMPATW'    => $this->input->post('txttempatw'),
-            'BIAYAW'      => $this->input->post('txtbiayaw'),
-            'STATR'         => 1
+            'NIP'       => $this->input->post('nip'),
+            'TGLW'      => $this->input->post('tglw'),
+            'PERIODEW'  => $this->input->post('periodew'),
+            'TEMPATW'   => $this->input->post('tempatw'),
+            'BIAYAW'    => $this->input->post('biayaw'),
+            'STATR'     => 0
         );
         return $data;
     }

@@ -10,15 +10,39 @@
                                     <form name="form1" method="post" action="<?php echo $action; ?>">
                                         <div class="form-group">
                                             <label>Tanggal Pelaksanaan</label>
-                                            <input class="form-control" type="date" name="txttglw" id="txttglw" <?php if($record!=NULL){ echo 'value="'.$record->TGLW.'"' ;}?>>
+                                            <input class="form-control" type="date" name="tglw" id="tglw" <?php if($record!=NULL){ echo 'value="'.$record->TGLW.'"' ;}?>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Wisuda ke</label>
+                                            <input class="form-control" type="text" name="periodew" id="periodew" <?php if($record!=NULL){ echo 'value="'.$record->PERIODEW.'"' ;}?>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ketua Pelaksana</label>    
+                                            <select class="form-control" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
+                                                <option value="">Pilih Ketua Pelaksana</option>
+<?php 
+    if(isset($recordspegawai_m)) :
+        foreach($recordspegawai_m as $key => $val) :
+            if (isset($idaselected) && $key==$idaselected){
+                echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
+            }
+            else {
+                echo "\t\t\t\t\t\t<option value='$key'>$val</option>\n";
+            }
+        endforeach;
+    else :
+        echo "<h2>No records were returned.</h2>";
+    endif;
+?>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Tempat Pelaksanaan</label>
-                                            <input class="form-control" type="text" name="txttempatw" id="txttempatw" <?php if($record!=NULL){ echo 'value="'.$record->TEMPATW.'"' ;}?>>
+                                            <input class="form-control" type="text" name="tempatw" id="tempatw" <?php if($record!=NULL){ echo 'value="'.$record->TEMPATW.'"' ;}?>>
                                         </div>
                                         <div class="form-group">
                                             <label>Biaya</label>
-                                            <input class="form-control" type="text" name="txtbiayaw" id="txtbiayaw" <?php if($record!=NULL){ echo 'value="'.$record->BIAYAW.'"' ;}?>>
+                                            <input class="form-control" type="text" name="biayaw" id="biayaw" <?php if($record!=NULL){ echo 'value="'.$record->BIAYAW.'"' ;}?>>
                                         </div>
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
                                         <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>

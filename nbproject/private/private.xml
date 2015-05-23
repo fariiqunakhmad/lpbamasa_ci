@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/pegawai.php</file>
             <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/kbk.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_pegawai.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/daftar_pegawai.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_laporan.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/core/MY_Model.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/laporan.php</file>
         </group>
     </open-files>
 </project-private>

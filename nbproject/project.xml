@@ -6,6 +6,8 @@
             <name>lpbamasa_ci</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Akademik</word>
+            <word>Jenis</word>
             <word>Mengajar</word>
         </spellchecker-wordlist>
     </configuration>

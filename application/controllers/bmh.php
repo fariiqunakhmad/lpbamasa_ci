@@ -1,20 +1,23 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * Description of bmh
- *
- * @author Akhmad Fariiqun Awwa
- */
+
 class Bmh extends MY_Controller {
     protected $title    = "Kegiatan Bimbingan Manasik Haji";
     protected $model    = 'bmh_m';
+    protected $related_model= array(
+        'pegawai'  
+    );
+    protected $dd_model = array(
+        'pegawai_m'         => 'NAMAP'
+    );
     function get_data_from_form() {
         $data=array(
-            'TAHUNBMH'      => $this->input->post('txttahunbmh'),
-            'PERIODEBMH'    => $this->input->post('txtperiodebmh'),
-            'TGLMULAIBMH'   => $this->input->post('txttglmulaibmh'),
-            'TGLAKHIRBMH'   => $this->input->post('txttglakhirbmh'),
-            'BIAYABMH'      => $this->input->post('txtbiayabmh'),
-            'STATR'         => 1
+            'NIP'           => $this->input->post('nip'),
+            'TAHUNBMH'      => $this->input->post('tahunbmh'),
+            'PERIODEBMH'    => $this->input->post('periodebmh'),
+            'TGLMULAIBMH'   => $this->input->post('tglmulaibmh'),
+            'TGLAKHIRBMH'   => $this->input->post('tglakhirbmh'),
+            'BIAYABMH'      => $this->input->post('biayabmh'),
+            'STATR'         => 0
         );
         return $data;
     }

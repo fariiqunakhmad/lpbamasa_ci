@@ -9,16 +9,16 @@
                                 <div class="col-lg-6">
                                     <form name="form1" method="post" action="<?php echo $action; ?>">
                                         <div class="form-group">
-                                            <label>Jarak Min</label>
-                                            <input autofocus="" class="form-control" type="text" name="txtjarakmin" id="txtjarakmin" <?php if($record!=NULL){ echo 'value="'.$record->JARAKMINJR.'"' ;}?>>
+                                            <label>ID</label>
+                                            <input autofocus="" class="form-control" type="text" name="idjr" id="idjr" <?php if($record!=NULL){ echo 'value="'.$record->IDJR.'"' ;}?>>
                                         </div>
                                         <div class="form-group">
-                                            <label>Jarak Max</label>
-                                            <input class="form-control" type="text" name="txtjarakmax" id="txtjarakmax" <?php if($record!=NULL){ echo 'value="'.$record->JARAKMAXJR.'"' ;}?>>
+                                            <label>Jarak Min</label>
+                                            <input class="form-control" type="text" name="jarakminjr" id="jarakminjr" <?php if($record!=NULL){ echo 'value="'.$record->JARAKMINJR.'"' ;}?>>
                                         </div>
                                         <div class="form-group">
                                             <label>Tunjangan Transport</label>
-                                            <input class="form-control" type="text" name="txtnominaltt" id="txtnominaltt" <?php if($record!=NULL){ echo 'value="'.$record->NOMINALTT.'"' ;}?>>
+                                            <input class="form-control" type="text" name="nominaltt" id="nominaltt" <?php if($record!=NULL){ echo 'value="'.$record->NOMINALTT.'"' ;}?>>
                                         </div>
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
                                         <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>

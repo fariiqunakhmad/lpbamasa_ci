@@ -3,4 +3,6 @@
 class Pekerjaan_m extends MY_Model{
     public $_table = 'pekerjaan';
     public $primary_key = 'IDJ';
-}
+}   
+/* End of file Pekerjaan_m.php */
+/* Location: ./application/models/Pekerjaan_m.php */

@@ -14,7 +14,6 @@
                                             <th>Angkatan</th>
                                             <th>KBK</th>
                                             <th>Biaya</th>
-                                            <th>Status</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -23,9 +22,8 @@
                                         <tr class="gradeA">
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDA; ?></td>
-                                            <td><?php echo $row->IDKBK; ?></td>
+                                            <td><?php echo $row->komponen_biaya_kuliah->NAMAKBK; ?></td>
                                             <td><?php echo $row->BIAYA; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKBK/$row->IDA", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDKBK/$row->IDA", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

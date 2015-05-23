@@ -11,7 +11,7 @@ class Kg extends MY_Controller {
     function get_data_from_form(){
         $data=array(
             'NAMAKG'   => $this->input->post('txtnamakg'),
-            'STATR'     => 1
+            'STATR'     => 0
         );
         return $data;
     }

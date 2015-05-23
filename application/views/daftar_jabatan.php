@@ -14,7 +14,6 @@
                                             <th>ID</th>
                                             <th>Nama</th>
                                             <th>Tunjangan</th>
-                                            <th>Status</th>
                                             <th>Control</th>
                                         </tr>
                                     </thead>
@@ -25,7 +24,6 @@
                                             <td><?php echo $row->IDJAB; ?></td>
                                             <td><?php echo $row->NAMAJAB; ?></td>
                                             <td><?php echo $row->NOMINALTJ; ?></td>
-                                            <td><?php echo $row->STATR; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDJAB", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDJAB", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

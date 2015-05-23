@@ -11,7 +11,7 @@ class Hak_akses extends MY_Controller {
     function get_data_from_form(){
         $data=array(
             'NAMAHAK'   => $this->input->post('txtnamahak'),
-            'STATR'     => 1
+            'STATR'     => 0
         );
         return $data;
     }

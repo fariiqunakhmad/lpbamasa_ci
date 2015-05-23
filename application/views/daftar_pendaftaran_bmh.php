@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <div id="wrapper">
-	<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Pendaftaran Bimbingan Manasik Haji</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url(); ?>tsl/load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -72,20 +53,4 @@ and open the template in the editor.
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-           
-        </div>
-        <!-- /#page-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-    <p>&nbsp;</p>
-    <!-- DataTables JavaScript -->
-    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').dataTable();
-    });
-    </script>
-    </body>
-</html>
+          

@@ -10,10 +10,10 @@ class Jarak_rumah extends MY_Controller {
     
     function get_data_from_form(){
         $data=array(
-            'JARAKMINJR'   => $this->input->post('txtjarakmin'),
-            'JARAKMAXJR'   => $this->input->post('txtjarakmax'),
-            'NOMINALTT'   => $this->input->post('txtnominaltt'),
-            'STATR'     => 1
+            'IDJR'          => $this->input->post('idjr'),
+            'JARAKMINJR'    => $this->input->post('jarakminjr'),
+            'NOMINALTT'     => $this->input->post('nominaltt'),
+            'STATR'         => 0
         );
         return $data;
     }
