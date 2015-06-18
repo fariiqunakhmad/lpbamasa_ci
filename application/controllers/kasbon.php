@@ -23,4 +23,22 @@ class Kasbon extends MY_Controller {
         );
         return $data;
     }
+    function kewajiban_per_pegawai() {
+        $param=array(
+            'STATKB'=>0,
+            'NIP'=>$this->data['userid']
+        );
+        
+        $this->data['title']  = 'Daftar Kabon Belum Lunas';
+        $this->data['table']  = $this->obj;
+        $this->data['records']=$this->mdl->get_many_by($param);
+        $this->view['css']    = 'assets/css/plugins/dataTables.bootstrap.css';
+        $this->view['content']= 'daftar_'.$this->obj;
+        $this->view['js']     = array(
+            'assets/js/plugins/dataTables/jquery.dataTables.js',
+            'assets/js/plugins/dataTables/dataTables.bootstrap.js'
+            );
+        $this->view['script'] = "$('#".$this->data['table']."').dataTable();";
+        $this->page->view($this->view, $this->data);
+    }
 }

@@ -8,8 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logo.png"/>
 
-        <title>SB Admin 2 - Bootstrap Admin Theme</title>
+        <title>SIK LPBA MASA</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -34,37 +35,54 @@
     <body>
         <div class="container">
             <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <center>
+                        <h3>
+                            Sistem Informasi Keuangan
+                        </h3>
+                        <h3>
+                            Lembaga Pengajaran Bahasa Arab Masjid Agung Sunan Ampel
+                        </h3>
+                        <h3>
+                            (LPBA MASA)
+                        </h3>
+                    </center>
+                    
+                </div>
                 <div class="col-md-4 col-md-offset-4">
-                    <div class="login-panel panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Please Sign In</h3>
+                    <center>
+                        <img alt="Brand" src="<?php echo base_url(); ?>assets/images/logo.png" height="150" width="150">
+                        <div class="login-panel panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Silahkan masuk</h3>
+                            </div>
+                            <div class="panel-body">
+                                <?php echo validation_errors(); ?>
+                                <?php
+                                 $aform = 'method="post" role="form"';
+                                echo form_open('authentication/verify_login', $aform);
+                                ?>
+                                <fieldset>
+                                    <div class="form-group">
+                                        <?php
+                                        echo form_input('username',"","class='form-control' placeholder='Username'");
+                                        ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <?php
+                                        echo form_password('password',"","class='form-control' placeholder='Password'");
+                                        ?>
+                                    </div>
+                                        <?php 
+                                        echo form_submit("","Masuk", "class='btn btn-lg btn-success btn-block'");
+                                        ?>
+                                </fieldset>
+                                <?php 
+                                echo form_close();
+                                ?>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <?php echo validation_errors(); ?>
-                            <?php
-                             $aform = 'method="post" role="form"';
-                            echo form_open('authentication/verify_login', $aform);
-                            ?>
-                            <fieldset>
-                                <div class="form-group">
-                                    <?php
-                                    echo form_input('username',"","class='form-control' placeholder='Username'");
-                                    ?>
-                                </div>
-                                <div class="form-group">
-                                    <?php
-                                    echo form_password('password',"","class='form-control' placeholder='Password'");
-                                    ?>
-                                </div>
-                                    <?php 
-                                    echo form_submit("","Login", "class='btn btn-lg btn-success btn-block'");
-                                    ?>
-                            </fieldset>
-                            <?php 
-                            echo form_close();
-                            ?>
-                        </div>
-                    </div>
+                    </center>
                 </div>
             </div>
         </div>

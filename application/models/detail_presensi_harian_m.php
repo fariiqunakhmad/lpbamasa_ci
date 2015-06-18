@@ -13,6 +13,12 @@ class Detail_presensi_harian_m extends MY_Model{
             'primary_key' => 'IDJPH' 
             )
         );
+        function get_like($idjph, $key, $value) {
+            $this->_database->where('IDJPH', $idjph); 
+            $this->_database->like($key, $value);
+            return $this->get_all();
+        }
+        
 }   
 /* End of file detail_presensi_harian_m.php */
 /* Location: ./application/models/detail_presensi_harian_m.php */

@@ -9,30 +9,37 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">	
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>"
+                                       data-search="true"
+                                       data-show-toggle="true"
+                                       data-pagination="true" 
+                                       data-page-size="5" 
+                                       data-page-list="[5, 10, 20, 50, 100, 200]"
+                                       data-show-pagination-switch="true"     
+                                       data-show-export="false">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>ID</th>
-                                            <th>Tanggal</th>
-                                            <th>Periode</th>
-                                            <th>ID Peserta</th>
-                                            <th>Nama Peserta</th>
-                                            <th>Pegawai</th>
-                                            <th>Control</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="center" >No</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >ID</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Tanggal</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Peserta</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Periode</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Biaya</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Pegawai</th>
+                                            <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if(isset($records)) : foreach($records as $row) : ?>
-                                        <tr class="odd gradeX">
-                                            <td><?php echo $row->IDTSL; ?></td>
-                                            <td><?php echo $row->TGLTSL; ?></td>
-                                            <td><?php echo $row->IDKK; ?></td>
-                                            <td><?php echo $row->URAIANTSL; ?></td>
-                                            <td><?php echo $row->DKTSL; ?></td>
-                                            <td><?php echo $row->NILAITSL; ?></td>
-                                            <td><?php echo $row->NIP; ?></td>
-                                            <td><?php echo anchor("tsl/delete/$row->IDTSL", 'Delete'); ?> | <?php echo anchor("tsl/update/$row->IDTSL", 'Update'); ?></td>
+                                        <?php if(isset($records)) : foreach($records as $key => $row) : ?>
+                                        <tr >
+                                            <td><?php echo $key+1; ?></td>
+                                            <td><?php echo $row->IDDAFTARBMH; ?></td>
+                                            <td><?php echo $row->TGLDAFTARBMH; ?></td>
+                                            <td><?php echo $row->IDPBMH.' '.$row->peserta_bmh->NAMAPBMH; ?></td>
+                                            <td><?php echo $row->IDBMH; ?></td>
+                                            <td><?php echo $row->BAYARDAFTARBMH; ?></td>
+                                            <td><?php echo $row->pegawai->NAMAP; ?></td>
+                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDDAFTARBMH", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDDAFTARBMH", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>
 

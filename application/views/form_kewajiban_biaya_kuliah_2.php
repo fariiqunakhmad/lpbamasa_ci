@@ -26,12 +26,12 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php $no=1; if(isset($recordsmahasiswa)) : foreach($recordsmahasiswa as $row) : ?>
-                                                    <tr class="gradeA">
+                                                    <tr >
                                                         <td><?php echo $no++; ?></td>
                                                         <td><?php echo $row->NIM; ?></td>
                                                         <td><?php echo $row->NAMAM; ?></td>
                                                         <?php if(isset($recordsbk)) : foreach($recordsbk as $row1) : ?>
-                                                        <td><input type="checkbox" name="c[<?php echo $row->NIM;?>][<?php echo $row1->IDKBK;?>]"></td>
+                                                        <td><input type="checkbox" name="c[<?php echo $row->NIM;?>][<?php echo $row1->IDKBK;?>]" value="<?php echo $row1->BIAYA;?>"></td>
                                                             
                                                         <?php endforeach; ?>
                                                         <?php else : ?> 

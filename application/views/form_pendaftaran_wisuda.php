@@ -7,68 +7,92 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <form id="form1" name="form1" method="post" action="<?php echo $action; ?>">
+                                <form id="form1" name="form1" method="post" action="<?php echo $action; ?>">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="txtidpw">No Pendaftaran</label>
+                                            <label for="idpw">No Pendaftaran</label>
                                             <input class="form-control" type="text" name="idpw" id="idpw" <?php if($record!=NULL){ echo 'value="'.$record->IDPW.'"' ;}?> />
                                         </div>
                                         <div class="form-group">
-                                            <label for="txttglpw">Tanggal Pendaftaran</label>
-                                            <input class="form-control" type="date" name="tglpw" id="tglpw" <?php if($record!=NULL){ echo 'value="'.$record->TGLPW.'"' ;}?> />
+                                            <label for="tglpw">Tanggal Pendaftaran</label>
+                                            <input class="form-control" type="date" name="tglpw" id="tglpw" <?php if($record!=NULL){ echo 'value="'.$record->TGLPW.'"' ;}else{echo 'value="'.date('Y-m-d').'"' ;}?> />
                                         </div>
+                                        <div class="form-group">
+                                            <label >Mahasiswa</label>
+                                            <select
+                                                class="selectpicker form-control"
+                                                data-live-search="true" 
+                                                onchange="" 
+                                                name="nim" 
+                                                <?php if($record!=NULL){ $nimselected=$record->NIM;}?>>
+                                                <option value="">Pilih Mahasiswa</option>
+                                                <?php
+                                                    if(isset($dd_mahasiswa_m)) :
+                                                        foreach($dd_mahasiswa_m as $key => $val) :
+                                                            if (isset($nimselected) && $key==$nimselected){
+                                                                echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$key $val</option>\n";
+                                                                $namamselected=$val;
+                                                            }
+                                                            else {
+                                                                echo "\t\t\t\t\t\t<option value='$key'>$key $val</option>\n";
+                                                            }
+                                                        endforeach;
+                                                    else :
+                                                        echo "<h2>No records were returned.</h2>";
+                                                    endif;
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Periode Wisuda</label>    
-                                            <select class="form-control" name="idw" id="idw" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDW;}?>>
+                                            <select 
+                                                <?php if($record==NULL){
+                                                    $idaselected=$lastw->IDW;
+                                                }else{
+                                                    $idaselected=$record->IDW;
+                                                }
+                                                ?>
+                                                class="selectpicker form-control"
+                                                data-live-search="true" 
+                                                onchange="getBiayaW(this.value)" 
+                                                name="idw" 
+                                                id="idw">
                                                 <option value="">Pilih Periode Wisuda</option>
-<?php 
-    if(isset($recordswisuda_m)) :
-        foreach($recordswisuda_m as $key => $val) :
-            if (isset($idaselected) && $key==$idaselected){
-                echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
-            }
-            else {
-                echo "\t\t\t\t\t\t<option value='$key'>$val</option>\n";
-            }
-        endforeach;
-    else :
-        echo "<h2>No records were returned.</h2>";
-    endif;
-?>
+                                                <?php 
+                                                    if(isset($dd_wisuda_m)) :
+                                                        foreach($dd_wisuda_m as $key => $val) :
+                                                            if (isset($idaselected) && $key==$idaselected){
+                                                                echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
+                                                            }
+                                                            else {
+                                                                echo "\t\t\t\t\t\t<option value='$key'>$val</option>\n";
+                                                            }
+                                                        endforeach;
+                                                    else :
+                                                        echo "<h2>No records were returned.</h2>";
+                                                    endif;
+                                                ?>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Atas Nama</label>    
-                                            <select class="form-control" name="nim" id="nim" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIM;}?>>
-                                                <option value="">Pilih Mahasiswa </option>
-<?php 
-    if(isset($recordsmahasiswa_m)) :
-        foreach($recordsmahasiswa_m as $key => $val) :
-            if (isset($idaselected) && $key==$idaselected){
-                echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
-            }
-            else {
-                echo "\t\t\t\t\t\t<option value='$key'>$val</option>\n";
-            }
-        endforeach;
-    else :
-        echo "<h2>No records were returned.</h2>";
-    endif;
-?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="txtcatatanpw">Catatan</label>
-                                            <textarea class="form-control" name="catatanpw" id="catatanpw" contenteditable="" cols="45" rows="5" <?php if($record!=NULL){ echo 'value="'.$record->CATATANPW.'"' ;}?>></textarea>
-                                          </div>
                                         <div class="form-group">
                                             <label for="bayarpw">Biaya yang Dibayar</label>
-                                            <input class="form-control" type="text" name="bayarpw" id="bayarpw" <?php if($record!=NULL){ echo 'value="'.$record->BAYARPW.'"' ;}?> />
+                                            <input class="form-control" type="text" name="bayarpw" id="bayarpw" value="<?php if($record==NULL){echo $lastw->BIAYAW;} else { echo $record->BAYARPW;}?>" />
                                         </div>
+                                        <div class="form-group">
+                                            <label for="catatanpw">Catatan</label>
+                                            <textarea class="form-control" name="catatanpw" id="catatanpw" contenteditable="" cols="45" rows="5" ><?php if($record!=NULL){ echo $record->CATATANPW ;}?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
                                         <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
-                                    </form>
-                                </div>
+                                    </div>
+
+
+
+                                </form>
                             </div>
                             <!-- /.row (nested) -->
                         </div>

@@ -9,6 +9,7 @@
             <word>Akademik</word>
             <word>Jenis</word>
             <word>Mengajar</word>
+            <word>Presensi</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

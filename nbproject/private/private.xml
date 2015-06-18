@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/kbk.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_laporan.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/core/MY_Model.php</file>
-            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/laporan.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/sidenav3.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/pendaftaran_wisuda.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/assets/js/modul/pendaftaran_bmh.js</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/pendaftaran_bmh.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/controllers/peserta_bmh.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_peserta_for_pendaftaran_bmh.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/views/form_pendaftaran_bmh.php</file>
+            <file>file:/C:/xampp/htdocs/lpbamasa_ci/application/core/MY_Controller.php</file>
         </group>
     </open-files>
 </project-private>

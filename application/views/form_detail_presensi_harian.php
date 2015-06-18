@@ -6,14 +6,26 @@
                         </div>
                         <div class="panel-body">
                             <form name="form1" method="post" action="<?php echo $action; ?>">
-                                <div class="form-group col-lg-4">
+                                <div class="col-lg-2">
                                     <label>Tanggal</label>
-                                    <input class="form-control-static" type="text" name="tglph" id="tglph" <?php echo "value='".$this->uri->segment(4)."'"?>>
                                 </div>
-                                <div class="form-group col-lg-4">
-                                    <label>Jenis</label>
-                                    <input class="form-control-static" type="text" name="idjph" id="idjph" <?php echo "value='".$this->uri->segment(3)."'"?>>
+                                <div class="col-lg-4">
+                                    <?php echo ': '.$this->uri->segment(4);?>
                                 </div>
+                                <div class="col-lg-2">
+                                    <label>Jenis Presensi</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <?php 
+                                    if($this->uri->segment(3)==1){
+                                        echo ': Piket Dosen';
+                                    } elseif ($this->uri->segment(3)==2) {
+                                        echo ': Pegawai';
+                                    }
+                                    ?>
+                                </div>
+                                <input hidden="true" type="text" name="tglph" id="tglph" value='<?php echo $this->uri->segment(4);?>'>
+                                <input hidden="true" type="text" name="idjph" id="idjph" value='<?php echo $this->uri->segment(3);?>'>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" >
                                         <thead>
@@ -33,10 +45,10 @@
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $row->NIP; ?><input type="text" name="nip[<?php echo $row->NIP; ?>]" value="<?php echo $row->NIP; ?>" hidden=""></td>
                                                 <td><?php echo $row->NAMAP; ?></td>
-                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="Hadir"></td>
-                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="Sakit"></td>
-                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="Izin"></td>
-                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="Alpha"></td>
+                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="h"></td>
+                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="s"></td>
+                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="i"></td>
+                                                <td><input name="ketph[<?php echo $row->NIP; ?>]" type="radio" value="a"></td>
                                             </tr>
                                             <?php endforeach; ?>
                                             <?php else : ?> 
@@ -47,6 +59,7 @@
                                 </div>
                                 <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
                                 <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
+                                <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
                             </form>
                         </div>
                         <!-- /.panel-body -->

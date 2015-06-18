@@ -8,22 +8,30 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
+                                <div class="col-lg-9">
+                                    <div class="col-lg-4">
                                         <label>NIP</label>
-                                        <p class="form-control-static"><?php echo $record->NIP;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->NIP;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Nama</label>
-                                        <p class="form-control-static"><?php echo $record->NAMAP;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->NAMAP;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Tempat/Tanggal Lahir</label>
-                                        <p class="form-control-static"><?php echo $record->kota->NAMAK.", ".$record->TGLLP;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->kota->NAMAK.", ".$record->TGLLP;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Jenis Kelamin</label>
-                                        <p class="form-control-static">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p>: 
                                             <?php 
                                             switch ($record->JKP) {
                                                 case 1:
@@ -38,17 +46,23 @@
                                             ?>
                                         </p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-4">
                                         <label>Alamat</label>
-                                        <p class="form-control-static"><?php echo $record->ALAMATP." ".$record->kota->NAMAK;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->ALAMATP." ".$record->kota->NAMAK;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Telp/HP</label>
-                                        <p class="form-control-static"><?php echo $record->TLPP;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->TLPP;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Kewarganegaraan</label>
-                                        <p class="form-control-static">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p>: 
                                             <?php 
                                             switch ($record->KWNP) {
                                                 case 1:
@@ -63,9 +77,11 @@
                                             ?>
                                         </p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-4">
                                         <label>Status Perkawinan</label>
-                                        <p class="form-control-static">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p>: 
                                             <?php 
                                             switch ($record->STATP) {
                                                 case 0:
@@ -80,17 +96,23 @@
                                             ?>
                                         </p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-4">
                                         <label>Tahun Masuk</label>
-                                        <p class="form-control-static"><?php echo $record->THMASUKP;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->THMASUKP;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Golongan Jarak Rumah</label>
-                                        <p class="form-control-static"><?php echo $record->IDJR;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->IDJR;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Jenis Pegawai</label>
-                                        <p class="form-control-static">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p>: 
                                             <?php 
                                             switch ($record->JENISP) {
                                                 case 1:
@@ -105,13 +127,17 @@
                                             ?>
                                         </p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-4">
                                         <label>Jenjang Pendidikan</label>
-                                        <p class="form-control-static"><?php echo $record->jenjang_pendidikan->NAMAJP;?></p>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->jenjang_pendidikan->NAMAJP;?></p>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label>Jabatan</label>
-                                        <p class="form-control-static"><?php echo $record->jabatan->NAMAJAB;?></p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p>: <?php echo $record->jabatan->NAMAJAB;?></p>
                                     </div> 
                                 </div>                                
                             </div>

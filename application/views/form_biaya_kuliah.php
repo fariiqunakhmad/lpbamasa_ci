@@ -10,11 +10,13 @@
                                     <form name="form1" method="post" action="<?php echo $action; ?>">
                                         <div class="form-group">
                                             <label>Angkatan</label>
-                                            <select class="form-control" name="txtida" id="txtida" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDA;}?>>
+                                            <select class="form-control selectpicker" 
+                                                    data-live-search="true"
+                                                    name="txtida" id="txtida" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDA;}?>>
                                                 <option value="">Pilih Angkatan</option>
 <?php 
-    if(isset($recordsangkatan_m)) :
-        foreach($recordsangkatan_m as $key => $val) :
+    if(isset($dd_angkatan_m)) :
+        foreach($dd_angkatan_m as $key => $val) :
             if (isset($idaselected) && $key==$idaselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }
@@ -30,11 +32,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Komponen</label>
-                                            <select  class="form-control" name="txtidkbk" id="txtidkbk" <?php if($record!=NULL){ echo ''; $idkbkselected=$record->IDKBK;}?>>
+                                            <select class="form-control selectpicker" data-live-search="true" name="txtidkbk" id="txtidkbk" <?php if($record!=NULL){ echo ''; $idkbkselected=$record->IDKBK;}?>>
                                                 <option value="" >Pilih Komponen Biaya</option>
 <?php 
-    if(isset($recordskbk_m)) :
-        foreach($recordskbk_m as $key => $val) :
+    if(isset($dd_kbk_m)) :
+        foreach($dd_kbk_m as $key => $val) :
             if (isset($idkbkselected) && $key==$idkbkselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }

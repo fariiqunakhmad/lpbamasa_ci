@@ -1,4 +1,4 @@
-            <div class="row">
+            <div id="coba" class="row">
                 <div class="col-lg-12">
                     <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
                     <div class="panel panel-default">
@@ -7,19 +7,27 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>">
+                                <table id="<?php echo $table;?>" class="table table-striped table-bordered table-hover" 
+                                       data-search="true"
+                                       data-show-toggle="true"
+                                       data-pagination="true" 
+                                       data-page-size="5" 
+                                       data-page-list="[5, 10, 20, 50, 100, 200]"
+                                       data-show-pagination-switch="true"     
+                                       data-show-export="true"
+                                       >
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
-                                            <th>ID</th>
-                                            <th>Nama</th>
-                                            <th>Tunjangan</th>
-                                            <th>Control</th>
+                                            <th data-halign="center" data-sortable="true" data-align="center">No.</th>
+                                            <th data-halign="center" data-sortable="true">ID</th>
+                                            <th data-halign="center" data-sortable="true">Nama</th>
+                                            <th data-halign="center" data-sortable="true" data-align="right" >Tunjangan</th>
+                                            <th data-halign="center" data-align="center">Control</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no=1; if(isset($records)) : foreach($records as $row) : ?>
-                                        <tr class="gradeA">
+                                        <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDJAB; ?></td>
                                             <td><?php echo $row->NAMAJAB; ?></td>
@@ -42,3 +50,6 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <button id="print" class="btn btn-default" onclick="$('#coba').tableExport({type:'pdf',escape:'false'});">
+            <i class="glyphicon glyphicon-remove"></i> Print
+        </button>

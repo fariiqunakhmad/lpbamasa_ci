@@ -11,14 +11,17 @@ class Home extends CI_Controller{
         if(!$this->session->userdata('logged_in')){
             redirect('authentication', 'refresh');
         }
+        
         //innitial session data
         $session_data = $this->session->userdata('logged_in');
-        $this->data['userid'] = $session_data['id'];
-        $this->data['username'] = $session_data['name'];
-        $this->data['userauthority'] = $session_data['authority'];
+        //print_r($session_data);
+        $this->data['userid']   = $this->session->userdata('logged_in')['id'];
+        $this->data['username'] = $this->session->userdata('logged_in')['name'];
+        $this->data['authority']= $this->session->userdata('logged_in')['authority'];
+        $this->data['useras']   = $this->session->userdata('logged_in')['useras'];
         
-        $this->view['topnav'] ='admin_topnav';
-        $this->view['sidenav']='admin_sidenav';
+        $this->view['sidenav']='sidenav'.$this->data['useras']['id'];
+        $this->view['topnav'] ='topnav';
     }
     function index() {
         
@@ -27,7 +30,7 @@ class Home extends CI_Controller{
             'assets/css/plugins/timeline.css',
             'assets/css/plugins/morris.css'
         );
-        $this->view['content']='home';
+        //$this->view['content']='home';
         $this->view['js']     =array(
             'assets/js/plugins/morris/raphael.min.js',
             'assets/js/plugins/morris/morris.min.js',

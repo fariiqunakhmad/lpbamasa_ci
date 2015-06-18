@@ -35,11 +35,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Ketua Pelaksana</label>    
-                                            <select class="form-control" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
+                                            <select data-live-search="true" class="selectpicker form-control" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
                                                 <option value="">Pilih Ketua Pelaksana</option>
 <?php 
-    if(isset($recordspegawai_m)) :
-        foreach($recordspegawai_m as $key => $val) :
+    if(isset($dd_pegawai_m)) :
+        foreach($dd_pegawai_m as $key => $val) :
             if (isset($idaselected) && $key==$idaselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }

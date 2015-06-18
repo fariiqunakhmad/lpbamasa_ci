@@ -37,4 +37,72 @@ class Tsl extends MY_Controller {
         );
         return $data;
     }
+    public function insert() {
+        $data = $this->get_data_from_form();
+        $this->mdl->insert($data);
+        redirect($this->obj, 'refresh');
+//        $mydat=array(
+//            'first_name'=>'akhmad',
+//            'last_name' =>'fariiqun'
+//        );
+//        $this->dopdf($mydat);
+    }
+     function buatpdf()
+    {
+        $this->load->library('fpdf');
+        $pdf = new FPDF();
+        $pdf->fontpath='system/fonts/';
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','',12);
+        $teks = "Cara Gampang Integrasi FPDF dengan Codeigniter";
+        // mencetak 10 baris kalimat dalam variable "teks".
+        for( $i=0; $i < 10; $i++ ) {
+            $pdf->Cell(0, 5, $teks, 1, 1, 'L'); 
+        }
+        $pdf->Output();
+    }
+    function dopdf($mydat){
+
+            //$this->output->enable_profiler(false);
+            //$this->load->library('parser');
+            require_once(APPPATH.'third_party/html2pdf_v4.03/html2pdf.class.php');
+
+            // set vars
+            $tpl_path = 'path/to/view_tpl.php';
+            $thefullpath = '/path/to/file_pdf.pdf';
+            $preview = true;
+            $previewpath = '/path/to/preview_pdf.pdf';
+
+
+            // PDFs datas
+            $datas = array(
+              'first_name' => $mydat['first_name'],
+              'last_name'  => $mydat['last_name'],
+              'site_title' => config_item('site_title'),
+            );
+
+            // Encode datas to utf8
+            $tpl_data = array_map('utf8_encode',$datas);
+
+
+            // 
+            // GENERATE PDF AND SAVE FILE (OR OUTPUT)
+            //
+
+            //$content = $this->parser->parse($tpl_path, $tpl_data, TRUE);
+            $content = $this->load->view('kosong', '', TRUE);
+            $html2pdf = new HTML2PDF('P','A4','fr', true, 'UTF-8',  array(7, 7, 10, 10));
+            $html2pdf->pdf->SetAuthor($tpl_data['site_title']);
+            $html2pdf->pdf->SetTitle($tpl_data['site_title']);
+            $html2pdf->pdf->SetSubject($tpl_data['site_title']);
+            $html2pdf->pdf->SetKeywords($tpl_data['site_title']);
+            $html2pdf->pdf->SetProtection(array('print'), '');//allow only view/print
+            $html2pdf->WriteHTML($content);
+            if (!$preview) //save
+              $html2pdf->Output($thefullpath, 'F');
+            else { //save and load
+              $html2pdf->Output($previewpath, 'D');
+            }
+
+        }
 }

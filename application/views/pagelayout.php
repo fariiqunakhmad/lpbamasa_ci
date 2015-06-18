@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logo.jpg"/>
+        <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <title><?php echo $title; ?></title>
 
         <!-- Bootstrap Core CSS -->
@@ -30,6 +30,12 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <script type="text/javascript">
+            var config = {
+                base: "<?php echo base_url(); ?>",
+                someOtherPref: 4
+            };
+        </script>
     </head>
     <body>
         <div id="wrapper">
@@ -42,7 +48,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo base_url(); ?>">Sistem Informasi Keuangan LPBA MASA</a>
+                    <a class="navbar-brand" href="<?php echo base_url(); ?>">
+                        <b> Sistem Informasi Keuangan LPBA MASA</b>
+                    </a>
                 </div>
                 <!-- /.navbar-header -->
                 <ul class="nav navbar-top-links navbar-right">
@@ -73,7 +81,7 @@
                 </div>
                 <!-- /.row -->
                 <!--call content-->
-    <?php echo $content; ?>
+                <?php echo $content; ?>
             </div>
             <!-- /#page-wrapper -->
 

@@ -14,15 +14,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Tanggal</label>
-                                            <input class="form-control" type="date" name="tglkb" id="tglkb" <?php if($record!=NULL){ echo 'value="'.$record->TGLKB.'"' ;}?>>
+                                            <input class="form-control" type="date" name="tglkb" id="tglkb" <?php if($record!=NULL){ echo 'value="'.$record->TGLKB.'"' ;}else{echo 'value="'.date('Y-m-d').'"' ;}?>>
                                         </div>
                                         <div class="form-group">
                                             <label for="nip">Pemohon</label>
-                                            <select class="form-control" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
+                                            <select data-live-search="true" class="form-control selectpicker" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
                                                 <option value="">Pilih Pemohon</option>
 <?php 
-    if(isset($recordspegawai_m)) :
-        foreach($recordspegawai_m as $key => $val) :
+    if(isset($dd_pegawai_m)) :
+        foreach($dd_pegawai_m as $key => $val) :
             if (isset($idaselected) && $key==$idaselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }

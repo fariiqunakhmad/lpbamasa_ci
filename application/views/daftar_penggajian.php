@@ -7,16 +7,23 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>">
+                                <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>"
+                                       data-search="true"
+                                       data-show-toggle="true"
+                                       data-pagination="true" 
+                                       data-page-size="5" 
+                                       data-page-list="[5, 10, 20, 50, 100, 200]"
+                                       data-show-pagination-switch="true"     
+                                       data-show-export="false">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>ID</th>
-                                            <th>Bulan</th>
-                                            <th>Tahun</th>
-                                            <th>Petugas</th>
-                                            <th>Tanggal Setup</th>
-                                            <th>Control</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="center" >No</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >ID</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Bulan</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Tahun</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Petugas</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Tanggal Setup</th>
+                                            <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
                                     <tbody>

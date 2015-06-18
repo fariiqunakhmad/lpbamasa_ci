@@ -15,15 +15,15 @@
 
                                         <div class="form-group">
                                             <label>Tanggal</label>
-                                            <input class="form-control" type="date" name="tgltsl" id="tgltsl" <?php if($record!=NULL){ echo 'value="'.$record->TGLTSL.'"' ;}?>>
+                                            <input class="form-control" type="date" name="tgltsl" id="tgltsl" <?php if($record!=NULL){ echo 'value="'.$record->TGLTSL.'"' ;}else{echo 'value="'.date('Y-m-d').'"' ;}?>>
                                         </div>
                                         <div class="form-group">
                                             <label>Penerima/Penyetor</label>    
-                                            <select class="form-control" name="peg_nip" id="peg_nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->PEG_NIP;}?>>
+                                            <select data-live-search="true" class="form-control selectpicker" name="peg_nip" id="peg_nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->PEG_NIP;}?>>
                                                 <option value="">Pilih Penerima/Penyetor</option>
 <?php 
-    if(isset($recordspegawai_m)) :
-        foreach($recordspegawai_m as $key => $val) :
+    if(isset($dd_pegawai_m)) :
+        foreach($dd_pegawai_m as $key => $val) :
             if (isset($idaselected) && $key==$idaselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }
@@ -39,11 +39,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Kelompok</label>
-                                            <select class="form-control" name="idkk" id="idkk" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDKK;}?>>
+                                            <select data-live-search="true" class="selectpicker form-control" name="idkk" id="idkk" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDKK;}?>>
                                                 <option value="">Pilih Kelompok</option>
 <?php 
-    if(isset($recordskk_m)) :
-        foreach($recordskk_m as $key => $val) :
+    if(isset($dd_kk_m)) :
+        foreach($dd_kk_m as $key => $val) :
             if (isset($idaselected) && $key==$idaselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }

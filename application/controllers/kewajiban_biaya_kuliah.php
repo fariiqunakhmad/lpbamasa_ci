@@ -8,7 +8,6 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
         'angkatan',
         'periode_akademik',
         'mahasiswa',
-        'biaya_kuliah',
         'pembayaran_biaya_kuliah'
     );
     protected $dd_model = array(
@@ -20,13 +19,15 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
         $this->data['table']  = $this->obj;
         $this->data['records']=$this->mdl->get_all();
         
-        $this->view['css']    = 'assets/css/plugins/dataTables.bootstrap.css';
+        $this->view['css']    = 'assets/css/plugins/bootstrap-table.css';
         $this->view['content']= 'daftar_'.$this->obj;
         $this->view['js']     = array(
-            'assets/js/plugins/dataTables/jquery.dataTables.js',
-            'assets/js/plugins/dataTables/dataTables.bootstrap.js'
+            'assets/js/plugins/bootstrap-table/bootstrap-table.js',
+            'assets/js/plugins/bootstrap-table/export/bootstrap-table-export.js',
+            'assets/js/plugins/bootstrap-table/export/jquery.plugin/tableExport.js',
+            'assets/js/plugins/bootstrap-table/export/jquery.plugin/jquery.base64.js',
             );
-        $this->view['script'] = "$('#".$this->data['table']."').dataTable();";
+        $this->view['script'] = "$('#".$this->data['table']."').bootstrapTable();";
         $this->page->view($this->view, $this->data);
     }
     function get_data_from_form() {
@@ -35,11 +36,12 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
         foreach ($this->input->post('c') as $key => $value) {
             foreach ($value as $key1 => $value1) {
                 if($value1){
-                    $data[$a]['IDKBK']=$key1;
-                    $data[$a]['IDA']=$this->input->post('ida');
-                    $data[$a]['IDPA']=$this->input->post('idpa');
-                    $data[$a]['NIM']=$key;
-                    $data[$a]['STATR']=0;
+                    $data[$a]['IDKBK']      =$key1;
+                    $data[$a]['IDA']        =$this->input->post('ida');
+                    $data[$a]['IDPA']       =$this->input->post('idpa');
+                    $data[$a]['BIAYAKBK']   =$value1;
+                    $data[$a]['NIM']        =$key;
+                    $data[$a]['STATR']      =0;
                 }
                 $a++;
             }
@@ -67,7 +69,7 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
             
                                                     
             
-            $this->view['css']    = 'assets/css/plugins/dataTables.bootstrap.css';
+            $this->view['css']    = 'assets/js/plugins/bootstrap-table/bootstrap-table.js';
             $this->view['content']= 'daftar_'.$this->obj;
             $this->view['content']='form_'.$this->obj.'_2';
             $this->data['action'] = base_url().$this->obj.'/insert';
@@ -77,11 +79,13 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
             if($this->dd_model != null){
                 foreach ($this->dd_model as $mdl => $value) {
                     $this->load->model($mdl);
-                    $this->data["records$mdl"] =  $this->$mdl->dropdown($value);
+                    $this->data["dd_$mdl"] =  $this->$mdl->dropdown($value);
                 } 
             }
             $this->view['content']='form_'.$this->obj.'_1';
             $this->data['action'] = base_url().$this->obj.'/load_form';
+            $this->view['css']  ='assets/css/plugins/select/bootstrap-select.css';
+            $this->view['js']   ='assets/js/plugins/select/bootstrap-select.js';
           
         }
         $this->page->view($this->view, $this->data);

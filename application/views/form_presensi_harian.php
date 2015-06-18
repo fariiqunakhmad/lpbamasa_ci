@@ -13,8 +13,8 @@
                                             <select class="form-control" name="idjph" id="idjph" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDJPH;}?>>
                                                 <option value="">Pilih Jenis Presensi Harian</option>
 <?php 
-    if(isset($recordsjenis_presensi_harian_m)) :
-        foreach($recordsjenis_presensi_harian_m as $key => $val) :
+    if(isset($dd_jenis_presensi_harian_m)) :
+        foreach($dd_jenis_presensi_harian_m as $key => $val) :
             if (isset($idaselected) && $key==$idaselected){
                 echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
             }
