@@ -90,6 +90,6 @@ class Page {
             } else {
                 $data['content']    ="\n";
             }
-            $this->_ci->load->view('pagelayout.php',$data);
+            $this->_ci->load->view('template/pagelayout.php',$data);
 	}
 }

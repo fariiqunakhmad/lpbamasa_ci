@@ -33,29 +33,19 @@ class Laporan extends CI_Controller{
     function __construct() {
         parent::__construct();
         //check session
-        if(!$this->session->userdata('logged_in')){
-            redirect('authentication', 'refresh');
-        }
+        is_loged_in();
         //innitial session data
         $session_data = $this->session->userdata('logged_in');
-        $this->data['userid'] = $session_data['id'];
+        //print_r($session_data);
+        $this->data['userid']   = $session_data['id'];
         $this->data['username'] = $session_data['name'];
-        $this->data['userauthority'] = $session_data['authority'];
+        $this->data['authority']= $session_data['authority'];
+        $this->data['useras']   = $session_data['useras'];
         
-        $this->view['topnav'] = 'admin_topnav';
-        $this->view['sidenav']= 'admin_sidenav';
-        
-        
-        //innitial name of this class object
+        $this->view['sidenav']='template/sidenav'.$this->data['useras']['id'];
+        $this->view['topnav'] ='template/topnav';
+        //innitial name of this/controller class object
         $this->obj = $this->uri->segment(1);
-        
-        //load model
-        $this->load->model($this->model,'mdl');
-        if($this->related_model != null){
-            foreach ($this->related_model as $value) {
-                $this->mdl->with($value);
-            }
-        }
         
     }
     function index() {
@@ -75,27 +65,52 @@ class Laporan extends CI_Controller{
         $this->data['title']  ='Form '.$this->title;
         $this->data['record'] = NULL;
         $this->data['action'] = base_url().$this->obj.'/generate';
-        $this->view['content']='form_'.$this->obj;
+        $this->view['content']=  $this->obj.'/form_'.$this->obj;
         $this->page->view($this->view, $this->data);
     }
-    function insert() {
-        $data = $this->get_data_from_form();
-        $this->mdl->insert($data);
-        redirect($this->obj, 'refresh');
+    function generate() {
+        $date = $this->get_data_from_form();
+        //$this->data['pbk']=$this->rekap_pembayaran_biaya_kuliah($date[0], $date[1]);
+        $this->data['pbk']      =  $this->rekap('pembayaran_biaya_kuliah_m', 'TGLPBK', $date[0], $date[1], 'NOMINALPBK');
+        $this->data['pbw']      =  $this->rekap('pendaftaran_wisuda_m', 'TGLPW', $date[0], $date[1], 'BAYARPW');
+        $this->data['pbb']      =  $this->rekap('pendaftaran_bmh_m', 'TGLDAFTARBMH', $date[0], $date[1], 'BAYARDAFTARBMH');
+        $this->data['kasbon']   =  $this->rekap('kasbon_m', 'TGLKB', $date[0], $date[1], 'NOMINALKB');
+        $this->data['pbk1']     =  $this->rekap('pembayaran_biaya_kuliah_m', 'TGLPBK', $date[0], $date[1], 'NOMINALPBK');
+        
+        $this->data['title']  = 'Daftar '.$this->title;
+        $this->data['table']  = $this->obj;
+        //$this->data['records']=$this->mdl->get_all();
+        $this->view['css']    = 'assets/css/plugins/dataTables.bootstrap.css';
+        $this->view['content']= $this->obj.'/'.$this->obj;
+        $this->view['js']     = array(
+            'assets/js/plugins/dataTables/jquery.dataTables.js',
+            'assets/js/plugins/dataTables/dataTables.bootstrap.js'
+            );
+        $this->view['script'] = "$('#".$this->data['table']."').dataTable();";
+        $this->page->view($this->view, $this->data);
     }
-    function update() {
-        $data = $this->get_data_from_form();
-        $id= $this->get_id_from_param();
-        $this->mdl->update($id, $data);
-        redirect($this->obj, 'refresh');
+    private function rekap_pembayaran_biaya_kuliah ($date1, $date2) {
+        $this->load->model('pembayaran_biaya_kuliah_m');
+        $row = $this->pembayaran_biaya_kuliah_m->get_in_a_range('TGLPBK', $date1, $date2);
+        $total=0;
+        foreach ($row as $value) {
+            $total += $value->NOMINALPBK;
+        }
+        return $total;
     }
-    function delete() {
-        $id= $this->get_id_from_param();
-        $this->mdl->delete($id);
-        redirect($this->obj, 'refresh');
+    private function rekap($model, $param, $value1, $value2, $col) {
+        $this->load->model($model);
+        $row = $this->$model->get_in_a_range($param, $value1, $value2);
+        $total=0;
+        foreach ($row as $value) {
+            $total += $value->$col;
+        }
+        return $total;
     }
+    
     protected function get_data_from_form() {
-        $data=array();
+        $data=array($this->input->post('tgl1'),$this->input->post('tgl2'),
+        );
         return $data;
     }
     

@@ -62,7 +62,7 @@ class Presensi_harian extends MY_Controller{
             if($bulan!=NULL){
                 $this->view['script']   = "showDetailDaftarPresensiHarian(".$idjph.",'".$bulan."');";
             }
-            $this->view['content']  = 'daftar_presensi_harian_per_jph';
+            $this->view['content']  = $this->obj.'/daftar_presensi_harian_per_jph';
             $this->page->view($this->view, $this->data);
         }
     }
@@ -86,7 +86,7 @@ class Presensi_harian extends MY_Controller{
         $this->data['pegawai']    =$this->pegawai_m->get_many_by('JENISP',$idjph);
         $this->data['table']    = 'detail_daftar_presensi_pegawai';
         $this->data['idjph']    =$idjph;
-        $this->load->view('detail_daftar_presensi_harian', $this->data);
+        $this->load->view($this->obj.'/detail_daftar_presensi_harian', $this->data);
     }
     public function load_form() {
         $idjph=$this->uri->segment(3);
@@ -108,6 +108,7 @@ class Presensi_harian extends MY_Controller{
         
         $this->load->model('presensi_harian_m');
         $inactivedatesarray=  $this->presensi_harian_m->get_dates($idjph);
+        $inactivedates='';
         foreach ($inactivedatesarray as $key=>$value) {
             $date=date_format(date_create($value->TGLPH),"m/d/Y") ;
             if($key>0){

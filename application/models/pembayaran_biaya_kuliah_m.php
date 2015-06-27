@@ -15,7 +15,9 @@ class Pembayaran_biaya_kuliah_m extends MY_Model{
             'model' => 'mahasiswa_m',
             'primary_key' => 'NIM' 
             )
+        
         );
+        
 }   
 /* End of file Pembayaran_biaya_kuliah_m.php */
 /* Location: ./application/models/Pembayaran_biaya_kuliah_m.php */

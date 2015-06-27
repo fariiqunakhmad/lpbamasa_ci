@@ -42,7 +42,7 @@ class Pendaftaran_bmh extends MY_Controller {
             $this->data['action'] = base_url().$this->obj.'/update'.$param;
         }
         
-        $this->view['content']='form_'.$this->obj;
+        $this->view['content']=$this->obj.'/form_'.$this->obj;
         $this->page->view($this->view, $this->data);
     }
     function get_data_from_form() {
@@ -107,7 +107,7 @@ class Pendaftaran_bmh extends MY_Controller {
     }
     function load_form_peserta_bmh() {
         $this->make_dd_resource();
-        $this->load->view('form_peserta_for_pendaftaran_bmh', $this->data);
+        $this->load->view($this->obj.'/form_peserta_for_pendaftaran_bmh', $this->data);
         //print_r($this->data);
     }
     

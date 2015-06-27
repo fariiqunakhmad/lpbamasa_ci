@@ -54,7 +54,6 @@ class Presensi_mengajar extends MY_Controller{
         $this->data['table']    = 'detail_daftar_presensi_pegawai';
         $this->load->view('detail_daftar_presensi_mengajar', $this->data);
     }
-    
     function get_kmk() {
         $idkmk = $this->uri->segment(3);
         $this->mdl->order_by('PERTEMUAN', 'DESC');

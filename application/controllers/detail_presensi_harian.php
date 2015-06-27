@@ -26,7 +26,7 @@ class Detail_presensi_harian extends MY_Controller{
         $this->data['tglph']  = $this->uri->segment(4);
         
         $this->view['css']    = 'assets/css/plugins/dataTables.bootstrap.css';
-        $this->view['content']= 'daftar_'.$this->obj;
+        $this->view['content']= $this->obj.'/daftar_'.$this->obj;
         $this->view['js']     = array(
             'assets/js/plugins/dataTables/jquery.dataTables.js',
             'assets/js/plugins/dataTables/dataTables.bootstrap.js'
@@ -55,12 +55,13 @@ class Detail_presensi_harian extends MY_Controller{
 //            $this->data['record'] = $this->mdl->get($id);
 //            $this->data['action'] = base_url().$this->obj.'/update'.$param;
 //        }
-        if($this->dd_model != null){
-            foreach ($this->dd_model as $mdl => $value) {
-                $this->load->model($mdl);
-                $this->data["records$mdl"] =  $this->$mdl->dropdown($value);
-            } 
-        }
+        
+//        if($this->dd_model != null){
+//            foreach ($this->dd_model as $mdl => $value) {
+//                $this->load->model($mdl);
+//                $this->data["records$mdl"] =  $this->$mdl->dropdown($value);
+//            } 
+//        }
         $this->load->model('pegawai_m');
         if($this->uri->segment(3)==1){
             $jenisp=1;
@@ -69,7 +70,7 @@ class Detail_presensi_harian extends MY_Controller{
         }
         
         $this->data['records_pegawai']= $this->pegawai_m->get_many_by('JENISP',$jenisp);
-        $this->view['content']='form_'.$this->obj;
+        $this->view['content']=$this->obj.'/form_'.$this->obj;
         $this->page->view($this->view, $this->data);
     }
     function insert() {
@@ -83,8 +84,9 @@ class Detail_presensi_harian extends MY_Controller{
     }
     function reset() {
         $param = $this->get_id_from_url();
-        $this->mdl->delete_by($param);
-        redirect('presensi_harian', 'refresh');
+        print_r($param);
+        //$this->mdl->delete_by($param);
+        //redirect('presensi_harian', 'refresh');
     }
     protected function get_data_from_form() {
         foreach ($this->input->post('nip') as $key => $value) {

@@ -8,20 +8,19 @@ class Home extends CI_Controller{
         parent::__construct();
         $this->load->helper(array('form', 'html'));
         //check session
-        if(!$this->session->userdata('logged_in')){
-            redirect('authentication', 'refresh');
-        }
-        
+        is_loged_in();
         //innitial session data
         $session_data = $this->session->userdata('logged_in');
         //print_r($session_data);
-        $this->data['userid']   = $this->session->userdata('logged_in')['id'];
-        $this->data['username'] = $this->session->userdata('logged_in')['name'];
-        $this->data['authority']= $this->session->userdata('logged_in')['authority'];
-        $this->data['useras']   = $this->session->userdata('logged_in')['useras'];
+        $this->data['userid']   = $session_data['id'];
+        $this->data['username'] = $session_data['name'];
+        $this->data['authority']= $session_data['authority'];
+        $this->data['useras']   = $session_data['useras'];
         
-        $this->view['sidenav']='sidenav'.$this->data['useras']['id'];
-        $this->view['topnav'] ='topnav';
+        $this->view['sidenav']='template/sidenav'.$this->data['useras']['id'];
+        $this->view['topnav'] ='template/topnav';
+        //print_session('Home');
+
     }
     function index() {
         

@@ -17,10 +17,10 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
     function index() {
         $this->data['title']  = 'Daftar '.$this->title;
         $this->data['table']  = $this->obj;
-        $this->data['records']=$this->mdl->get_all();
+        $this->data['records']= $this->mdl->get_all();
         
         $this->view['css']    = 'assets/css/plugins/bootstrap-table.css';
-        $this->view['content']= 'daftar_'.$this->obj;
+        $this->view['content']= $this->obj.'/daftar_'.$this->obj;
         $this->view['js']     = array(
             'assets/js/plugins/bootstrap-table/bootstrap-table.js',
             'assets/js/plugins/bootstrap-table/export/bootstrap-table-export.js',
@@ -70,23 +70,22 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
                                                     
             
             $this->view['css']    = 'assets/js/plugins/bootstrap-table/bootstrap-table.js';
-            $this->view['content']= 'daftar_'.$this->obj;
-            $this->view['content']='form_'.$this->obj.'_2';
+            //$this->view['content']= 'daftar_'.$this->obj;
+            $this->view['content']= $this->obj.'/form_'.$this->obj.'_2';
             $this->data['action'] = base_url().$this->obj.'/insert';
 
         } else{
             $this->data['title']  ='Form Setup '.$this->title;
+            $this->data['action']   = base_url().$this->obj.'/load_form';
             if($this->dd_model != null){
                 foreach ($this->dd_model as $mdl => $value) {
                     $this->load->model($mdl);
                     $this->data["dd_$mdl"] =  $this->$mdl->dropdown($value);
                 } 
             }
-            $this->view['content']='form_'.$this->obj.'_1';
-            $this->data['action'] = base_url().$this->obj.'/load_form';
-            $this->view['css']  ='assets/css/plugins/select/bootstrap-select.css';
-            $this->view['js']   ='assets/js/plugins/select/bootstrap-select.js';
-          
+            $this->view['content']  = $this->obj.'/form_'.$this->obj.'_1';
+            $this->view['css']      = 'assets/css/plugins/select/bootstrap-select.css';
+            $this->view['js']       = 'assets/js/plugins/select/bootstrap-select.js';
         }
         $this->page->view($this->view, $this->data);
     }

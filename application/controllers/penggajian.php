@@ -24,7 +24,10 @@ class Penggajian extends MY_Controller {
     public function insert() {
         //parent::insert();
         $this->load->model('detail_presensi_harian_m');
-        $this->data['records']=$this->detail_presensi_harian_m->group_by('NIP')->count_by('KETPH', 'H');
+        $i = $this->detail_presensi_harian_m->rekap_kehadiran();
+        print_r($i);
+        
+        
         
     }
 }

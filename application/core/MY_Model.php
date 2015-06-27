@@ -174,6 +174,12 @@ class MY_Model extends CI_Model
 
         return $this->get_all();
     }
+    
+    function get_in_a_range($param, $value1, $value2) {
+        $this->_database->where($param.' >=', $value1);
+        $this->_database->where($param.' <=', $value2);
+        return $this->get_all();
+    }
 
     /**
      * Fetch all the records in the table. Can be used as a generic call
@@ -777,6 +783,10 @@ class MY_Model extends CI_Model
         $this->_database->limit($limit, $offset);
         return $this;
     }
+    public function group_by($param) {
+        $this->_database->group_by($param);
+        return $this;
+    }
 
     /* --------------------------------------------------------------
      * INTERNAL METHODS
@@ -964,4 +974,6 @@ class MY_Model extends CI_Model
         $method = ($multi) ? 'result' : 'row';
         return $this->_temporary_return_type == 'array' ? $method . '_array' : $method;
     }
+    
+    
 }

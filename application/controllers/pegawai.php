@@ -19,9 +19,7 @@ class Pegawai extends MY_Controller {
         'jabatan_m'             => 'NAMAJAB',
         'jenjang_pendidikan_m'  => 'NAMAJP'
     );
-    public function __construct() {
-        parent::__construct();
-    }
+    
     function get_data_from_form() {
         $idma= $this->determine_masa_abdi($this->input->post('thmasukp'));
         $data=array(
@@ -50,24 +48,27 @@ class Pegawai extends MY_Controller {
         return $data;
     }
     
-//    public function load_form() {
-//        $id=$this->get_id_from_url();
-//        if ($id == NULL){
-//            $this->data['title']  ='Form Insert '.$this->title;
-//            $this->data['NIP'] = $this->generate_nip();
-//            $this->data['action'] = base_url().$this->obj.'/insert';
-//        }else{
-//            $param= $this->make_url_param($id);
-//            $this->data['title']  ='Form Update '.$this->title;
-//            $this->data['record'] = $this->mdl->get($id);
-//            $this->data['action'] = base_url().$this->obj.'/update'.$param;
-//        }
-//        $this->make_dd_resource();
-//        $this->view['content']='form_'.$this->obj;
-//        $this->page->view($this->view, $this->data);
-//    }
-    function generate_nip() {
-        //echo date("Y");
+    public function load_form() {
+        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+            $id=$this->get_id_from_url();
+            if ($id == NULL){
+                $this->data['title']  ='Form Insert '.$this->title;
+                $this->data['NIP'] = $this->generate_nip();
+                $this->data['action'] = base_url().$this->obj.'/insert';
+            }else{
+                $param= $this->make_url_param($id);
+                $this->data['title']  ='Form Update '.$this->title;
+                $this->data['record'] = $this->mdl->get($id);
+                $this->data['action'] = base_url().$this->obj.'/update'.$param;
+            }
+            $this->make_dd_resource();
+            $this->view['content']=$this->obj.'/form_'.$this->obj;
+            $this->page->view($this->view, $this->data);
+        } else {
+            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+        }
+    }
+    private function generate_nip() {
         $no= $this->mdl
                 ->order_by('NIP', $order = 'DSC')
                 ->limit(1)
@@ -78,10 +79,9 @@ class Pegawai extends MY_Controller {
         } else {
             $nip=date("Y").'1';
         }
-        
         return $nip;
     }
-    function determine_masa_abdi($tahunmasuk) {
+    private function determine_masa_abdi($tahunmasuk) {
         echo $ma = date("Y")-$tahunmasuk;
         $this->load->model('masa_abdi_m');
         $datama= $this->masa_abdi_m->get_all();
@@ -96,7 +96,7 @@ class Pegawai extends MY_Controller {
         $id=$this->get_id_from_url();
         $this->data['title']  ='Data Detail '.$this->title;
         $this->data['record'] = $this->mdl->get($id);
-        $this->view['content']='detail_'.$this->obj;
+        $this->view['content']=$this->obj.'/detail_'.$this->obj;
         $this->page->view($this->view, $this->data);
     }
 }

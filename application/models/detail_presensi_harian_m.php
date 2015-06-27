@@ -13,11 +13,16 @@ class Detail_presensi_harian_m extends MY_Model{
             'primary_key' => 'IDJPH' 
             )
         );
-        function get_like($idjph, $key, $value) {
-            $this->_database->where('IDJPH', $idjph); 
-            $this->_database->like($key, $value);
-            return $this->get_all();
-        }
+    function get_like($idjph, $key, $value) {
+        $this->_database->where('IDJPH', $idjph); 
+        $this->_database->like($key, $value);
+        return $this->get_all();
+    }
+    function rekap_kehadiran() {
+        $this->_database->select('NIP, COUNT(NIP) AS JUMLAHHADIR');
+        $this->group_by('NIP');
+        return $this->get_many_by('KETPH', 'h');
+    }
         
 }   
 /* End of file detail_presensi_harian_m.php */

@@ -29,7 +29,7 @@ class Pendaftaran_wisuda extends MY_Controller {
         );
         return $data;
     }
-    public function load_form() {
+    function load_form() {
         $this->view['css']     = array(
             'assets/css/plugins/select/bootstrap-select.css'
             );
@@ -55,7 +55,7 @@ class Pendaftaran_wisuda extends MY_Controller {
         foreach ( $this->mahasiswa_m->dropdown1() as $key => $value) {
                 $this->data["dd_mahasiswa_m"][$key]=$value;
             }
-        $this->view['content']='form_'.$this->obj;
+        $this->view['content']=$this->obj.'/form_'.$this->obj;
         $this->page->view($this->view, $this->data);
     }
     private function set_last_wisuda(){
@@ -79,7 +79,6 @@ class Pendaftaran_wisuda extends MY_Controller {
         $data['IDPW']=$idpw;
         $this->mahasiswa_m->update($nim, $data);
     }
-    
     private function delete_child($nim) {
         $this->load->model('mahasiswa_m');
         $data['IDPW']=NULL;
