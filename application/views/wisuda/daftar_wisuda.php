@@ -23,7 +23,7 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Wisuda ke</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Ketua Pelaksana</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Tempat</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Biaya (Rp)</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Biaya</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -36,7 +36,7 @@
                                             <td><?php echo $row->PERIODEW; ?></td>
                                             <td><?php echo $row->pegawai->NAMAP; ?></td>
                                             <td><?php echo $row->TEMPATW; ?></td>
-                                            <td><?php echo number_format($row->BIAYAW,2,',','.'); ?></td>
+                                            <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->BIAYAW,2,',','.'); ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDW", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDW", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

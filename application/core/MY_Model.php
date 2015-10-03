@@ -98,8 +98,7 @@ class MY_Model extends CI_Model
      * Initialise the model, tie into the CodeIgniter superobject and
      * try our best to guess the table name.
      */
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
 
         $this->load->helper('inflector');
@@ -121,8 +120,7 @@ class MY_Model extends CI_Model
     /**
      * Fetch a single record based on the primary key. Returns an object.
      */
-    public function get($primary_value)
-    {
+    public function get($primary_value){
 		return $this->get_by($this->primary_key, $primary_value);
     }
 
@@ -130,8 +128,7 @@ class MY_Model extends CI_Model
      * Fetch a single record based on an arbitrary WHERE call. Can be
      * any valid value to $this->_database->where().
      */
-    public function get_by()
-    {
+    public function get_by(){
         $where = func_get_args();
 
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
@@ -156,8 +153,7 @@ class MY_Model extends CI_Model
     /**
      * Fetch an array of records based on an array of primary values.
      */
-    public function get_many($values)
-    {
+    public function get_many($values){
         $this->_database->where_in($this->primary_key, $values);
 
         return $this->get_all();
@@ -166,8 +162,7 @@ class MY_Model extends CI_Model
     /**
      * Fetch an array of records based on an arbitrary WHERE call.
      */
-    public function get_many_by()
-    {
+    public function get_many_by(){
         $where = func_get_args();
         
         $this->_set_where($where);
@@ -185,8 +180,7 @@ class MY_Model extends CI_Model
      * Fetch all the records in the table. Can be used as a generic call
      * to $this->_database->get() with scoped methods.
      */
-    public function get_all()
-    {
+    public function get_all(){
         $this->trigger('before_get');
 
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
@@ -211,8 +205,7 @@ class MY_Model extends CI_Model
      * Insert a new row into the table. $data should be an associative array
      * of data to be inserted. Returns newly created ID.
      */
-    public function insert($data, $skip_validation = FALSE)
-    {
+    public function insert($data, $skip_validation = FALSE){
         if ($skip_validation === FALSE)
         {
             $data = $this->validate($data);
@@ -238,8 +231,7 @@ class MY_Model extends CI_Model
     /**
      * Insert multiple rows into the table. Returns an array of multiple IDs.
      */
-    public function insert_many($data, $skip_validation = FALSE)
-    {
+    public function insert_many($data, $skip_validation = FALSE){
         $ids = array();
 
         foreach ($data as $key => $row)
@@ -253,8 +245,7 @@ class MY_Model extends CI_Model
     /**
      * Updated a record based on the primary value.
      */
-    public function update($primary_value, $data, $skip_validation = FALSE)
-    {
+    public function update($primary_value, $data, $skip_validation = FALSE){
         $data = $this->trigger('before_update', $data);
 
         if ($skip_validation === FALSE)
@@ -281,8 +272,7 @@ class MY_Model extends CI_Model
     /**
      * Update many records, based on an array of primary values.
      */
-    public function update_many($primary_values, $data, $skip_validation = FALSE)
-    {
+    public function update_many($primary_values, $data, $skip_validation = FALSE){
         $data = $this->trigger('before_update', $data);
 
         if ($skip_validation === FALSE)
@@ -309,8 +299,7 @@ class MY_Model extends CI_Model
     /**
      * Updated a record based on an arbitrary WHERE clause.
      */
-    public function update_by()
-    {
+    public function update_by(){
         $args = func_get_args();
         $data = array_pop($args);
 
@@ -334,8 +323,7 @@ class MY_Model extends CI_Model
     /**
      * Update all records
      */
-    public function update_all($data)
-    {
+    public function update_all($data){
         $data = $this->trigger('before_update', $data);
         $result = $this->_database->set($data)
                            ->update($this->_table);
@@ -347,8 +335,7 @@ class MY_Model extends CI_Model
     /**
      * Delete a row from the table by the primary value
      */
-    public function delete($primary_value)
-    {
+    public function delete($primary_value){
         $this->trigger('before_delete', $primary_value);
         
         $params=array($this->primary_key, $primary_value);
@@ -371,8 +358,7 @@ class MY_Model extends CI_Model
     /**
      * Delete a row from the database table by an arbitrary WHERE clause
      */
-    public function delete_by()
-    {
+    public function delete_by(){
         $where = func_get_args();
 
 	    $where = $this->trigger('before_delete', $where);
@@ -397,8 +383,7 @@ class MY_Model extends CI_Model
     /**
      * Delete many rows from the database table by multiple primary values
      */
-    public function delete_many($primary_values)
-    {
+    public function delete_many($primary_values){
         $primary_values = $this->trigger('before_delete', $primary_values);
 
         $this->_database->where_in($this->primary_key, $primary_values);
@@ -417,14 +402,11 @@ class MY_Model extends CI_Model
         return $result;
     }
 
-
     /**
      * Truncates the table
      */
-    public function truncate()
-    {
+    public function truncate(){
         $result = $this->_database->truncate($this->_table);
-
         return $result;
     }
 
@@ -432,8 +414,7 @@ class MY_Model extends CI_Model
      * RELATIONSHIPS
      * ------------------------------------------------------------ */
 
-    public function with($relationship)
-    {
+    public function with($relationship){
         $this->_with[] = $relationship;
 
         if (!in_array('relate', $this->after_get))
@@ -444,8 +425,7 @@ class MY_Model extends CI_Model
         return $this;
     }
 
-    public function relate($row)
-    {
+    public function relate($row){
 		if (empty($row))
         {
 		    return $row;
@@ -467,14 +447,24 @@ class MY_Model extends CI_Model
             if (in_array($relationship, $this->_with))
             {
                 $this->load->model($options['model'], $relationship . '_model');
-
+//tambahan->
+                if(isset($options['with'])){
+                    if(is_array($options['with'])){
+                        foreach ($options['with'] as $w) {
+                            $this->{$relationship . '_model'}->with($w);
+                        }
+                    } else{
+                        $this->{$relationship . '_model'}->with($options['with']);
+                    }
+                }
+//<-tambahan
                 if (is_object($row))
                 {
-                    $row->{$relationship} = $this->{$relationship . '_model'}->get($row->{$options['primary_key']});
+                    $row->{$relationship} = $this->{$relationship . '_model'}->with_deleted()->get($row->{$options['primary_key']});
                 }
                 else
                 {
-                    $row[$relationship] = $this->{$relationship . '_model'}->get($row[$options['primary_key']]);
+                    $row[$relationship] = $this->{$relationship . '_model'}->with_deleted()->get($row[$options['primary_key']]);
                 }
             }
         }
@@ -495,7 +485,17 @@ class MY_Model extends CI_Model
             if (in_array($relationship, $this->_with))
             {
                 $this->load->model($options['model'], $relationship . '_model');
-
+//tambahan->
+                if(isset($options['with'])){
+                    if(is_array($options['with'])){
+                        foreach ($options['with'] as $v) {
+                            $this->{$relationship . '_model'}->with($v);
+                        }
+                    } else{
+                        $this->{$relationship . '_model'}->with($options['with']);
+                    }
+                }
+//<-tambahan
                 if (is_object($row))
                 {
                     $row->{$relationship} = $this->{$relationship . '_model'}->get_many_by($options['primary_key'], $row->{$this->primary_key});
@@ -517,8 +517,7 @@ class MY_Model extends CI_Model
     /**
      * Retrieve and generate a form_dropdown friendly array
      */
-    function dropdown()
-    {
+    function dropdown(){
         $args = func_get_args();
 
         if(count($args) == 2)
@@ -553,12 +552,18 @@ class MY_Model extends CI_Model
 
         return $options;
     }
-
+    //tambahan
+    function count_nv() {
+        $this->_database->join('kas', "kas.IDKAS=$this->_table.IDKAS");
+        $this->_database->where("kas.STATR","0");
+        $this->_database->where("kas.NIP IS NULL");
+        return count($this->with_deleted()->get_all());
+    }
+    //tambahan
     /**
      * Fetch a count of rows based on an arbitrary WHERE call.
      */
-    public function count_by()
-    {
+    public function count_by(){
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
         {
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
@@ -573,8 +578,7 @@ class MY_Model extends CI_Model
     /**
      * Fetch a total count of rows, disregarding any previous conditions
      */
-    public function count_all()
-    {
+    public function count_all(){
         if ($this->soft_delete && $this->_temporary_with_deleted !== TRUE)
         {
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
@@ -586,8 +590,7 @@ class MY_Model extends CI_Model
     /**
      * Tell the class to skip the insert validation
      */
-    public function skip_validation()
-    {
+    public function skip_validation(){
         $this->skip_validation = TRUE;
         return $this;
     }
@@ -595,16 +598,14 @@ class MY_Model extends CI_Model
     /**
      * Get the skip validation status
      */
-    public function get_skip_validation()
-    {
+    public function get_skip_validation(){
         return $this->skip_validation;
     }
 
     /**
      * Return the next auto increment of the table. Only tested on MySQL.
      */
-    public function get_next_id()
-    {
+    public function get_next_id(){
         return (int) $this->_database->select('AUTO_INCREMENT')
             ->from('information_schema.TABLES')
             ->where('TABLE_NAME', $this->_table)
@@ -614,15 +615,13 @@ class MY_Model extends CI_Model
     /**
      * Getter for the table name
      */
-    public function table()
-    {
+    public function table(){
         return $this->_table;
     }
     /**
      * Getter for the primary_key
      */
-    public function primary_key()
-    {
+    public function primary_key(){
         return $this->primary_key;
     }
 
@@ -633,8 +632,7 @@ class MY_Model extends CI_Model
     /**
      * Return the next call as an array rather than an object
      */
-    public function as_array()
-    {
+    public function as_array(){
         $this->_temporary_return_type = 'array';
         return $this;
     }
@@ -642,8 +640,7 @@ class MY_Model extends CI_Model
     /**
      * Return the next call as an object rather than an array
      */
-    public function as_object()
-    {
+    public function as_object(){
         $this->_temporary_return_type = 'object';
         return $this;
     }
@@ -651,8 +648,7 @@ class MY_Model extends CI_Model
     /**
      * Don't care about soft deleted rows on the next call
      */
-    public function with_deleted()
-    {
+    public function with_deleted(){
         $this->_temporary_with_deleted = TRUE;
         return $this;
     }
@@ -660,8 +656,7 @@ class MY_Model extends CI_Model
     /**
      * Only get deleted rows on the next call
      */
-    public function only_deleted()
-    {
+    public function only_deleted(){
         $this->_temporary_only_deleted = TRUE;
         return $this;
     }
@@ -673,8 +668,7 @@ class MY_Model extends CI_Model
     /**
      * MySQL DATETIME created_at and updated_at
      */
-    public function created_at($row)
-    {
+    public function created_at($row){
         if (is_object($row))
         {
             $row->created_at = date('Y-m-d H:i:s');
@@ -687,8 +681,7 @@ class MY_Model extends CI_Model
         return $row;
     }
 
-    public function updated_at($row)
-    {
+    public function updated_at($row){
         if (is_object($row))
         {
             $row->updated_at = date('Y-m-d H:i:s');
@@ -705,8 +698,7 @@ class MY_Model extends CI_Model
      * Serialises data for you automatically, allowing you to pass
      * through objects and let it handle the serialisation in the background
      */
-    public function serialize($row)
-    {
+    public function serialize($row){
         foreach ($this->callback_parameters as $column)
         {
             $row[$column] = serialize($row[$column]);
@@ -715,8 +707,7 @@ class MY_Model extends CI_Model
         return $row;
     }
 
-    public function unserialize($row)
-    {
+    public function unserialize($row){
         foreach ($this->callback_parameters as $column)
         {
             if (is_array($row))
@@ -735,8 +726,7 @@ class MY_Model extends CI_Model
     /**
      * Protect attributes by removing them from $row array
      */
-    public function protect_attributes($row)
-    {
+    public function protect_attributes($row){
         foreach ($this->protected_attributes as $attr)
         {
             if (is_object($row))
@@ -759,8 +749,7 @@ class MY_Model extends CI_Model
     /**
      * A wrapper to $this->_database->order_by()
      */
-    public function order_by($criteria, $order = 'ASC')
-    {
+    public function order_by($criteria, $order = 'ASC'){
         if ( is_array($criteria) )
         {
             foreach ($criteria as $key => $value)
@@ -778,16 +767,11 @@ class MY_Model extends CI_Model
     /**
      * A wrapper to $this->_database->limit()
      */
-    public function limit($limit, $offset = 0)
-    {
+    public function limit($limit, $offset = 0){
         $this->_database->limit($limit, $offset);
         return $this;
     }
-    public function group_by($param) {
-        $this->_database->group_by($param);
-        return $this;
-    }
-
+    
     /* --------------------------------------------------------------
      * INTERNAL METHODS
      * ------------------------------------------------------------ */
@@ -797,8 +781,7 @@ class MY_Model extends CI_Model
      * (which looks for an instance variable $this->event_name), an array of
      * parameters to pass through and an optional 'last in interation' boolean
      */
-    public function trigger($event, $data = FALSE, $last = TRUE)
-    {
+    public function trigger($event, $data = FALSE, $last = TRUE){
         if (isset($this->$event) && is_array($this->$event))
         {
             foreach ($this->$event as $method)
@@ -821,8 +804,7 @@ class MY_Model extends CI_Model
     /**
      * Run validation on the passed data
      */
-    public function validate($data)
-    {
+    public function validate($data){
         if($this->skip_validation)
         {
             return $data;
@@ -871,8 +853,7 @@ class MY_Model extends CI_Model
     /**
      * Guess the table name by pluralising the model name
      */
-    private function _fetch_table()
-    {
+    private function _fetch_table(){
         if ($this->_table == NULL)
         {
             $this->_table = plural(preg_replace('/(_m|_model)?$/', '', strtolower(get_class($this))));
@@ -882,8 +863,7 @@ class MY_Model extends CI_Model
     /**
      * Guess the primary key for current table
      */
-    private function _fetch_primary_key()
-    {
+    private function _fetch_primary_key(){
         if($this->primary_key == NULL)
         {
             $this->primary_key = $this->_database->query("SHOW KEYS FROM `".$this->_table."` WHERE Key_name = 'PRIMARY'")->row()->Column_name;
@@ -893,8 +873,7 @@ class MY_Model extends CI_Model
     /**
      * Set WHERE parameters, cleverly
      */
-    protected function _set_where($params) 
-    {
+    protected function _set_where($params){
         if (count($params) == 1 && is_array($params[0])) 
         {
             foreach ($params[0] as $field => $filter) 
@@ -969,8 +948,7 @@ class MY_Model extends CI_Model
     /**
      * Return the method name for the current return type
      */
-    protected function _return_type($multi = FALSE)
-    {
+    protected function _return_type($multi = FALSE){
         $method = ($multi) ? 'result' : 'row';
         return $this->_temporary_return_type == 'array' ? $method . '_array' : $method;
     }

@@ -1,6 +1,6 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Tambah Baru</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -23,7 +23,7 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Periode</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Mulai</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Berakhir</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Biaya Pendaftaran (Rp)</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Biaya Pendaftaran</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Ketua Pelaksana</th>
                                             <th data-halign="center"    data-sortable="false"   data-align="center" >Control</th>
                                         </tr>
@@ -37,7 +37,7 @@
                                             <td><?php echo $row->PERIODEBMH; ?></td>
                                             <td><?php echo $row->TGLMULAIBMH; ?></td>
                                             <td><?php echo $row->TGLAKHIRBMH; ?></td>
-                                            <td><?php echo number_format($row->BIAYABMH,2,',','.'); ?></td>
+                                            <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->BIAYABMH,2,',','.'); ?></td>
                                             <td><?php echo $row->pegawai->NAMAP; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDBMH", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDBMH", 'Update'); ?></td>
                                         </tr>

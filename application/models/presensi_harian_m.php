@@ -1,38 +1,36 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Presensi_harian_m extends MY_Model{
-    public $_table      = 'presensiharian';
-    public $primary_key = array('IDJPH', 'TGLPH');
-    public $belongs_to  = array( 
-        'jenisph'  => array(
+    public $_table = 'presensiharian';
+    public $primary_key =array('NIP','IDJPH','TGLHK');
+    public $belongs_to = array( 
+        'pegawai' => array(
+            'model' => 'pegawai_m', 
+            'primary_key' => 'NIP' 
+            ),
+        'jenis_presensi_harian' => array(
             'model' => 'jenis_presensi_harian_m', 
             'primary_key' => 'IDJPH' 
-            )
+            ),
+        'hari_kerja' => [
+            'model' => 'hari_kerja_m', 
+            'primary_key' => 'TGLHK'
+        ]
         );
-    public $has_many= array( 
-        'detailph' => array(
-            'model' => 'detail_presensi_harian_m', 
-            'primary_key' => 'TGLPH' 
-            ) 
-        );
-    function get_dates($idjph, $bulan=NULL) {
-        //echo $like;
+    function get_like($idjph, $key, $value) {
+        $this->_database->where('IDJPH', $idjph); 
+        $this->_database->like($key, $value);
+        return $this->get_all();
+    }
+    function rekap_2($bulan) {
+        $this->_database->select('NIP, COUNT(NIP) AS JUMLAHHADIR');
+        $this->_database->like('TGLHK', $bulan);
+        $this->_database->group_by('NIP');
         
-        $this->_database->select('TGLPH');
-        if($bulan!=NULL){
-            
-            $this->_database->where('IDJPH', $idjph);
-            $this->_database->like('TGLPH', $bulan);
-            $dates = $this->get_all();
-        } else {
-            $dates = $this->get_many_by('IDJPH', $idjph);
-        }
-        return $dates;
+        $param=array('IDJPH'=>2, 'KETPH'=>'h');
+        return $this->get_many_by($param);
     }
-    function get_months($idjph) {
-        $query= $this->db->query("SELECT DATE_FORMAT(TGLPH, '%Y-%m') AS BULAN, COUNT(IDJPH) AS JUMLAH FROM presensiharian WHERE IDJPH = $idjph AND STATR = 0 GROUP BY DATE_FORMAT(TGLPH, '%Y%m')");
-        return $query->result();
-    }
+        
 }   
-/* End of file Presensi_harian_m.php */
-/* Location: ./application/models/Presensi_harian_m.php */
+/* End of file detail_presensi_harian_m.php */
+/* Location: ./application/models/detail_presensi_harian_m.php */

@@ -24,7 +24,6 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Nama Mahasiswa</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Komponen</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="right" >Biaya (Rp)</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="left" >No Pembayaran</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -38,7 +37,6 @@
                                             <td><?php echo $row->mahasiswa->NAMAM; ?></td>
                                             <td><?php echo $row->kbk->NAMAKBK; ?></td>
                                             <td><?php echo number_format($row->BIAYAKBK,2,',','.'); ?></td>
-                                            <td><?php echo $row->IDPBK; ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKBK", 'Delete'); ?> </td>
                                         </tr>
                                         <?php endforeach; ?>

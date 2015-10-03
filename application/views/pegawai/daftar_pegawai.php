@@ -1,6 +1,6 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Tambah Baru</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -31,7 +31,7 @@
                                             <td><?php echo anchor($this->uri->slash_segment(1)."detail/$row->NIP", $row->NIP); ?></td>
                                             <td><?php echo $row->NAMAP; ?></td>
                                             <td><?php echo $row->jabatan->NAMAJAB; ?></td>
-                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->NIP", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->NIP", 'Update'); ?></td>
+                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->NIP", 'Nonaktifkan'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->NIP", 'Perbarui'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else : ?> 

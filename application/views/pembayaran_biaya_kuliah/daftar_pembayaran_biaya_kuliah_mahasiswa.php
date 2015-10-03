@@ -23,7 +23,7 @@
                                             <th data-halign="center" data-sortable="true" >ID</th>
                                             <th data-halign="center" data-sortable="true" >Tanggal</th>
                                             <th data-halign="center" data-sortable="true" >Petugas</th>
-                                            <th data-halign="center" data-sortable="true" data-align="right">Jumlah (Rp)</th>
+                                            <th data-halign="center" data-sortable="true" data-align="right">Jumlah</th>
                                             <th data-halign="center" data-align="center">Control</th>
                                         </tr>
                                     </thead>
@@ -34,7 +34,7 @@
                                             <td><?php echo $row->IDPBK; ?></td>
                                             <td><?php echo $row->TGLPBK; ?></td>
                                             <td><?php echo $row->pegawai->NAMAP; ?></td>
-                                            <td><?php echo number_format($row->NOMINALPBK,2,',','.'); ?></td>
+                                            <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALPBK,2,',','.'); ?></td>
                                             <td>
                                                 <button class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="showDetail(this.value)" value="<?php echo $row->IDPBK;?>">Detail</button>
                                             </td>

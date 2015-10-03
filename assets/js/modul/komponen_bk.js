@@ -56,21 +56,33 @@ function sumCheckedRow() {
     var sum = 0;  
     if(check.length!== undefined){
         for (i=0;i<check.length;i++) {
-            //document.writeln(check[i].getAttribute('data-biaya'));
             if (check[i].checked) {
-                //document.writeln('checked= '+check[i].getAttribute('data-biaya'));
                 sum += parseInt(check[i].getAttribute('data-biaya'));
             }
         }
     } else{
-        //document.writeln('bukan array');
-        //document.writeln(check.getAttribute('data-biaya'));
         if (check.checked) {
-            //document.writeln('checked= '+check.getAttribute('data-biaya'));
             sum = parseInt(check.getAttribute('data-biaya'));
         }
     }
     document.form1.total.value = sum;
+    setCheckAll();
+}
+function setCheckAll(){
+    var c = document.form1.check;
+    var stat=true;
+    if(c.length !== undefined){
+        for (i=0;i<c.length;i++) {
+            if(c[i].checked===false){
+                stat=false;
+            }
+        }
+    }else{
+        if(c.checked===false){
+            stat=false;
+        }
+    }
+    document.form1.checkall.checked=stat;
 }
 function checkAll(){
     var c = document.form1.check;
@@ -100,4 +112,9 @@ function setAllCheckbox() {
         uncheckAll();
     }
     sumCheckedRow();
+}
+function deleteR(value){
+        var host= config.base;
+        //$load(host+value);
+        alert(host+value);
 }

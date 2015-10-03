@@ -4,13 +4,14 @@
  *
  * @author Akhmad Fariiqun Awwa
  */
-class Pendaftaran_bmh extends MY_Controller {
-    protected $title    = "Pendaftaran Peserta BMH";
+class Pendaftaran_bmh extends MY_Transaction {
+    protected $title    = "Pendaftaran BMH";
     protected $model    = 'pendaftaran_bmh_m';
     protected $related_model= array(
         'peserta_bmh',
         'bmh',
-        'pegawai'  
+        'pegawai',
+        'kas'
     );
     protected $dd_model = array(
         'peserta_bmh_m' => 'NAMAPBMH',
@@ -18,7 +19,15 @@ class Pendaftaran_bmh extends MY_Controller {
         'kota_m'        => 'NAMAK',
         'pekerjaan_m'   => 'NAMAJ',
     );
-    
+    function index() {
+        if(can_access($this->obj)){
+            parent::index();
+            $this->data['records']= $this->mdl->get_all();
+            $this->page->view($this->view, $this->data);
+        } else {
+            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+        }
+    }
     public function load_form() {
         $this->view['css']     = array(
             'assets/css/plugins/select/bootstrap-select.css'
@@ -60,30 +69,36 @@ class Pendaftaran_bmh extends MY_Controller {
                 'TLPPBMH'   =>$this->input->post('tlppbmh'),
                 'STATR'     =>0
             );
-            $data['PBMH']=$datapbmh;
+            $value['pbmh']=$datapbmh;
         } else{
             $idpbmh=$this->input->post('idpbmh');
         }
-        $datadaftarbmh=array(
-            'IDDAFTARBMH'   => $this->input->post('iddaftarbmh'),
-            'TGLDAFTARBMH'  => $this->input->post('tgldaftarbmh'),
-            'IDBMH'         => $this->input->post('idbmh'),
-            'BAYARDAFTARBMH'=> $this->input->post('bayardaftarbmh'),
-            'IDPBMH'        => $idpbmh,
-            'NIP'           => $this->data['userid'],
-            'STATR'         => 0,
-        );
-        $data['DAFTARBMH']=$datadaftarbmh;
-        return $data;
+        $value['data']['IDPBMH']    = $idpbmh;
+        $value['data']['IDBMH']       = $this->input->post('idbmh');
+        $value['kas']['NOMINALKAS'] = $this->input->post('bayardaftarbmh');
+        if($this->uri->segment(2)== 'insert'){
+            $value['kas']['IDKK']   = '05';
+            $value['kas']['DKKAS']  = 1;
+            $value['kas']['NIP']    = NULL;
+            $value['kas']['TGLKAS'] = date('Y-m-d');
+            $value['kas']['STATR']  = 0;
+            $value['kas']['IDKAS']  = $this->gen_kas_id($value['kas']['DKKAS'], $value['kas']['IDKK'], $value['kas']['TGLKAS']);
+            
+            $value['data']['NIP']   = $this->data['userid'];
+            $value['data']['IDKAS'] = $value['kas']['IDKAS'];
+            $value['data']['STATR'] = 0;
+            $value['data']['IDDAFTARBMH']  = $this->gen_id($value['data']['IDBMH']);
+            $value['idtrans']       = $value['data']['IDDAFTARBMH'];
+        }
+        return $value;
     }
     public function insert() {
         $data = $this->get_data_from_form();
-        if(isset($data['PBMH'])){
+        if(isset($data['pbmh'])){
             $this->load->model('peserta_bmh_m');
-            $this->peserta_bmh_m->insert($data['PBMH']);
+            $this->peserta_bmh_m->insert($data['pbmh']);
         }
-        $this->mdl->insert($data['DAFTARBMH']);
-        redirect($this->obj, 'refresh');
+        parent::insert();
     }
     public function update() {
         $data = $this->get_data_from_form();
@@ -109,6 +124,35 @@ class Pendaftaran_bmh extends MY_Controller {
         $this->make_dd_resource();
         $this->load->view($this->obj.'/form_peserta_for_pendaftaran_bmh', $this->data);
         //print_r($this->data);
+    }
+//    function nota($idpbk) {
+//        $row=$this->mdl->with('pegawai')->with('peserta_bmh')->with('bmh')->get($idpbk);
+//        $data['IDPBK']        =$idpbk;
+//        $data['TGLPBK']       =$row->TGLPBK;
+//        $data['NIM']          =$row->NIM;
+//        $data['NAMAM']        =$row->mahasiswa->NAMAM;
+//        $data['NOMINALPBK']   =$row->NOMINALPBK;
+//        $data['NAMAP']        =$row->pegawai->NAMAP;
+//        $this->load->model('kewajiban_biaya_kuliah_m');
+//        $data['recordskbk']     =$this->kewajiban_biaya_kuliah_m->with('kbk')->get_many_by('IDPBK',$idpbk);
+//        $data['recordskbkbl']   =$this->kewajiban_biaya_kuliah_m->with('kbk')->get_many_by(array('IDPBK'=>NULL, 'NIM'=>$data['NIM']));
+//        $data['table1']  = 'detail_pembayaran_biaya_kuliah';
+//        $data['table2']  = 'detail_pembayaran_biaya_kuliah_belum_lunas';
+//       
+//        $this->load->view($this->obj.'/nota_pembayaran_biaya_kuliah', $data);
+//        return $data;
+//    }
+    protected function gen_id($idbmh) {
+        $last=$this->mdl->get_last_by_id('p'.$idbmh);
+        if($last){
+            return 'pbmh'.(substr($last[0]->IDDAFTARBMH, 4)+1);
+        }else{
+            return 'p'.$idbmh.'001';
+        }
+    }
+    public function accept($idtrans) {
+        parent::accept($idtrans);
+        redirect($this->obj, 'refresh');
     }
     
 }

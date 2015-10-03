@@ -22,8 +22,7 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >NIP</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Nama</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Nama Komponen</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Gaji Satuan (Rp)</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Tanggal Aktif</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Gaji Satuan</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -35,8 +34,7 @@
                                             <td><?php echo $row->NIP; ?></td>
                                             <td><?php echo $row->pegawai->NAMAP; ?></td>
                                             <td><?php echo $row->kg->NAMAKG; ?></td>
-                                            <td><?php echo number_format($row->GAJISATUAN,2,',','.'); ?></td>
-                                            <td><?php echo $row->TGLAKTIFKGP; ?></td>
+                                            <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->GAJISATUAN,2,',','.'); ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDKGP", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDKGP", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

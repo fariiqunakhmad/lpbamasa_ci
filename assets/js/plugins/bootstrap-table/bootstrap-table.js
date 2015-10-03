@@ -1840,7 +1840,11 @@
             (useCurrentPage ? this.options.data.slice(this.pageFrom - 1, this.pageTo)
                 : this.options.data);
     };
-
+//tambahan
+    BootstrapTable.prototype.getTotalPages = function () {
+        return this.options.totalPages;
+    }
+//tambahan
     BootstrapTable.prototype.load = function (data) {
         var fixedScroll = false;
 
@@ -2248,7 +2252,7 @@
         'getScrollPosition',
         'selectPage', 'prevPage', 'nextPage',
         'togglePagination',
-        'toggleView'
+        'toggleView', 'getTotalPages'
     ];
 
     $.fn.bootstrapTable = function (option) {

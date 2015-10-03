@@ -29,7 +29,7 @@
 +function ($) {
   'use strict';
 
-  var inputSelector = ':input:not([type="submit"], button):enabled:visible'
+  var inputSelector = ':input:not([type="submit"], button):enabled:visible, .selectpicker'
   // VALIDATOR CLASS DEFINITION
   // ==========================
 

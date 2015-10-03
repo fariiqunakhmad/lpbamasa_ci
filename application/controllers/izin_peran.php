@@ -15,7 +15,7 @@ class Izin_peran extends MY_Controller {
         'izin_m'    => 'FUNGSIIZIN'
         );  
     public function index() {
-        if(can_access($this->obj)){
+        if(can_access($this->obj) && $this->uri->segment(3)!=NULL){
             $idperan=$this->uri->segment(3);
             $this->data['title']  = 'Daftar '.$this->title;
             $this->data['table']  = $this->obj;

@@ -26,7 +26,7 @@ function can_access($param) {
     }
     return $can_access;
 }
-function print_session($position) {
+function print_session($position=NULL) {
     $CI =& get_instance();
     echo $position;
     echo '<br>';

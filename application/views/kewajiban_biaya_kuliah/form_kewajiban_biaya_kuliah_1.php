@@ -49,7 +49,7 @@
                                             </select>
                                         </div>
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Setup</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
+                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
                                         <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
                                     </form>
                                 </div>

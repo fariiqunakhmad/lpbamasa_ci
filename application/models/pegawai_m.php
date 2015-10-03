@@ -25,6 +25,10 @@ class Pegawai_m extends MY_Model{
             'primary_key' => 'IDJP' 
             ),
         );
+    function get_last_by_tglmasukp($tglmasukp){
+        $this->_database->like('TGLMASUKP', date('Y-m', strtotime(str_replace('-','/', $tglmasukp)) ));
+        return $this->order_by('NIP', 'DESC')->limit(1)->get_all();
+    }
 }   
 /* End of file Pegawai_m.php */
 /* Location: ./application/models/Pegawai_m.php */

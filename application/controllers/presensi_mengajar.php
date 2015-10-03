@@ -80,7 +80,9 @@ class Presensi_mengajar extends MY_Controller{
             'assets/js/modul/presensi_mengajar.js',
             'assets/js/plugins/select/bootstrap-select.js'
         );
+        
         parent::load_form();
+        //print_r($this->data['record']);
     }
     
 }

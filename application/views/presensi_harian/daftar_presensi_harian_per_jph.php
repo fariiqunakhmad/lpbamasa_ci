@@ -1,6 +1,5 @@
             <div class="row">
                 <!--<div class="col-lg-12">-->
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form/<?php echo $idjph;?>">Add</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar

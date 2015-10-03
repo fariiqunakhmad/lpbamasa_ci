@@ -8,7 +8,7 @@
                                                                 <th data-halign="center" data-align="center" >No</th>
                                                                 <th data-halign="center">Periode Akademik</th>
                                                                 <th data-halign="center">Komponen</th>
-                                                                <th data-halign="center" data-align="right">Nominal (Rp)</th>
+                                                                <th data-halign="center" data-align="right">Nominal</th>
                                                                 <th data-halign="center" data-align="center">Dibayar <input type="checkbox" name="checkall" onclick="setAllCheckbox()"></th>
                                                             </tr>
                                                         </thead>
@@ -18,8 +18,20 @@
                                                                 <td><?php echo $no++; ?></td>
                                                                 <td><?php echo $row->IDPA; ?></td>
                                                                 <td><?php echo $row->kbk->NAMAKBK; ?></td>
-                                                                <td><?php echo number_format($row->BIAYAKBK,2,',','.'); ?></td>
-                                                                <td ><input type="checkbox" name="check[]" id="check" onchange="sumCheckedRow()" data-biaya="<?php echo $row->BIAYAKBK;?>" value="<?php echo $row->IDPA.' '.$row->IDKBK; ?>"></td>
+                                                                <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->BIAYAKBK,2,',','.'); ?></td>
+                                                                <td>
+                                                                    <input 
+                                                                        type="checkbox" 
+                                                                        name="check[]" 
+                                                                        id="check" 
+                                                                        onchange="sumCheckedRow()" 
+                                                                        data-biaya="<?php echo $row->BIAYAKBK;?>"
+                                                                        value="<?php echo $row->IDWBK; ?>"
+                                                                        
+                                                                        >
+<!--                                                                        value="<?php echo $row->IDPA.' '.$row->IDKBK; ?>"-->
+                                                                        
+                                                                </td>
                                                             </tr>
                                                             <?php endforeach; ?>
                                                             <?php else : ?> 

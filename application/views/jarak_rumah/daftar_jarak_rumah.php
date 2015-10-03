@@ -20,7 +20,7 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="center" >No.</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >ID</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Jarak Min</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Transport/hari (Rp)</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Transport/hari</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -30,7 +30,7 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDJR; ?></td>
                                             <td><?php echo $row->JARAKMINJR; ?></td>
-                                            <td><?php echo number_format($row->NOMINALTT,2,',','.'); ?></td>
+                                            <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALTT,2,',','.'); ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDJR", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDJR", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

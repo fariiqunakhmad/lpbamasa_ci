@@ -20,44 +20,43 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> 
+                            <a href="<?php echo base_url(); ?>">
+                                <i class="fa fa-shopping-cart fa-fw"></i> 
                                 Transaksi
                                 <span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url(); ?>pembayaran_biaya_kuliah/load_form">
-                                        Pembayaran Biaya Kuliah v
+                                    <a href="<?php echo base_url(); ?>pembayaran_biaya_kuliah">
+                                        Pembayaran Biaya Kuliah
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>pendaftaran_wisuda/load_form">
-                                        Pendaftaran Wisuda v
+                                    <a href="<?php echo base_url(); ?>pendaftaran_wisuda">
+                                        Pendaftaran Wisuda
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>pendaftaran_bmh/load_form">
-                                        Pendaftaran BMH v
+                                    <a href="<?php echo base_url(); ?>pendaftaran_bmh">
+                                        Pendaftaran BMH
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>penggajian/load_form">
-                                        Penggajian
+                                    <a href="<?php echo base_url(); ?>penggajian">
+                                        Penggajian x
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>kasbon/load_form">
-                                        Kasbon v
+                                    <a href="<?php echo base_url(); ?>kasbon">
+                                        Kasbon
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>tsl/load_form">
-                                        Sektor Lain v
+                                    <a href="<?php echo base_url(); ?>tsl">
+                                        Transaksi Sektor Lain
                                     </a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>">
@@ -68,69 +67,69 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="">
-                                        Biaya Kuliah v
+                                        Biaya Kuliah
                                         <span class="fa arrow"></span>
                                     </a>
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="<?php echo base_url(); ?>pembayaran_biaya_kuliah">
-                                                Pembayaran Biaya Kuliah v
+                                                Pembayaran Biaya Kuliah
                                             </a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url(); ?>biaya_kuliah">
-                                                Biaya Kuliah Angkatan v
+                                                Biaya Kuliah Angkatan
                                             </a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url(); ?>kewajiban_biaya_kuliah">
-                                                Kewajiban Biaya Kuliah v
+                                                Kewajiban Biaya Kuliah
                                             </a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url(); ?>kbk">
-                                                Komponen Biaya Kuliah v
+                                                Komponen Biaya Kuliah
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="">
-                                        Wisuda v
+                                        Wisuda
                                         <span class="fa arrow"></span>
                                     </a>
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="<?php echo base_url(); ?>pendaftaran_wisuda">
-                                                Pendaftaran Wisuda v
+                                                Pendaftaran Wisuda
                                             </a>
                                         </li> 
                                         <li>
                                             <a href="<?php echo base_url(); ?>wisuda">
-                                                Kegiatan Wisuda v
+                                                Kegiatan Wisuda
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="">
-                                        BMH v
+                                        Bimbingan Manasik Haji
                                         <span class="fa arrow"></span>
                                     </a>
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="<?php echo base_url(); ?>pendaftaran_bmh">
-                                                Pendaftaran Peserta BMH v
+                                                Pendaftaran BMH
                                             </a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url(); ?>bmh">
-                                                Kegiatan Bimbingan Manasik Haji v
+                                                Kegiatan Bimbingan Manasik Haji
                                             </a>
                                         </li>        
                                         <li>
                                             <a href="<?php echo base_url(); ?>peserta_bmh">
-                                                Peserta BMH v
+                                                Peserta BMH
                                             </a>
                                         </li>
                                     </ul>
@@ -143,12 +142,12 @@
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="<?php echo base_url(); ?>penggajian">
-                                                Generate Penggajian
+                                                Penggajian x
                                             </a>
                                         </li>
                                         <li>
                                             <a href="<?php echo base_url(); ?>kg">
-                                                Komponen Gaji v
+                                                Komponen Gaji
                                             </a>
                                         </li>        
                                         <li>
@@ -162,60 +161,61 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo base_url(); ?>kasbon">
-                                        Kasbon v
+                                        Kasbon
                                     </a>
                                 </li>
                                 <li>
                                     <a href="">
-                                        Sektor Lain v
+                                        Sektor Lain
                                         <span class="fa arrow"></span>
                                     </a>
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="<?php echo base_url(); ?>tsl">
-                                                Transaksi Sektor Lain v
+                                                Transaksi Sektor Lain
                                             </a>
                                         </li> 
                                         <li>
                                             <a href="<?php echo base_url(); ?>kk">
-                                                Kelompok Keuangan v
+                                                Kelompok Keuangan
                                             </a>
                                         </li>                              
                                     </ul>
                                 </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-calendar-o fa-fw"></i>
+                                Presensi
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-third-level">
                                 <li>
-                                    <a href="">
-                                        Presensi
-                                        <span class="fa arrow"></span>
+                                    <a href="<?php echo base_url(); ?>jenis_presensi_harian">
+                                        Jenis Presensi Harian
                                     </a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="<?php echo base_url(); ?>jenis_presensi_harian">
-                                                Jenis Presensi Harian
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url(); ?>presensi_harian">
-                                                Presensi Harian
-                                            </a>
-                                        </li>        
-                                        <li>
-                                            <a href="<?php echo base_url(); ?>presensi_mengajar">
-                                                Presensi Mengajar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url(); ?>presensi_harian/index/1">
-                                                Presensi Dosen Piket
-                                            </a>
-                                        </li> 
-                                        <li>
-                                            <a href="<?php echo base_url(); ?>presensi_harian/index/2">
-                                                Presensi Pegawai
-                                            </a>
-                                        </li> 
-                                    </ul>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>hari_kerja">
+                                        Hari Kerja
+                                    </a>
+                                </li>        
+                                <li>
+                                    <a href="<?php echo base_url(); ?>presensi_mengajar">
+                                        Presensi Mengajar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>presensi_harian/index/1">
+                                        Presensi Dosen Piket
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="<?php echo base_url(); ?>presensi_harian/index/2">
+                                        Presensi Pegawai
+                                    </a>
+                                </li> 
                             </ul>
                         </li>
                         <li>
@@ -227,7 +227,7 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?php echo base_url(); ?>pegawai">
-                                        Pegawai
+                                        Pegawai x
                                     </a>
                                 </li>
                                 <li>
@@ -252,14 +252,46 @@
                                     </a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>laporan/load_form">
+                            <a href="<?php echo base_url(); ?>kas">
+                                <i class="fa fa-book fa-fw"></i>
+                                Kas
+                            </a> 
+                        </li>
+                        <li>
+                            <a href="">
                                 <i class="fa fa-files-o fa-fw"></i>
                                 Laporan
                                 <span class="fa arrow"></span>
                             </a>
-                            
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url(); ?>kas/load_form_laporan">
+                                        Kas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>kasbon/load_form_laporan">
+                                        Kasbon x
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>pembayaran_biaya_kuliah/load_form_laporan">
+                                        Pembayaran Biaya Kuliah x
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>pendaftaran_wisuda/load_form_laporan">
+                                        Pendaftaran Wisuda x
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo base_url(); ?>pendaftaran_bmh/load_form_laporan">
+                                        Pendaftaran BMH x
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         

@@ -20,7 +20,7 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="center" >No.</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >ID</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Tahun Min</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Abdi (Rp)</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Abdi</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -30,7 +30,7 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDMA; ?></td>
                                             <td><?php echo $row->TAHUNMINMA; ?></td>
-                                            <td><?php echo number_format($row->NOMINALTA,2,',','.'); ?></td>
+                                            <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALTA,2,',','.'); ?></td>
                                             <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDMA", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDMA", 'Update'); ?></td>
                                         </tr>
                                         <?php endforeach; ?>

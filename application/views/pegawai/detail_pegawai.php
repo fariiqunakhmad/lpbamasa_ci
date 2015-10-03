@@ -4,7 +4,6 @@
                     <a href="<?php echo base_url().$this->uri->slash_segment(1)."load_form/".$record->NIP; ?>">Update</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Form
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -97,10 +96,10 @@
                                         </p>
                                     </div>
                                     <div class="col-lg-4">
-                                        <label>Tahun Masuk</label>
+                                        <label>Tanggal Masuk</label>
                                     </div>
                                     <div class="col-lg-8">
-                                        <p>: <?php echo $record->THMASUKP;?></p>
+                                        <p>: <?php echo $record->TGLMASUKP;?></p>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Golongan Jarak Rumah</label>
@@ -139,7 +138,25 @@
                                     <div class="col-lg-8">
                                         <p>: <?php echo $record->jabatan->NAMAJAB;?></p>
                                     </div> 
-                                </div>                                
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="">
+                                        <center>
+                                            <img class="img-thumbnail" src="<?php echo base_url(); ?>assets/images/pegawai/<?php echo $record->NIP;?>.jpg" width="120px" height="160px">
+                                        </center>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Form Pembaruan Foto
+                                        </div>
+                                        <div class="panel-body">
+                                            <form action="<?php echo base_url().'pegawai/update_photo/'.$record->NIP; ?>" enctype="multipart/form-data">
+                                                <input class="form-control" type="file" accept=".jpg" name="userfile">
+                                                <input type="submit" value="Perbarui Foto" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.row (nested) -->
                         </div>

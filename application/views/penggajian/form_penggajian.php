@@ -10,11 +10,11 @@
                                     <form name="form1" method="post" action="<?php echo $action; ?>">
                                         <div class="form-group">
                                             <label>Bulan</label>    
-                                            <input type="month" class="form-control" name="peg_nip" id="peg_nip" <?php if($record!=NULL){ $idaselected=$record->PEG_NIP;}?>>
+                                            <input type="month" class="form-control" name="bulan" id="bulan" <?php if($record!=NULL){ $idaselected=$record->PEG_NIP;}?>>
                                         </div>
                                                                                 
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Generate</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
+                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
                                         <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
                                     </form>
                                 </div>

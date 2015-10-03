@@ -7,23 +7,14 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <form id="form1" name="form1" method="post" action="<?php echo $action; ?>">
+                                <form id="form1" name="form1" method="post" action="<?php echo $action; ?>" data-toggle="validator" enctype="multipart/form-data">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="idpw">No Pendaftaran</label>
-                                            <input class="form-control" type="text" name="idpw" id="idpw" <?php if($record!=NULL){ echo 'value="'.$record->IDPW.'"' ;}?> />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tglpw">Tanggal Pendaftaran</label>
-                                            <input class="form-control" type="date" name="tglpw" id="tglpw" <?php if($record!=NULL){ echo 'value="'.$record->TGLPW.'"' ;}else{echo 'value="'.date('Y-m-d').'"' ;}?> />
-                                        </div>
-                                        <div class="form-group">
-                                            <label >Mahasiswa</label>
+                                            <label >Mahasiswa *</label>
                                             <select
                                                 class="selectpicker form-control"
-                                                data-live-search="true" 
-                                                onchange="" 
-                                                name="nim" 
+                                                data-live-search="true"
+                                                name="nim" required
                                                 <?php if($record!=NULL){ $nimselected=$record->NIM;}?>>
                                                 <option value="">Pilih Mahasiswa</option>
                                                 <?php
@@ -42,11 +33,16 @@
                                                     endif;
                                                 ?>
                                             </select>
+                                            <div class='help-block with-errors'></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="catatanpw">Catatan</label>
+                                            <textarea class="form-control" name="catatanpw" id="catatanpw" contenteditable=""  rows="1" ><?php if($record!=NULL){ echo $record->CATATANPW ;}?></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Periode Wisuda</label>    
+                                            <label>Periode Wisuda *</label>    
                                             <select 
                                                 <?php if($record==NULL){
                                                     $idaselected=$lastw->IDW;
@@ -58,7 +54,7 @@
                                                 data-live-search="true" 
                                                 onchange="getBiayaW(this.value)" 
                                                 name="idw" 
-                                                id="idw">
+                                                id="idw" required>
                                                 <option value="">Pilih Periode Wisuda</option>
                                                 <?php 
                                                     if(isset($dd_wisuda_m)) :
@@ -75,20 +71,24 @@
                                                     endif;
                                                 ?>
                                             </select>
+                                            <div class='help-block with-errors'></div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="bayarpw">Biaya yang Dibayar</label>
-                                            <input class="form-control" type="text" name="bayarpw" id="bayarpw" value="<?php if($record==NULL){echo $lastw->BIAYAW;} else { echo $record->BAYARPW;}?>" />
+                                            <label>Biaya yang Dibayar *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Rp</span>
+                                                <input class="form-control" type="text" name="bayarpw" id="bayarpw" value="<?php if($record==NULL){echo $lastw->BIAYAW;} else { echo $record->BAYARPW;}?>" data-error="Nama tidak boleh kosong" required>
+                                                <span class="input-group-addon">,00</span>
+                                            </div>
+                                            <div class="help-block with-errors"></div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="catatanpw">Catatan</label>
-                                            <textarea class="form-control" name="catatanpw" id="catatanpw" contenteditable="" cols="45" rows="5" ><?php if($record!=NULL){ echo $record->CATATANPW ;}?></textarea>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-lg-12">
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
+                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
                                         <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; * Wajib diisi
                                     </div>
                                 </form>
                             </div>

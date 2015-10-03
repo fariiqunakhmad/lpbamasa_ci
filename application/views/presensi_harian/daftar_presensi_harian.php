@@ -1,12 +1,13 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form/1">Add Presensi Dosen Piket</a> |
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form/2">Add Presensi Pegawai</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form<?php echo "/$idjph/$tglph"?>">Add</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
                         </div>
                         <div class="panel-body">
+                            <p>Jenis    : <?php echo $idjph;?></p>
+                            <p>Tanggal  : <?php echo $tglph;?></p>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>"
                                        data-search="true"
@@ -19,22 +20,18 @@
                                     <thead>
                                         <tr>
                                             <th data-halign="center"    data-sortable="true"    data-align="center" >No.</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Jenis</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Tanggal</th>
-                                            <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >NIP</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Nama</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no=1; if(isset($records)) : foreach($records as $row) : ?>
                                         <tr class="gradeA">
                                             <td><?php echo $no++; ?></td>
-                                            <td><?php echo $row->jenisph->NAMAJPH; ?></td>
-                                            <td><?php echo $row->TGLPH; ?></td>
-                                            <td>
-                                                <a href="<?php echo "detail_presensi_harian/index/$row->IDJPH/$row->TGLPH";?>" class="btn btn-sm btn-primary">Detail</a>
-                                                <a href="<?php echo $this->uri->slash_segment(1)."delete/$row->IDJPH/$row->TGLPH";?>" class="btn btn-sm btn-danger">Delete</a>
-<!--                                                <a href="<?php echo "detail_presensi_harian/reset/$row->IDJPH/$row->TGLPH";?>" class="btn btn-sm btn-warning">Reset</a>-->
-                                            </td>
+                                            <td><?php echo $row->NIP; ?></td>
+                                            <td><?php echo $row->pegawai->NAMAP; ?></td>
+                                            <td><?php echo $row->KETPH; ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else : ?> 

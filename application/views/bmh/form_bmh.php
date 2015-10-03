@@ -9,19 +9,6 @@
                                 <div class="col-lg-6">
                                     <form name="form1" method="post" action="<?php echo $action; ?>">
                                         <div class="form-group">
-                                            <label>Tahun</label>
-                                            <input autofocus="" class="form-control" type="text" name="tahunbmh" id="tahunbmh" <?php if($record!=NULL){ echo 'value="'.$record->TAHUNBMH.'"' ;}?>>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Periode</label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="periodebmh" id="periodebmh1" value="1" <?php if($record!=NULL && $record->PERIODEBMH==1){ echo 'checked';}?>>1 (_ s/d _)
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="periodebmh" id="periodebmh2" value="2" <?php if($record!=NULL && $record->PERIODEBMH==2){ echo 'checked';}?>>2 (_ s/d _)
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
                                             <label>Tanggal Mulai</label>
                                             <input class="form-control" type="date" name="tglmulaibmh" id="tglmulaibmh" <?php if($record!=NULL){ echo 'value="'.$record->TGLMULAIBMH.'"' ;}?>>
                                         </div>
@@ -54,7 +41,7 @@
                                             </select>
                                         </div>
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
+                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
                                         <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
                                     </form>
                                 </div>

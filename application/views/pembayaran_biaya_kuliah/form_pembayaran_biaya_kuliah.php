@@ -12,7 +12,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 ">
                                     
-                                        <div class="form-group col-lg-3">
+<!--                                        <div class="form-group col-lg-3">
                                             <label >ID Pembayaran</label>
                                             <input <?php if($record==NULL){ echo 'class="form-control"';}?> 
                                                    type="text" 
@@ -30,14 +30,15 @@
                                                 else{echo 'value="'.date('Y-m-d').'"' ;}?> 
                                                 />
                                             <?php if($record!=NULL){ echo '<p class="form-control-static">'.$record->TGLPBK.'</p>' ;}?>
-                                        </div>
-                                        <div class="form-group col-lg-6">
+                                        </div>-->
+                                        <div class="form-group">
                                             <label >Mahasiswa</label>
                                             <select <?php if($record==NULL){ echo 'class="selectpicker form-control"';}?>
                                                 data-live-search="true" 
                                                 onchange="showDetailForm(this.value)" 
                                                 name="nim" 
-                                                <?php if($record!=NULL){ echo 'hidden="true"'; $nimselected=$record->NIM;}?>>
+                                                <?php if($record!=NULL){ echo 'hidden="true"'; $nimselected=$record->NIM;}?>
+                                                required>
                                                 <option value="">Pilih Mahasiswa</option>
                                                 <?php
                                                     if(isset($dd_mahasiswa_m)) :
@@ -116,9 +117,11 @@
                                         <?php else:?>
                                         <div id="txtHint"></div>
                                         <?php endif;?>
-                                        <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
-                                        <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
+                                        <div class="form-group">
+                                            <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
+                                            <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
+                                            <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.row (nested) -->

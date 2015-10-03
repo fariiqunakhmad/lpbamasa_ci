@@ -85,10 +85,10 @@ class Authentication extends CI_Controller{
             }
         }
     }
-    private function set_peran_pegawai($NIP) {
+    private function set_peran_pegawai($nip) {
         $this->load->model('peran_m');
         $this->load->model('peran_pegawai_m');
-        $peran_pegawai =$this->peran_pegawai_m->with('peran')->get_many_by('NIP', $NIP);
+        $peran_pegawai =$this->peran_pegawai_m->with('peran')->get_many_by('NIP', $nip);
         if ($peran_pegawai) {
             foreach ($peran_pegawai as $value) {
                 $this->user_data['authority'][$value->IDPERAN] =$value->peran->NAMAPERAN;
@@ -96,7 +96,7 @@ class Authentication extends CI_Controller{
             return TRUE;
         }
     }
-    private function set_izin($idperan) {
+    private function set_user_access($idperan) {
         $this->load->model('izin_m');
         $this->load->model('izin_peran_m');
         $izin_peran =$this->izin_peran_m->with('izin')->get_many_by('IDPERAN', $idperan);
@@ -114,7 +114,7 @@ class Authentication extends CI_Controller{
         if($ha){
             $this->user_data['useras']['id']  =$ha->IDPERAN;
             $this->user_data['useras']['name']=$ha->NAMAPERAN;
-            $this->set_izin($idperan);
+            $this->set_user_access($idperan);
             return TRUE;
         }  else {
             return FALSE;

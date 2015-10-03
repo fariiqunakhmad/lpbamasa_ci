@@ -1,55 +1,57 @@
-                                        <div  id="cprint" class="modal-content">    
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel">Pembayaran Biaya Kuliah</h4>
-                                            </div>
-                                            <div  class="modal-body">
-                                                <div class="col-lg-6">
-                                                    <div class="col-lg-12">
-                                                        <label class="col-lg-5">No Trans</label>
-                                                        : <?php echo $IDPBK;?>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <label class="col-lg-5">NIM</label>
-                                                        : <?php echo $NIM;?>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <label class="col-lg-5">Nama</label>
-                                                        : <?php echo $NAMAM;?>
-                                                    </div>
+                                                <div class="col-lg-2">No Trans</div>
+                                                <div class="col-lg-4">: <?php echo $trans->IDPBK;?></div>
+                                                <div class="col-lg-2">Tanggal</div>
+                                                <div class="col-lg-4">: <?php echo $trans->kas->TGLKAS;?></div>
+                                                <div class="col-lg-2">Mahasiswa</div>
+                                                <div class="col-lg-4">: <?php echo $trans->NIM.' '.$trans->mahasiswa->NAMAM;?></div>
+                                                <div class="col-lg-2">Petugas</div>
+                                                <div class="col-lg-4">: <?php echo $trans->NIP.' '.$trans->pegawai->NAMAP;?></div>
+                                                <div class="col-lg-2">Status</div>
+                                                <div class="col-lg-4">:
+                                                    <?php
+                                                    if($trans->STATR==0){
+                                                        if(isset($trans->kas->NIP)){
+                                                            echo 'Sah, Terverifikasi';
+                                                        } else{
+                                                            echo 'Sah, Belum Terverifikasi';
+                                                        }
+                                                    } else{
+                                                        if(isset($trans->kas->NIP) && $trans->kas->STATR==1){
+                                                            echo 'Batal, Terverifikasi';
+                                                        }else{
+                                                            echo 'Batal, Belum Terverifikasi';
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <div class="col-lg-12">
-                                                        <label class="col-lg-5">Tanggal</label>
-                                                        : <?php echo $TGLPBK;?>
-                                                    </div>    
-                                                </div>
-                                                
-                                                
-                                                
-                                                
-                                                <div class="col-lg-12 form-group">
-                                                    <label> Komponen:</label>
+                                                <?php if(isset($trans->kas->NIP)){?>
+                                                <div class="col-lg-2">Wadir</div>
+                                                <div class="col-lg-4">: <?php echo $trans->kas->NIP.' '.$trans->kas->pegawai->NAMAP;?></div>
+                                                <?php } else {echo '<div class="col-lg-6">&emsp;</div>';}?>
+                                                <div class="col-lg-2">Komponen</div>
+                                                <div class="col-lg-10">:</div>
+                                                <div class="col-lg-12">
                                                     <div class="table-responsive">
                                                         <table 
-                                                            class="table table-striped table-bordered table-hover"
+                                                            class="table table-bordered"
                                                             id="<?php echo $table;?>"
+                                                            data-toggle="table"
                                                             >
                                                             <thead>
                                                                 <tr>
                                                                     <th data-halign="center" data-align="center" >No</th>
                                                                     <th data-halign="center">Periode Akademik</th>
                                                                     <th data-halign="center">Nama Komponen</th>
-                                                                    <th data-halign="center" data-align="right">Nominal (Rp)</th>
+                                                                    <th data-halign="center" data-align="right">Nominal</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php $no=1; if(isset($recordskbk)) : foreach($recordskbk as $row) : ?>
+                                                                <?php $no=1; if(isset($recordskpbk)) : foreach($recordskpbk as $row) : ?>
                                                                 <tr>                                            
                                                                     <td><?php echo $no++; ?></td>
-                                                                    <td><?php echo $row->IDPA; ?></td>
-                                                                    <td><?php echo $row->kbk->NAMAKBK; ?></td>
-                                                                    <td class="right"><?php echo number_format($row->BIAYAKBK,2,',','.'); ?></td>
+                                                                    <td><?php echo $row->kewajiban_biaya_kuliah->IDPA; ?></td>
+                                                                    <td><?php echo $row->kewajiban_biaya_kuliah->kbk->NAMAKBK; ?></td>
+                                                                    <td class="right"><?php echo '<div class="pull-left">Rp </div>'.number_format($row->kewajiban_biaya_kuliah->BIAYAKBK,2,',','.'); ?></td>
                                                                 </tr>
                                                                 <?php endforeach; ?>
                                                                 <?php else : ?> 
@@ -59,33 +61,14 @@
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td><label>Jumlah </label></td>
-                                                                    <td><label><?php echo $NOMINALPBK;?></label></td>
+                                                                    <td><b><?php echo '<div class="pull-left">Rp </div>'.number_format($trans->kas->NOMINALKAS,2,',','.');?></b></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="form-group col-lg-7">
-                                                </div>
-                                                <div class="form-group col-lg-5">
-                                                    <center>
-                                                        <p>Petugas </p>
-                                                        <p> </p>
-                                                        <p> </p>
-                                                        <p>(<?php echo $NAMAP;?>)</p>
-                                                    </center>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                            
-                                            
-
-<script>
-    $(document).ready(function() {
-        $('#<?php echo $table;?>').bootstrapTable();
-    });
-</script>
+                                                <script>
+                                                        $(document).ready(function() {
+                                                                $('#<?php echo $table;?>').bootstrapTable();
+                                                        });
+                                                </script>

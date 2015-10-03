@@ -21,12 +21,10 @@ class Pegawai extends MY_Controller {
     );
     
     function get_data_from_form() {
-        $idma= $this->determine_masa_abdi($this->input->post('thmasukp'));
         $data=array(
-            'NIP'       => $this->input->post('nip'),
             'IDK'       => $this->input->post('idk'),
             'KOT_IDK'   => $this->input->post('kot_idk'),
-            'IDMA'      => $idma,
+            'IDMA'      => $this->determine_masa_abdi($this->input->post('tglmasukp')),
             'IDJR'      => $this->input->post('idjr'),
             'IDJAB'     => $this->input->post('idjab'),
             'IDJP'      => $this->input->post('idjp'),
@@ -37,23 +35,47 @@ class Pegawai extends MY_Controller {
             'TGLLP'     => $this->input->post('tgllp'),
             'JKP'       => $this->input->post('jkp'),
             'KWNP'      => $this->input->post('kwnp'),
-            'THMASUKP'  => $this->input->post('thmasukp'),
-            'STATP'     => $this->input->post('statp'),
-            'STATR'     => 0
+            'STATP'     => $this->input->post('statp')
         );
-        $pass=$this->input->post('passp');
-        if($pass!=NULL){
-            $data['PASSP'] =  md5($pass);
+        
+        if($this->uri->segment(2)== 'insert'){
+            $data['NIP']        = $this->gen_id($this->input->post('tglmasukp'));
+            $data['TGLMASUKP']  = $this->input->post('tglmasukp');
+            $data['STATR']      = 0;
+            $data['PASSP']      =  md5($this->input->post('passp'));
+            $this->upload_photo($data['NIP']);
         }
         return $data;
     }
-    
+    function upload_photo($namafile) {
+        $this->load->library('upload');
+        $config['upload_path']      = './assets/images/pegawai/'; //path folder
+        $config['allowed_types']    = 'jpg|jpeg'; //type yang dapat diakses bisa anda sesuaikan
+        $config['max_size']         = '4048'; //maksimum besar file 4M
+        $config['max_width']        = '1288'; //lebar maksimum 1288 px
+        $config['max_height']       = '768'; //tinggi maksimu 768 px
+        $config['file_name']        = $namafile; //nama yang terupload nantinya
+        $config['overwrite']        = TRUE;
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('userfile')){
+            show_error('Gagal mengunggah foto '.$this->upload->display_errors());
+        }
+    }
+    public function update_photo($nip) {
+        echo $nip;
+        $this->upload_photo($nip);
+        redirect($this->obj.'/detail/'.$nip, 'refresh');
+    }
+    public function insert() {
+        parent::insert();
+        
+    }
     public function load_form() {
         if(can_access($this->obj.'/'.$this->uri->segment(2))){
             $id=$this->get_id_from_url();
             if ($id == NULL){
                 $this->data['title']  ='Form Insert '.$this->title;
-                $this->data['NIP'] = $this->generate_nip();
+//                $this->data['NIP'] = $this->generate_nip();
                 $this->data['action'] = base_url().$this->obj.'/insert';
             }else{
                 $param= $this->make_url_param($id);
@@ -61,6 +83,16 @@ class Pegawai extends MY_Controller {
                 $this->data['record'] = $this->mdl->get($id);
                 $this->data['action'] = base_url().$this->obj.'/update'.$param;
             }
+            $this->view['css']     = array(
+//                'assets/css/plugins/validator/Bootstrap-Validators.css',
+                'assets/css/plugins/select/bootstrap-select.css'
+                );
+            $this->view['js']     = array(
+//                'assets/js/plugins/validator/Bootstrap-Validators.js'
+//                'assets/js/form_validator/'.$this->obj.'.js'
+                'assets/js/plugins/select/bootstrap-select.js',
+                'assets/js/validator.js'
+                );
             $this->make_dd_resource();
             $this->view['content']=$this->obj.'/form_'.$this->obj;
             $this->page->view($this->view, $this->data);
@@ -68,21 +100,29 @@ class Pegawai extends MY_Controller {
             show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
         }
     }
-    private function generate_nip() {
-        $no= $this->mdl
-                ->order_by('NIP', $order = 'DSC')
-                ->limit(1)
-                ->get_by('THMASUKP',date("Y"))
-                ;
-        if($no){
-            $nip=date("Y").(1+(int)substr($no->NIP, 4));
-        } else {
-            $nip=date("Y").'1';
+    protected function gen_id($tglmasukp) {
+        $last=$this->mdl->get_last_by_tglmasukp($tglmasukp);
+        if($last){
+            return $last[0]->NIP+1;
+        }else{
+            return date('Ym', strtotime(str_replace('-','/', $tglmasukp)) ).'001';
         }
-        return $nip;
     }
+//    private function generate_nip() {
+//        $no= $this->mdl
+//                ->order_by('NIP', $order = 'DESC')
+//                ->limit(1)
+//                ->get_by('THMASUKP',date("Y"))
+//                ;
+//        if($no){
+//            $nip=date("Y").(1+(int)substr($no->NIP, 4));
+//        } else {
+//            $nip=date("Y").'1';
+//        }
+//        return $nip;
+//    }
     private function determine_masa_abdi($tahunmasuk) {
-        echo $ma = date("Y")-$tahunmasuk;
+        $ma = date("Y")-$tahunmasuk;
         $this->load->model('masa_abdi_m');
         $datama= $this->masa_abdi_m->get_all();
         $i=count($datama);

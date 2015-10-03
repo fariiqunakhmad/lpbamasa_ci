@@ -10,7 +10,7 @@
                                     <form name="form1" method="post" action="<?php echo $action; ?>">
                                         <div class="form-group">
                                             <label>Kelas MK</label>
-                                            <select class="form-control" name="idkmk" id="idkmk" onchange="getKMK(this.value)" <?php if($record!=NULL){ echo ''; $idaselected=$record->IDKMK;}?>>
+                                            <select class="form-control" name="idkmk" id="idkmk" onchange="getKMK(this.value)" <?php if($record!=NULL){$idaselected=$record->IDKMK;}?>>
                                                 <option value="">Pilih Kelas MK</option>
 <?php 
     if(isset($dd_kelas_mk_m)) :
@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Pertemuan</label>
-                                            <input type="text" class="form-control" name="pertemuan" id="pertemuan" >
+                                            <input type="text" class="form-control" name="pertemuan" id="pertemuan" <?php if($record!=NULL){ echo 'value="'.$record->PERTEMUAN.'"';}?> >
                                         </div>
                                         <div class="form-group">
                                             <label>Pengajar</label>
@@ -57,7 +57,7 @@
                                             <input class="form-control" type="date" name="tglmengajar" id="tglmengajar" <?php if($record!=NULL){ echo 'value="'.$record->TGLMENGAJAR.'"' ;}?>>
                                         </div>
                                         <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Clear Field</button>
+                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
                                         <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
                                     </form>
                                 </div>
