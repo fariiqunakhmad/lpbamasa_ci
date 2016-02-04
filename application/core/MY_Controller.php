@@ -58,37 +58,29 @@ class MY_Controller extends CI_Controller{
                 $this->mdl->with($value);
             }
         }
+        $this->view['css']    =[];
+        $this->view['js']     =[];
+        $this->view['script'] =[];
     }
     function index() {
 //        if(can_access($this->obj)){
             $this->data['title']  = 'Daftar '.$this->title;
             $this->data['table']  = $this->obj;
-            $this->data['records']= $this->mdl->get_all();
-            $this->view['css']    = array(
-    //            'assets/css/plugins/dataTables.bootstrap.css'
-                'assets/css/plugins/bootstrap-table.css'
-                );
+            $this->data['records']= $this->mdl->with_deleted()->get_all();
+            array_push($this->view['css'], 'assets/css/plugins/bootstrap-table.css');
+            array_push($this->view['js'], 'assets/js/plugins/bootstrap-table/bootstrap-table.js');
+            array_push($this->view['js'], 'assets/js/plugins/bootstrap-table/export/bootstrap-table-export.js');
+            array_push($this->view['js'], 'assets/js/plugins/bootstrap-table/export/jquery.plugin/tableExport.js');
+            array_push($this->view['js'], 'assets/js/plugins/bootstrap-table/export/jquery.plugin/jquery.base64.js');
+            array_push($this->view['script'], "$('#".$this->data['table']."').bootstrapTable();");
             $this->view['content']= $this->obj.'/daftar_'.$this->obj;
-            $this->view['js']     = array(
-    //            'assets/js/plugins/dataTables/jquery.dataTables.js',
-    //            'assets/js/plugins/dataTables/dataTables.bootstrap.js'
-                'assets/js/plugins/bootstrap-table/bootstrap-table.js',
-                'assets/js/plugins/bootstrap-table/export/bootstrap-table-export.js',
-                'assets/js/plugins/bootstrap-table/export/jquery.plugin/tableExport.js',
-                'assets/js/plugins/bootstrap-table/export/jquery.plugin/jquery.base64.js',
-    //            'assets/js/plugins/bootstrap-table/export/jquery.plugin/jspdf/libs/sprintf.js',
-    //            'assets/js/plugins/bootstrap-table/export/jquery.plugin/jspdf/jspdf.js',
-    //            'assets/js/plugins/bootstrap-table/export/jquery.plugin/jspdf/libs/base64.js'
-                );
-    //        $this->view['script'] = "$('#".$this->data['table']."').dataTable();";
-            $this->view['script'] = "$('#".$this->data['table']."').bootstrapTable();";
             $this->page->view($this->view, $this->data);
 //        } else {
 //            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
 //        }
     }
     function load_form() {
-        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+//        if(can_access($this->obj.'/'.$this->uri->segment(2))){
             $id=$this->get_id_from_url();
             if ($id == NULL){
                 $this->data['title']  ='Form Insert '.$this->title;
@@ -108,30 +100,31 @@ class MY_Controller extends CI_Controller{
     //            'assets/js/plugins/validator/Bootstrap-Validators.js',
     //            'assets/js/form_validator/'.$this->obj.'.js'
     //            );
+            array_push($this->view['js'], 'assets/js/validator.js');
             $this->view['content']=$this->obj.'/form_'.$this->obj;
             $this->page->view($this->view, $this->data);
-        } else {
-            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
-        }
+//        } else {
+//            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+//        }
     }
     function insert() {
-        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+//        if(can_access($this->obj.'/'.$this->uri->segment(2))){
             $data = $this->get_data_from_form();
             $this->mdl->insert($data);
             redirect($this->obj, 'refresh');
-        } else {
-            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
-        }
+//        } else {
+//            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+//        }
     }
     function update() {
-        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+//        if(can_access($this->obj.'/'.$this->uri->segment(2))){
             $data = $this->get_data_from_form();
             $id= $this->get_id_from_url();
             $this->mdl->update($id, $data);
             redirect($this->obj, 'refresh');
-        } else {
-            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
-        }
+//        } else {
+//            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+//        }
     }
     function delete() {
         if(can_access($this->obj.'/'.$this->uri->segment(2))){
@@ -141,6 +134,12 @@ class MY_Controller extends CI_Controller{
         } else {
             show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
         }
+    }
+    //baru 151025
+    function restore() {
+        $id= $this->get_id_from_url();
+        $this->mdl->update($id,['STATR'=>0]);
+        redirect($this->obj, 'refresh');
     }
     protected function make_url_param($id){
         $param='';
@@ -199,14 +198,14 @@ class MY_Controller extends CI_Controller{
         }
         return $id;
     }
-    protected function print_it($view, $data, $filename, $size=NULL, $orientation=NULL) {
-        
-        $this->load->helper(array('dompdf', 'file'));
-        $html = $this->load->view($view, $data, true);
-        pdf_create($html, $filename, $size, $orientation);
-            
-        
-    }
+//    protected function print_it($view, $data, $filename, $size=NULL, $orientation=NULL) {
+//        
+//        $this->load->helper(array('dompdf', 'file'));
+//        $html = $this->load->view($view, $data, true);
+//        pdf_create($html, $filename, $size, $orientation);
+//            
+//        
+//    }
     protected function gen_id() {
         
     }
@@ -249,10 +248,10 @@ class MY_Transaction extends MY_Controller{
         $this->load->view($this->obj.'/detail_'.$this->obj, $this->data);
     }
     function load_form() {
-        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+//        if(can_access($this->obj.'/'.$this->uri->segment(2))){
             $id=$this->get_id_from_url();
             if ($id == NULL){
-                $this->data['title']  ='Form Insert '.$this->title;
+                $this->data['title']  ='Form '.$this->title;
                 $this->data['record'] = NULL;
                 $this->data['action'] = base_url().$this->obj.'/insert';
             }else{
@@ -265,15 +264,15 @@ class MY_Transaction extends MY_Controller{
     //        $this->view['css']     = array(
     //            'assets/css/plugins/validator/Bootstrap-Validators.css'
     //            );
-    //        $this->view['js']     = array(
-    //            'assets/js/plugins/validator/Bootstrap-Validators.js',
-    //            'assets/js/form_validator/'.$this->obj.'.js'
-    //            );
+//            $this->view['js']     = array(
+//                'assets/js/validator.js'
+//                );
+            array_push($this->view['js'], 'assets/js/validator.js');
             $this->view['content']=$this->obj.'/form_'.$this->obj;
             $this->page->view($this->view, $this->data);
-        } else {
-            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
-        }
+//        } else {
+//            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+//        }
     }
     protected function gen_kas_id($dk, $idkk, $tglkas) {
         $param=$dk.$idkk.date('ymd', strtotime(str_replace('-','/', $tglkas)));
@@ -377,7 +376,7 @@ class MY_Transaction extends MY_Controller{
 //        }
     }
     function nota($idtrans) {
-        $this->data['nota']=$row=$this->mdl->get($idtrans);
+        $this->data['nota']=$this->mdl->get($idtrans);
         $this->load->view($this->obj.'/nota_'.$this->obj, $this->data);
     }
     

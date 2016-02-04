@@ -1,10 +1,10 @@
 
-function showDetailDaftarPresensiHarian(idjph, bulan) {
+function showDaftarPresensiHarian(idjph, bulan) {
     if (bulan === "") {
         $("#detail").empty();
     } else {
         var host= config.base;
-        $("#detail").load(host+"hari_kerja/get_daftar_hari_kerja/"+idjph+"/"+bulan);
+        $("#detail").load(host+"presensi_harian/get_daftar_presensi_harian/"+idjph+"/"+bulan);
     }
 }
 

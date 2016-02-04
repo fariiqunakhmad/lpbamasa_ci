@@ -14,8 +14,10 @@
                                             <select
                                                 class="selectpicker form-control"
                                                 data-live-search="true"
-                                                name="nim" required
-                                                <?php if($record!=NULL){ $nimselected=$record->NIM;}?>>
+                                                name="nim" 
+                                                required data-error="Mahasiswa harus dipilih"
+                                                <?php if($record!=NULL){ $nimselected=$record->NIM;}?>
+                                                >
                                                 <option value="">Pilih Mahasiswa</option>
                                                 <?php
                                                     if(isset($dd_mahasiswa_m)) :
@@ -54,7 +56,7 @@
                                                 data-live-search="true" 
                                                 onchange="getBiayaW(this.value)" 
                                                 name="idw" 
-                                                id="idw" required>
+                                                id="idw" required data-error="Periode wisuda harus dipilih">
                                                 <option value="">Pilih Periode Wisuda</option>
                                                 <?php 
                                                     if(isset($dd_wisuda_m)) :
@@ -74,10 +76,10 @@
                                             <div class='help-block with-errors'></div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Biaya yang Dibayar *</label>
+                                            <label>Biaya yang Dibayar </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">Rp</span>
-                                                <input class="form-control" type="text" name="bayarpw" id="bayarpw" value="<?php if($record==NULL){echo $lastw->BIAYAW;} else { echo $record->BAYARPW;}?>" data-error="Nama tidak boleh kosong" required>
+                                                <input readonly="" class="form-control text-right" type="text" name="bayarpw" id="bayarpw" value="<?php if($record==NULL){echo $lastw->BIAYAW;} else { echo $record->BAYARPW;}?>" data-error="tidak boleh kosong" required>
                                                 <span class="input-group-addon">,00</span>
                                             </div>
                                             <div class="help-block with-errors"></div>

@@ -6,6 +6,9 @@
                                                 <div class="col-lg-4">: <?php echo $trans->NIM.' '.$trans->mahasiswa->NAMAM;?></div>
                                                 <div class="col-lg-2">Petugas</div>
                                                 <div class="col-lg-4">: <?php echo $trans->NIP.' '.$trans->pegawai->NAMAP;?></div>
+                                                <?php
+                                                if($useras['id']!=4){
+                                                ?>
                                                 <div class="col-lg-2">Status</div>
                                                 <div class="col-lg-4">:
                                                     <?php
@@ -24,10 +27,17 @@
                                                     }
                                                     ?>
                                                 </div>
-                                                <?php if(isset($trans->kas->NIP)){?>
+                                                <?php 
+                                                    if(isset($trans->kas->NIP)){
+                                                ?>
                                                 <div class="col-lg-2">Wadir</div>
                                                 <div class="col-lg-4">: <?php echo $trans->kas->NIP.' '.$trans->kas->pegawai->NAMAP;?></div>
-                                                <?php } else {echo '<div class="col-lg-6">&emsp;</div>';}?>
+                                                <?php 
+                                                    } else {
+                                                        echo '<div class="col-lg-6">&emsp;</div>';
+                                                    }
+                                                }
+                                                ?>
                                                 <div class="col-lg-2">Komponen</div>
                                                 <div class="col-lg-10">:</div>
                                                 <div class="col-lg-12">

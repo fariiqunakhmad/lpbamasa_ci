@@ -28,7 +28,7 @@ table {
                     <td colspan="10"><center>Bukti Transaksi</center></td>
                 </tr>
                 <tr>
-                    <td colspan="10"><center><?php if($nota->STATR==1 )echo 'Pembatalan ';?>Pendaftaran Wisuda</center></td>
+                    <td colspan="10"><center><?php if($nota->STATR==1 )echo 'Pembatalan ';?>Pembayaran Biaya Wisuda</center></td>
                 </tr>
                 <tr>
                     <td colspan="10"><br></td>
@@ -62,8 +62,8 @@ table {
                             <p>Mahasiswa,</p>
                             <br>
                             <br>
-                            <p>( <?php echo $recordpbk->mahasiswa->NAMAM;?> )</p>
-                             <?php echo $recordpbk->NIM;?>
+                            <p>( <?php echo $nota->mahasiswa->NAMAM;?> )</p>
+                             <?php echo $nota->NIM;?>
                         </center>
                     </td>
                     <td colspan="4"><br></td>

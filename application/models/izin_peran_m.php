@@ -2,7 +2,6 @@
 class Izin_peran_m extends MY_Model{
     public $_table = 'izinperan';
     public $primary_key = array('IDPERAN', 'IDIZIN');
-    public $soft_delete = FALSE;
     public $belongs_to = array( 
         'peran' => array(
             'model'         => 'peran_m',

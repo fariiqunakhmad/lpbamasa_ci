@@ -55,6 +55,26 @@ table {
                     <td colspan="2">Nominal </td>
                     <td colspan="8">: <?php echo 'Rp '.number_format($nota->kas->NOMINALKAS,2,',','.').', dicicil '.$nota->QTYCICILANKB.' kali penggajian.';?></td>
                 </tr>
+                <?php
+                if($nota->STATR!=0 && $cicilan!=NULL){
+                    $jumlahcicilan=0;
+                    $n=0;
+                    foreach ($cicilan as $value) {
+                        $jumlahcicilan+=$value->NOMINALCK;
+                        $n++;
+                    }
+                ?>
+                <tr>
+                    <td colspan="2">Cicilan </td>
+                    <td colspan="8">: <?php echo 'Rp '.number_format($jumlahcicilan,2,',','.').', dari '.$n.' cicilan @ Rp '.number_format($jumlahcicilan/$n,2,',','.');?></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Jumlah </td>
+                    <td colspan="8">: <?php echo 'Rp '.number_format($nota->kas->NOMINALKAS-$jumlahcicilan,2,',','.');?></td>
+                </tr>
+                <?php
+                }
+                ?>
                 <tr>
                     <td colspan="10"><br></td>
                 </tr>
@@ -71,7 +91,7 @@ table {
                     <td colspan="4"><br></td>
                     <td colspan="3">
                         <center>
-                            <p>Wadir Bid Adm,</p>
+                            <p>Wadir Bid Keu & SDM,</p>
                             <br>
                             <br>
                             <p>( <?php echo $username;?> )</p>

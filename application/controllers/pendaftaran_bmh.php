@@ -34,7 +34,8 @@ class Pendaftaran_bmh extends MY_Transaction {
             );
         $this->view['js']     = array(
             'assets/js/modul/pendaftaran_bmh.js',
-            'assets/js/plugins/select/bootstrap-select.js'
+            'assets/js/plugins/select/bootstrap-select.js',
+            'assets/js/validator.js'
             );
         $this->set_last_bmh();
         $this->make_dd_resource();
@@ -125,23 +126,6 @@ class Pendaftaran_bmh extends MY_Transaction {
         $this->load->view($this->obj.'/form_peserta_for_pendaftaran_bmh', $this->data);
         //print_r($this->data);
     }
-//    function nota($idpbk) {
-//        $row=$this->mdl->with('pegawai')->with('peserta_bmh')->with('bmh')->get($idpbk);
-//        $data['IDPBK']        =$idpbk;
-//        $data['TGLPBK']       =$row->TGLPBK;
-//        $data['NIM']          =$row->NIM;
-//        $data['NAMAM']        =$row->mahasiswa->NAMAM;
-//        $data['NOMINALPBK']   =$row->NOMINALPBK;
-//        $data['NAMAP']        =$row->pegawai->NAMAP;
-//        $this->load->model('kewajiban_biaya_kuliah_m');
-//        $data['recordskbk']     =$this->kewajiban_biaya_kuliah_m->with('kbk')->get_many_by('IDPBK',$idpbk);
-//        $data['recordskbkbl']   =$this->kewajiban_biaya_kuliah_m->with('kbk')->get_many_by(array('IDPBK'=>NULL, 'NIM'=>$data['NIM']));
-//        $data['table1']  = 'detail_pembayaran_biaya_kuliah';
-//        $data['table2']  = 'detail_pembayaran_biaya_kuliah_belum_lunas';
-//       
-//        $this->load->view($this->obj.'/nota_pembayaran_biaya_kuliah', $data);
-//        return $data;
-//    }
     protected function gen_id($idbmh) {
         $last=$this->mdl->get_last_by_id('p'.$idbmh);
         if($last){
@@ -154,5 +138,17 @@ class Pendaftaran_bmh extends MY_Transaction {
         parent::accept($idtrans);
         redirect($this->obj, 'refresh');
     }
-    
+        public function delete($idtrans) {
+        parent::delete($idtrans);
+        redirect($this->obj.'/nota/'.$idtrans, 'refresh');
+    }
+    public function delete_trans($idtrans) {
+        parent::delete_trans($idtrans);
+        redirect($this->obj.'/nota/'.$idtrans, 'refresh');
+    }
+    public function delete_kas($idtrans) {
+        parent::delete_kas($idtrans);
+        redirect($this->obj, 'refresh');
+    }
+
 }

@@ -22,4 +22,14 @@ class Biaya_kuliah extends MY_Controller{
         );
         return $data;
     }
+    function get_kbk_dd($ida) {
+        $this->data['records_bk']  = $this->mdl->with_deleted()->get_many_by('IDA',$ida);
+        $this->load->model('kbk_m');
+        $this->data["dd_kbk_m"]     =  $this->kbk_m->dropdown('NAMAKBK');
+        $this->load->view('kbk_dd', $this->data);
+    }
+    public function load_form() {
+        array_push($this->view['js'], 'assets/js/modul/biaya_kuliah.js');
+        parent::load_form();
+    }
 }

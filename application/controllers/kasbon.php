@@ -61,6 +61,9 @@ class Kasbon extends MY_Transaction {
                 $param= $this->make_url_param($id);
                 $this->data['action'] = base_url().$this->obj.'/update'.$param;
             }
+            $this->view['js']     = array(
+                'assets/js/validator.js'
+                );
             $this->make_dd_resource();
             $this->view['content']=$this->obj.'/form_'.$this->obj;
             $this->page->view($this->view, $this->data);
@@ -69,21 +72,32 @@ class Kasbon extends MY_Transaction {
         }
     }
     function delete_app($idtrans) {
-        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+//        if(can_access($this->obj.'/'.$this->uri->segment(2))){
             $idkas= $this->mdl->get($idtrans)->IDKAS;
             $this->mdl->hard_delete($idtrans);
             $this->kas->hard_delete($idkas);
             redirect($this->obj, 'refresh');
-        } else {
-            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
-        }
+//        } else {
+//            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+//        }
     }
     function detail($idtrans) {
         $this->load->model('cicilan_kasbon_m');
         $this->data['recordsck']=$this->cicilan_kasbon_m->with('penggajian')->get_many_by('IDKB',$idtrans);
-        $this->data['table']  = 'detail_'.$this->obj;
+        $this->data['table']  = 'detail_'.$this->obj.'_'.$idtrans;
         parent::detail($idtrans);
     }
+    function pertimbangan($idtrans){
+        $this->load->model(['cicilan_kasbon_m', 'detail_penggajian_m']);
+        $this->data['recordsck']    =$this->cicilan_kasbon_m->with('penggajian')->get_many_by('IDKB',$idtrans);
+        $this->data['table']        = 'detail_'.$this->obj.'_'.$idtrans;
+        $this->data['trans']        =$this->mdl->get($idtrans);
+        $this->data['tanggungan']   =$this->mdl->with('kas')->get_sah($this->data['trans']->NIP);
+        $this->data['last_gaji']    = $this->detail_penggajian_m->get_last_gaji_by_pegawai($this->data['trans']->NIP);
+//        print_r($this->data['tanggungan']);
+        $this->load->view($this->obj.'/pertimbangan_'.$this->obj, $this->data);
+    }
+
     public function accept($idtrans) {
         parent::accept($idtrans);
         redirect($this->obj.'/nota/'.$idtrans, 'refresh');
@@ -91,5 +105,17 @@ class Kasbon extends MY_Transaction {
     public function delete($idtrans) {
         parent::delete($idtrans);
         redirect($this->obj.'/nota/'.$idtrans, 'refresh');
+    }
+    function reject_app($idtrans) {
+        parent::delete($idtrans);
+        redirect($this->obj, 'refresh');
+    }
+    public function nota($idtrans) {
+        $this->data['nota']=$this->mdl->get($idtrans);
+        if($this->data['nota']->STATR!=0){
+            $this->load->model('cicilan_kasbon_m');
+            $this->data['cicilan']=$this->cicilan_kasbon_m->get_many_by('IDKB',$idtrans);
+        }
+        $this->load->view($this->obj.'/nota_'.$this->obj, $this->data);
     }
 }

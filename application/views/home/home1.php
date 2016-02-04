@@ -1,25 +1,46 @@
             <div class="row">
+                <div class="col-lg-12 text-center h4">
+                    <p>Assalaamualaikum Wr. Wb.</p>
+                    <p>Selamat datang Bapak/Ibu <b><?php echo $username; ?></b> di</p>
+                    <p>Sistem Informasi Keuangan Lembaga Pangajaran Bahasa Arab Masjid Agung Sunan Ampel</p> 
+                    <p>Hari ini <?php echo date('d-m-Y');?></p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="panel panel-default col-lg-12">
                     <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Kas per <?php echo date('d-m-Y');?>
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Kas
+                        <div class="pull-right">
+                            Tahun : 
+                            <select class=" selectpicker" data-live-search="true" onchange="setKas(this.value)">
+                                <option value="">Semua</option>
+                                <?php
+                                    if(isset($years)) :
+                                        foreach($years as $val) :
+                                            echo "\t\t\t\t\t\t<option value='$val->TAHUN'>$val->TAHUN </option>\n";
+                                        endforeach;
+                                    endif;
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="col-lg-12">
-                            <div class="text-center h3">Saldo : <?php echo 'Rp '.number_format($today->SALDO,2,',','.');?></div>
+                            <div id="saldo" class="text-center h3">Saldo : <?php echo 'Rp '.number_format($today->SALDO,2,',','.');?></div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="label-info label center-block">Debet</div>
-                            <div class="text-center h4">Jumlah: <?php echo 'Rp '.number_format($today->DEBET,2,',','.');?></div>
+                            <div class="label-info text-center h3" style=" color: white">Pemasukan</div>
+                            <div id="debet" class="text-center h4">Jumlah: <?php echo 'Rp '.number_format($today->DEBET,2,',','.');?></div>
                             <div id="d-donut-chart"></div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="label-info label center-block">Kredit</div>
-                            <div class="text-center h4">Jumlah: <?php echo 'Rp '.number_format($today->KREDIT,2,',','.');?></div>
+                            <div class="label-info text-center h3" style=" color: white">Pengeluaran</div>
+                            <div id="kredit" class="text-center h4">Jumlah: <?php echo 'Rp '.number_format($today->KREDIT,2,',','.');?></div>
                             <div id="k-donut-chart"></div>
                         </div>
-                        <div class="col-lg-12">
+<!--                        <div class="col-lg-12">
                             <a href="kas" class="btn btn-default btn-block">Tampilkan Detail</a>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -69,7 +90,7 @@
                 <div class="panel panel-default col-lg-8">
                     <div class="panel-heading">
                         <i class="fa fa-bar-chart-o fa-fw"></i> Progress Kas
-                        <div class="pull-right">
+<!--                        <div class="pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                     Actions
@@ -87,7 +108,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

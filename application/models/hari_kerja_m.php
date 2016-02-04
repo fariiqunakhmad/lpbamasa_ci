@@ -11,6 +11,7 @@ class Hari_kerja_m extends MY_Model{
         );
     function get_dates($bulan=NULL) {
         $this->_database->select('TGLHK');
+        $this->_database->order_by("TGLHK", "asc");
         if($bulan!=NULL){
             $this->_database->like('TGLHK', $bulan);
             $dates = $this->get_all();

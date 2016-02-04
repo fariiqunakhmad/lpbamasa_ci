@@ -14,16 +14,17 @@
                                 <label>Jarak Rumah</label>
                                 <p class="form-control-static"><?php echo '> '.$pegawai->jarak_rumah->JARAKMINJR.' km';?></p>
                             </div>
-                            <label>Komponen Gaji</label>
+                            <label>Komponen Gaji</label>&nbsp;&nbsp;<button class="btn btn-xs btn-primary" onclick="showFormI(<?php echo $nip;?>,'')"><span class="glyphicon glyphicon-plus" ></span></button>
+
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="<?php echo $table;?>"
                                        data-toggle="table"
-                                       data-search="true"
-                                       data-show-toggle="true"
-                                       data-pagination="true" 
+                                       data-search="false"
+                                       data-show-toggle="false"
+                                       data-pagination="false" 
                                        data-page-size="5" 
                                        data-page-list="[5, 10, 20, 50, 100, 200]"
-                                       data-show-pagination-switch="true"     
+                                       data-show-pagination-switch="false"     
                                        data-show-export="false">
                                     <thead>
                                         <tr>
@@ -57,6 +58,11 @@
                                         <?php endif; ?>
                                     </tbody>
                                 </table>
-                                <button class="btn-default" onclick="showFormI(<?php echo $nip;?>,'')"><span class="glyphicon glyphicon-plus" ></span></button>
+
                             </div>
                             <!-- /.row (nested) -->
+<script>
+    $(document).ready(function() {
+        $('#<?php echo $table;?>').bootstrapTable();
+    });
+</script>

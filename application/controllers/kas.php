@@ -62,8 +62,8 @@ class Kas extends MY_Controller {
         $this->data['date']     = $date; 
         $this->data['tabled']   = $this->obj.'d';
         $this->data['tablek']   = $this->obj.'k';
-        $this->data['records1'] = $this->mdl->get_detail_sector_in_period(1, $date[0], $date[1]);
-        $this->data['records2'] = $this->mdl->get_detail_sector_in_period(2, $date[0], $date[1]);
+        $this->data['records1'] = $this->mdl->get_all_sector_in_period(1, $date[0], $date[1]);
+        $this->data['records2'] = $this->mdl->get_all_sector_in_period(2, $date[0], $date[1]);
         $this->view['content']  = $this->obj.'/laporan_'.$this->obj;
         $this->load->view($this->view['content'], $this->data);
     }

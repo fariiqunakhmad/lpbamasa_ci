@@ -1,6 +1,6 @@
             <div id="coba" class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Tambah</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -20,8 +20,9 @@
                                         <tr>
                                             <th data-halign="center" data-sortable="true" data-align="center">No.</th>
                                             <th data-halign="center" data-sortable="true">ID</th>
-                                            <th data-halign="center" data-sortable="true">Nama</th>
-                                            <th data-halign="center" data-sortable="true" data-align="right" >Tunjangan</th>
+                                            <th data-halign="center" data-sortable="true">Nama Jabatan</th>
+                                            <th data-halign="center" data-sortable="true" data-align="right" >Tunjangan Jabatan</th>
+                                            <th data-halign="center" data-sortable="true" data-align="center" >Status</th>
                                             <th data-halign="center" data-align="center">Control</th>
                                         </tr>
                                     </thead>
@@ -32,7 +33,18 @@
                                             <td><?php echo $row->IDJAB; ?></td>
                                             <td><?php echo $row->NAMAJAB; ?></td>
                                             <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALTJ,2,',','.'); ?></td>
-                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDJAB", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDJAB", 'Update'); ?></td>
+                                            <td><?php if($row->STATR==0){echo 'Aktif';}else{echo 'Non Aktif';} ?></td>
+                                            <td>
+                                                <?php
+                                                if($row->STATR==0){
+                                                    echo anchor($this->uri->slash_segment(1)."delete/$row->IDJAB", 'Delete');
+                                                    echo " | ";
+                                                    echo anchor($this->uri->slash_segment(1)."load_form/$row->IDJAB", 'Update');
+                                                }else{
+                                                    echo anchor($this->uri->slash_segment(1)."restore/$row->IDJAB", 'Aktifkan Kembali');
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else : ?> 

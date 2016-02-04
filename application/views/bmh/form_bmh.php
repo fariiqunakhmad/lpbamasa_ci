@@ -6,23 +6,19 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <form name="form1" method="post" action="<?php echo $action; ?>">
-                                        <div class="form-group">
-                                            <label>Tanggal Mulai</label>
-                                            <input class="form-control" type="date" name="tglmulaibmh" id="tglmulaibmh" <?php if($record!=NULL){ echo 'value="'.$record->TGLMULAIBMH.'"' ;}?>>
+                                    <form data-toggle="validator" name="form1" method="post" action="<?php echo $action; ?>">
+                                        <div class="form-group col-lg-6">
+                                            <label>Tanggal Pelaksanaan *</label>
+                                            <div class="input-group">
+                                                <input required class="form-control" type="date" name="tglmulaibmh" id="tglmulaibmh" <?php if($record!=NULL){ echo 'value="'.$record->TGLMULAIBMH.'"' ;}?> data-error="Tanggal pelaksanaan harap diisi dengan lengkap">
+                                                <span class="input-group-addon">s/d</span>
+                                                <input required class="form-control" type="date" name="tglakhirbmh" id="tglakhirbmh" <?php if($record!=NULL){ echo 'value="'.$record->TGLAKHIRBMH.'"' ;}?> data-error="Tanggal pelaksanaan harap diisi dengan lengkap">
+                                            </div>
+                                            <div class='help-block with-errors'></div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Tanggal Berakhir</label>
-                                            <input class="form-control" type="date" name="tglakhirbmh" id="tglakhirbmh" <?php if($record!=NULL){ echo 'value="'.$record->TGLAKHIRBMH.'"' ;}?>>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Biaya</label>
-                                            <input class="form-control" type="text" name="biayabmh" id="biayabmh" <?php if($record!=NULL){ echo 'value="'.$record->BIAYABMH.'"' ;}?>>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ketua Pelaksana</label>    
-                                            <select data-live-search="true" class="selectpicker form-control" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
+                                        <div class="form-group col-lg-3">
+                                            <label>Ketua Pelaksana *</label>    
+                                            <select required data-live-search="true" class="selectpicker form-control" name="nip" id="nip" <?php if($record!=NULL){ echo ''; $idaselected=$record->NIP;}?>>
                                                 <option value="">Pilih Ketua Pelaksana</option>
 <?php 
     if(isset($dd_pegawai_m)) :
@@ -39,12 +35,27 @@
     endif;
 ?>
                                             </select>
+                                            <div class='help-block with-errors'></div>
                                         </div>
-                                        <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
-                                        <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
+                                        <div class="form-group col-lg-3">
+                                            <label>Biaya *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Rp</span>
+                                                <input required class="form-control text-right" type="text" name="biayabmh" id="biayabmh" pattern="^[0-9]{1,}$" <?php if($record!=NULL){ echo 'value="'.$record->BIAYABMH.'"' ;}?>>
+                                                <span class="input-group-addon">,00</span>
+                                            </div>
+                                            <div class='help-block with-errors'></div>
+                                        </div>
+                                        
+                                        <div class="col-lg-3">
+                                            <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary ">Submit</button>
+                                            <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger " >Reset Field</button>
+                                            <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            *&nbsp;&nbsp; Wajib diisi
+                                        </div>
                                     </form>
-                                </div>
                             </div>
                             <!-- /.row (nested) -->
                         </div>

@@ -27,11 +27,16 @@
                                             <td>
                                                 <font size="1">
                                                 <?php 
+                                                
                                                 foreach ($detail as $key => $value) {
-                                                    if($value->NIP==$peg->NIP && $value->TGLHK==$date->TGLHK){
-                                                        echo $value->KETPH;
+                                                    
+                                                    if($value->NIP===$peg->NIP && $value->TGLHK===$date->TGLHK){
+                                                        //echo $value->NIP;
+                                                        echo strtoupper($value->KETPH) ;
+                                                        //echo $value->TGLHK;
                                                     }
                                                 }
+                                                
                                                 ?>  
                                                 </font>
                                             </td>
@@ -43,17 +48,23 @@
                                         <?php endif; ?>
                                         
                                     </tbody>
+                                    <?php
+                                    if ($useras['id']==2){
+                                    ?>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2"><font size="1">Form presensi</font></td>
                                             <?php if(isset($dates)) : foreach($dates as $date) : ?>
                                             <td>
-                                                <a href="<?php echo base_url();?>presensi_harian/load_form/<?php echo $idjph.'/'.$date->TGLHK;?>"><font size="1">+</font></a>  
+                                                <a href="<?php echo base_url();?>presensi_harian/load_form/<?php echo $idjph.'/'.$date->TGLHK;?>"><font size="1"><i class="fa fa-pencil"></i></font></a>  
                                             </td>
                                             <?php endforeach; ?>
                                             <?php endif; ?>
                                         </tr>
                                     </tfoot>
+                                    <?php 
+                                    }
+                                    ?>
                                 </table>
                             </div>
                             <!-- /.row (nested) -->

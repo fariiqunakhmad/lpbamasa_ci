@@ -1,7 +1,30 @@
+<style>
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+.kv-avatar .file-input {
+    display: table-cell;
+    max-width: 220px;
+}
+</style>
             <div class="row">
                 <div class="col-lg-12">
+                    <?php
+                    if($this->uri->segment(2)!='profile'){
+                    ?>
                     <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>">Kembali ke Daftar Pegawai</a> |
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1)."load_form/".$record->NIP; ?>">Update</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1)."load_form/".$record->NIP; ?>">Update</a> |
+                    <?php
+                    }else{
+                    ?>
+                        <a href="<?php echo base_url().$this->uri->slash_segment(1)."load_form/".$record->NIP; ?>">Ubah Password</a>
+                    <?php
+                    }
+                    ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                         </div>
@@ -49,7 +72,7 @@
                                         <label>Alamat</label>
                                     </div>
                                     <div class="col-lg-8">
-                                        <p>: <?php echo $record->ALAMATP." ".$record->kota->NAMAK;?></p>
+                                        <p>: <?php echo $record->ALAMATP." ".$record->kot_kota->NAMAK;?></p>
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Telp/HP</label>
@@ -138,24 +161,34 @@
                                     <div class="col-lg-8">
                                         <p>: <?php echo $record->jabatan->NAMAJAB;?></p>
                                     </div> 
+                                    <div class="col-lg-4">
+                                        <label>Status Kepegawaian</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p>: 
+                                            <?php 
+                                            switch ($record->STATR) {
+                                                case 0:
+                                                    echo 'Aktif';
+                                                    break;
+                                                case 1:
+                                                    echo 'Non Aktif';
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                            ?>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col-lg-3">
-                                    <div class="">
-                                        <center>
-                                            <img class="img-thumbnail" src="<?php echo base_url(); ?>assets/images/pegawai/<?php echo $record->NIP;?>.jpg" width="120px" height="160px">
-                                        </center>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Form Pembaruan Foto
+                                <div id="ava" class="col-lg-3">
+                                    <!-- the avatar markup -->
+                                    <div id="kv-avatar-errors" class="center-block" style="width:800px;display:none"></div>
+                                    <form class="text-center" method="post" enctype="multipart/form-data">
+                                        <div class="kv-avatar center-block" style="width:200px">
+                                            <input id="avatar<?php echo $record->NIP;?>" name="avatar" type="file" class="file-loading">
                                         </div>
-                                        <div class="panel-body">
-                                            <form action="<?php echo base_url().'pegawai/update_photo/'.$record->NIP; ?>" enctype="multipart/form-data">
-                                                <input class="form-control" type="file" accept=".jpg" name="userfile">
-                                                <input type="submit" value="Perbarui Foto" />
-                                            </form>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.row (nested) -->

@@ -70,6 +70,9 @@ class Kewajiban_biaya_kuliah extends MY_Controller {
             $this->load->model('biaya_kuliah_m');
             $this->data['recordsbk']=$this->biaya_kuliah_m ->with('komponen_biaya_kuliah')
                                                             ->get_many_by('IDA', $this->data['ida']);
+            $this->load->model('kewajiban_biaya_kuliah_m');
+            $this->data['recordswbk']=$this->kewajiban_biaya_kuliah_m->get_many_by(['IDA'=> $this->data['ida'],'IDPA'=> $this->data['idpa']]);
+//            print_r($this->data['recordswbk']);
             $this->view['css']   = 'assets/css/plugins/bootstrap-table.css';
             $this->view['js']    = array(
                 'assets/js/plugins/bootstrap-table/bootstrap-table.js',

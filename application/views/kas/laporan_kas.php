@@ -46,8 +46,8 @@ td, th {
                     <td width="10%">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td colspan="5"style="text-align: left;"><b>Debet</b></td>
-                    <td colspan="5"style="text-align: right"><b>Kredit</b></td>
+                    <td colspan="5"style="text-align: left;"><b>Pemasukan</b></td>
+                    <td colspan="5"style="text-align: right"><b>Pengeluaran</b></td>
                 </tr>
                 <tr>
                     <td colspan="5">

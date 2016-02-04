@@ -10,16 +10,26 @@
                         <?php 
                         if(isset($authority)) {
                             if(count($authority)>1){
-                                foreach($authority as $key => $value) { 
+                                foreach($authority as $key => $value) {
+                                    if($value != $useras['name']){
                         ?>
-                        <li><a href="<?php echo base_url(); ?>authentication/change_user_as/<?php echo $key; ?>"><i class="fa fa-user fa-fw"></i> <?php echo $value; ?></a></li>
+                        <li><a href="<?php echo base_url(); ?>authentication/change_user_as/<?php echo $key; ?>"><i class="fa fa-exchange fa-fw"></i> <?php echo $value; ?></a></li>
                         <?php 
+                                    }
                                 }
                                 echo '<li class="divider"></li>';    
                             }
                         }
+                        if($useras['id']!=4){
                         ?>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li>
+                            <a href="<?php echo base_url(); ?>pegawai/profile"><i class="fa fa-user fa-fw"></i> Profile</a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <li>
+                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url(); ?>authentication/logout"><i class="fa fa-sign-out fa-fw"></i> Keluar</a>

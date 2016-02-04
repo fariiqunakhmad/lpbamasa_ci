@@ -9,7 +9,7 @@ class Presensi_mengajar extends MY_Controller{
     protected $model    = 'presensi_mengajar_m';
     protected $dd_model = array(
         'kelas_mk_m'    => 'NAMAKMK',
-        'pegawai_m'     => 'NAMAP'
+//        'pegawai_m'     => 'NAMAP'
         );
     protected $related_model= array(
         'kelas_mk',
@@ -26,24 +26,19 @@ class Presensi_mengajar extends MY_Controller{
         );
         return $data;
     }
-    function daftar_per_kmk() {
-        $this->view['css']     = array(
-            'assets/css/plugins/dataTables.bootstrap.css',
-//                'assets/css/plugins/bootstrap-table.css',
-            'assets/css/plugins/select/bootstrap-select.css'
-        );
-        $this->view['js']     = array(
-            'assets/js/plugins/dataTables/jquery.dataTables.js',
-            'assets/js/plugins/dataTables/dataTables.bootstrap.js',
-//                'assets/js/plugins/bootstrap-table/bootstrap-table.js',
-            'assets/js/modul/presensi_mengajar.js',
-            'assets/js/plugins/select/bootstrap-select.js'
-        );
+    public function index($idkmk=NULL) {
+        if ($idkmk!=NULL) {
+            $this->data['kmkselected']=$idkmk;
+            array_push($this->view['script'], "showDetailDaftarPresensiMengajar('".$idkmk."')");
+        }
+        array_push($this->view['css'], 'assets/css/plugins/bootstrap-table.css');
+        array_push($this->view['js'], 'assets/js/plugins/bootstrap-table/bootstrap-table.js');
+        array_push($this->view['js'], 'assets/js/modul/presensi_mengajar.js');
         $this->make_dd_resource();
         
         $this->data['title']    = 'Daftar '.$this->title;
         $this->data['table']    = 'daftar_presensi_mengajar';
-        $this->view['content']  = 'daftar_presensi_mengajar_per_kmk';
+        $this->view['content']  = 'presensi_mengajar/daftar_presensi_mengajar_per_kmk';
         $this->page->view($this->view, $this->data);
     }
     function get_daftar_presensi_mengajar() {
@@ -52,7 +47,7 @@ class Presensi_mengajar extends MY_Controller{
         $this->data['kmk']  =$this->kelas_mk_m->get($idkmk);
         $this->data['records']    =$this->mdl->get_many_by('IDKMK',$idkmk);
         $this->data['table']    = 'detail_daftar_presensi_pegawai';
-        $this->load->view('detail_daftar_presensi_mengajar', $this->data);
+        $this->load->view('presensi_mengajar/detail_daftar_presensi_mengajar', $this->data);
     }
     function get_kmk() {
         $idkmk = $this->uri->segment(3);
@@ -73,16 +68,25 @@ class Presensi_mengajar extends MY_Controller{
         echo json_encode($data);
     }
     public function load_form() {
-        $this->view['css']     = array(
-            'assets/css/plugins/select/bootstrap-select.css'
-        );
-        $this->view['js']     = array(
-            'assets/js/modul/presensi_mengajar.js',
-            'assets/js/plugins/select/bootstrap-select.js'
-        );
-        
+        array_push($this->view['js'], 'assets/js/modul/presensi_mengajar.js');
+        $id=$this->get_id_from_url();
+        if ($id == NULL){
+            $this->data['idkmk']    = $this->uri->segment(3);
+            array_push($this->view['script'], "getKMK('".$this->data['idkmk']."')");
+        }
+//        array_push($this->view['css'], 'assets/css/plugins/select/bootstrap-select.css');
+//        array_push($this->view['js'], 'assets/js/plugins/select/bootstrap-select.js');
+        $this->load->model('pegawai_m');
+        $this->data["dd_dosen_m"] =  $this->pegawai_m->dropdown('NAMAP', 1);
         parent::load_form();
-        //print_r($this->data['record']);
+    }
+    public function insert() {
+        $this->obj = $this->obj."/index/".$this->input->post('idkmk');
+        parent::insert();
+    }
+    public function update() {
+        $this->obj = $this->obj."/index/".$this->input->post('idkmk');
+        parent::update();
     }
     
 }

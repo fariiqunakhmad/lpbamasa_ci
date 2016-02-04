@@ -26,9 +26,10 @@
                                     <th data-halign="center"    data-sortable="true"    data-align="left" data-footer-formatter="Hari ini" data-visible="false">ID</th>
                                     <th data-halign="center"    data-sortable="true"    data-align="left" data-footer-formatter="footerTanggal" >Tanggal</th>
                                     <th data-halign="center"    data-sortable="true"    data-align="left" data-footer-formatter="Total"  >Keterangan</th>
-                                    <th data-halign="center"    data-sortable="false"   data-align="left" data-field="ref">Ref</th>
-                                    <th data-halign="center"    data-sortable="true"    data-align="right" data-footer-formatter="footerNominalD" data-field="nominald">Debet</th>
-                                    <th data-halign="center"    data-sortable="true"    data-align="right" data-footer-formatter="footerNominalK" data-field="nominalk">Kredit</th>
+                                    <th data-halign="center"    data-sortable="true"   data-align="left" data-field="ref">Ref</th>
+                                    <th data-halign="center"    data-sortable="true"    data-align="right" data-footer-formatter="footerNominalD" data-field="nominald" data-width="200px">Debet</th>
+                                    <th data-halign="center"    data-sortable="true"    data-align="right" data-footer-formatter="footerNominalK" data-field="nominalk" data-width="200px">Kredit</th>
+                                    <th data-field="dkkas" data-visible="false">DKKAS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,7 @@
                                     <td><?php echo $row->REFKAS; ?></td>
                                     <td><?php if($row->DKKAS==1) {echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALKAS,2,',','.');} ?></td>
                                     <td><?php if($row->DKKAS==2) {echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALKAS,2,',','.');} ?></td>
+                                    <td><?php echo $row->DKKAS; ?></td>
                                 </tr>
                                 <?php endforeach; ?>
 <!--                                <tr>
@@ -69,8 +71,8 @@
                                     <td><?php echo date('Y-m-d');// echo date('Y-m-d H:i:s');?></td>
                                     <td>Saldo</td>
                                     <td></td>
-                                    <td><div id="saldod"></div></td>
-                                    <td><div id="saldok"></div></td>
+                                    <td width="200px"><div id="saldod"></div></td>
+                                    <td width="200px"><div id="saldok"></div></td>
                                 </tr>
                             </tfoot>
                         </table>

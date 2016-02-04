@@ -8,12 +8,6 @@
                             <div class="row">
                                 <form data-toggle="validator" name="pegawai" method="post" action="<?php echo $action; ?>" enctype="multipart/form-data" >
                                     <div class="col-lg-12">
-                                    
-<!--                                        <div class="form-group">
-                                            <label>NIP</label>
-                                            <input  class="form-control" type="text" name="nip" id="nip" <?php if(isset($record)){ echo 'value="'.$record->NIP.'"' ;}if(isset($NIP)){ echo 'value="'.$NIP.'"' ;}?>>
-                                        </div>-->
-                                        
                                         <?php
                                         if(!isset($record)){
                                         echo "<div class='form-group col-lg-6'>
@@ -29,21 +23,36 @@
                                         }
                                         ?>
                                         
-                                        <div class="form-group col-lg-<?php if(!isset($record)){ echo'6';} else{echo'12';}?>">
+                                        <div class="form-group col-lg-6">
                                             <label>Nama *</label>
                                             <input class="form-control" type="text" name="namap" id="namap" <?php if(isset($record)){ echo 'value="'.$record->NAMAP.'"' ;}?> data-error="Nama tidak boleh kosong" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
-                                        <?php
-                                        if(!isset($record)){
-                                            echo'<div class="form-group col-lg-6">
-                                            <label>Foto</label>
-                                            <input class="form-control" type="file" accept=".jpg" name="userfile">
-                                            <div class="help-block with-errors"></div>
-                                        </div>';
-                                        }
-                                        ?>
-                                        
+                                        <div class="form-group col-lg-6">
+                                            <label>Tempat/Tanggal Lahir *</label>
+                                            <div class="input-group">
+                                                <select  class="form-control selectpicker" data-live-search="true" name="idk" id="idk" <?php if(isset($record)){ echo ''; $idaselected=$record->IDK;}?> required>
+                                                    <option value="">Pilih Tempat Lahir</option>
+    <?php 
+        if(isset($dd_kota_m)) :
+            foreach($dd_kota_m as $key => $val) :
+                if (isset($idaselected) && $key==$idaselected){
+                    echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
+                }
+                else {
+                    echo "\t\t\t\t\t\t<option value='$key'>$val</option>\n";
+                }
+            endforeach;
+        else :
+            echo "<h2>No records were returned.</h2>";
+        endif;
+    ?>
+                                                </select>
+                                                <span class="input-group-addon">,</span>
+                                                <input  class="form-control" type="date" name="tgllp" id="tgllp" <?php if(isset($record)){ echo 'value="'.$record->TGLLP.'"' ;}?> required>
+                                            </div>      
+                                            <div class='help-block with-errors'></div>
+                                        </div>                                        
                                         <div class="form-group col-lg-6">
                                             <label>Jenis Kelamin *</label>
                                             <label class="radio-inline">
@@ -64,33 +73,7 @@
                                             </label>
                                             <div class='help-block with-errors'></div>
                                         </div>
-                                        <div class="form-group col-lg-6">
-                                            <label>Tempat Lahir *</label>
-                                            <select  class="form-control selectpicker" data-live-search="true" name="idk" id="idk" <?php if(isset($record)){ echo ''; $idaselected=$record->IDK;}?> required>
-                                                <option value="">Pilih Tempat Lahir</option>
-<?php 
-    if(isset($dd_kota_m)) :
-        foreach($dd_kota_m as $key => $val) :
-            if (isset($idaselected) && $key==$idaselected){
-                echo "\t\t\t\t\t\t<option selected='selected' value='$key'>$val</option>\n";
-            }
-            else {
-                echo "\t\t\t\t\t\t<option value='$key'>$val</option>\n";
-            }
-        endforeach;
-    else :
-        echo "<h2>No records were returned.</h2>";
-    endif;
-?>
-                                            </select>
-                                            <div class='help-block with-errors'></div>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label>Tanggal Lahir *</label>
-                                            <input  class="form-control" type="date" name="tgllp" id="tgllp" <?php if(isset($record)){ echo 'value="'.$record->TGLLP.'"' ;}?> required>
-                                            <div class='help-block with-errors'></div>
-                                        </div>
-                                        
+
                                         <div class="form-group col-lg-12">
                                             <label>Alamat *</label>
                                             <textarea  class="form-control" name="alamatp" id="alamatp" required><?php if(isset($record)){ echo $record->ALAMATP;}?></textarea>
@@ -119,7 +102,7 @@
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label>Telp/HP</label>
-                                            <input class="form-control" type="tel" name="tlpp" id="tlpp" <?php if(isset($record)){ echo 'value="'.$record->TLPP.'"' ;}?>>
+                                            <input class="form-control" type="tel" name="tlpp" id="tlpp" <?php if(isset($record)){ echo 'value="'.$record->TLPP.'"' ;}?> pattern="^[0-9\-\+\ \(\)]{9,17}$">
                                             <div class='help-block with-errors'></div>
                                         </div>
                                         <div class="form-group col-lg-6">
@@ -222,9 +205,6 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp; * Wajib diisi
                                         </div>
                                     </div>
-                                    <div>
-                                
-                                    </div>
                                 </form>
                             </div>
                             <!-- /.row (nested) -->
@@ -236,32 +216,3 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-<!--<script>
-$(document).ready(function() {
-    // Generate a simple captcha
-    function randomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
-    
-    $('#pegawai').BootstrapValidator({
-        framework: 'bootstrap',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            namap: {
-                row: '.col-xs-4',
-                validators: {
-                    notEmpty: {
-                        message: 'Nama tidak boleh kosong'
-                    }
-                }
-            }
-
-        }
-    });
-});
-</script>-->

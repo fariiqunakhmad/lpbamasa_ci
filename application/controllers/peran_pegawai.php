@@ -1,23 +1,22 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Biaya_kuliah extends MY_Controller{
-    protected $title    = "Biaya Kuliah";
-    protected $model    = 'biaya_kuliah_m';
+class Peran_pegawai extends MY_Controller{
+    protected $title    = "Peran Pegawai";
+    protected $model    = 'peran_pegawai_m';
     protected $related_model= array(
-        'angkatan',
-        'komponen_biaya_kuliah'  
+        'peran',
+        'pegawai'  
     );
     protected $dd_model = array(
-        'angkatan_m'    => 'IDA', 
-        'kbk_m'         => 'NAMAKBK'
+        'peran_m'   => 'NAMAPERAN', 
+        'pegawai_m' => 'NAMAP'
         );
     
     protected function get_data_from_form() {
         $data=array(
-            'IDKBK'     => $this->input->post('txtidkbk'),
-            'IDA'       => $this->input->post('txtida'),
-            'BIAYA'     => $this->input->post('txtbiaya'),
+            'IDPERAN'   => $this->input->post('txtidperan'),
+            'NIP'       => $this->input->post('txtnip'),
             'STATR'     => 0
         );
         return $data;

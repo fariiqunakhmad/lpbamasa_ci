@@ -22,13 +22,21 @@ class Presensi_harian_m extends MY_Model{
         $this->_database->like($key, $value);
         return $this->get_all();
     }
-    function rekap_2($bulan) {
-        $this->_database->select('NIP, COUNT(NIP) AS JUMLAHHADIR');
+//    function rekap($bulan, $idjph='') {
+//        $this->_database->select('NIP, COUNT(NIP) AS JUMLAHHADIR');
+//        $this->_database->like('TGLHK', $bulan);
+//        $this->_database->group_by('NIP');
+//        if($idjph==''){
+//            $param=['KETPH'=>'h'];
+//        }else{
+//            $param=array('IDJPH'=>$idjph, 'KETPH'=>'h');
+//        }
+//        return $this->get_many_by($param);
+//    }
+    function get_data_for_ta($bulan) {
+        $this->_database->select('NIP, TGLHK as TGL');
         $this->_database->like('TGLHK', $bulan);
-        $this->_database->group_by('NIP');
-        
-        $param=array('IDJPH'=>2, 'KETPH'=>'h');
-        return $this->get_many_by($param);
+        return $this->get_many_by(['KETPH'=>'h']);
     }
         
 }   

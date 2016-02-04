@@ -1,6 +1,6 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Tambah</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -19,8 +19,9 @@
                                         <tr>
                                             <th data-halign="center"    data-sortable="true"    data-align="center" >No.</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >ID</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Jarak Min</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Transport/hari</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Jarak Minimal</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Transport / Hari</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="center" >Status</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -29,9 +30,20 @@
                                         <tr class="gradeA">
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDJR; ?></td>
-                                            <td><?php echo $row->JARAKMINJR; ?></td>
+                                            <td><?php echo $row->JARAKMINJR.' Km'; ?></td>
                                             <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALTT,2,',','.'); ?></td>
-                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDJR", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDJR", 'Update'); ?></td>
+                                            <td><?php if($row->STATR==0){echo 'Aktif';}else{echo 'Non Aktif';} ?></td>
+                                            <td>
+                                                <?php
+                                                if($row->STATR==0){
+                                                    echo anchor($this->uri->slash_segment(1)."delete/$row->IDJR", 'Delete');
+                                                    echo " | ";
+                                                    echo anchor($this->uri->slash_segment(1)."load_form/$row->IDJR", 'Update');
+                                                }else{
+                                                    echo anchor($this->uri->slash_segment(1)."restore/$row->IDJR", 'Aktifkan Kembali');
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else : ?> 

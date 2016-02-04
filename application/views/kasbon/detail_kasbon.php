@@ -42,19 +42,19 @@
                                                                 <tr>                                            
                                                                     <td><?php echo $no++; ?></td>
                                                                     <td><?php echo $row->IDGAJI; ?></td>
-                                                                    <td class="right"><?php $jml+=$row->NOMINALCK; echo number_format($row->NOMINALCK,2,',','.'); ?></td>
+                                                                    <td class="right"><?php $jml+=$row->NOMINALCK; echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALCK,2,',','.'); ?></td>
                                                                 </tr>
                                                                 <?php endforeach; ?>
                                                                 <?php else : ?> 
                                                                 <h2>No records were returned.</h2>
                                                                 <?php endif; ?>
-                                                                <tr>                                            
-                                                                    <td></td>
-                                                                    <td><label>Jumlah </label></td>
-                                                                    <td><label><?php echo $jml;?></label></td>
-                                                                </tr>
-                                                                
                                                             </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="2" class="text-center"><b>Jumlah </b></td>
+                                                                    <td><b><?php echo '<div class="pull-left">Rp </div><div class="pull-right">'.number_format($jml,2,',','.').'</div>';?></b></td>
+                                                                </tr>
+                                                            </tfoot>
                                                         </table>
                                                     </div>
                                                 </div>

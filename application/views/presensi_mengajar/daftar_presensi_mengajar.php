@@ -1,6 +1,6 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Tambah Baru</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -22,7 +22,7 @@
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Pertemuan</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Pengajar</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >Tgl Mengajar</th>
-                                            <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
+                                            <th data-halign="center"    data-sortable="false"    data-align="center" >Kontrol</th>
                                         </tr>
                                     </thead>
                                     <tbody>

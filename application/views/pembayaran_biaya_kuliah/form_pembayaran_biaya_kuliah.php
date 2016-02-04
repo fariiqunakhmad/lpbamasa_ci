@@ -1,5 +1,3 @@
-
-
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -8,37 +6,19 @@
                             Form
                         </div>
                         <div class="panel-body">
-                            <form id="form1" name="form1" method="post" action="<?php echo $action; ?>">
+                            <form id="form1" data-toggle="validator" enctype="multipart/form-data" name="form1" method="post" action="<?php echo $action; ?>">
                                 <div class="row">
-                                    <div class="col-lg-12 ">
                                     
-<!--                                        <div class="form-group col-lg-3">
-                                            <label >ID Pembayaran</label>
-                                            <input <?php if($record==NULL){ echo 'class="form-control"';}?> 
-                                                   type="text" 
-                                                   name="idpbk" 
-                                                   <?php if($record!=NULL){echo 'value="'.$record->IDPBK.'" hidden="true"';}?> 
-                                                   />
-                                            <?php if($record!=NULL){echo '<p class="form-control-static">'.$record->IDPBK.'</p>';}?>
-                                        </div>
-                                        <div class="form-group col-lg-3">
-                                            <label >Tanggal Pembayaran</label>
-                                            <input <?php if($record==NULL){ echo 'class="form-control"';}?> 
-                                                type="date" 
-                                                name="tglpbk" 
-                                                <?php if($record!=NULL){ echo 'value="'.$record->TGLPBK.'" hidden="true"' ;} 
-                                                else{echo 'value="'.date('Y-m-d').'"' ;}?> 
-                                                />
-                                            <?php if($record!=NULL){ echo '<p class="form-control-static">'.$record->TGLPBK.'</p>' ;}?>
-                                        </div>-->
-                                        <div class="form-group">
-                                            <label >Mahasiswa</label>
+                                    <!--<div class="col-lg-12 ">-->
+                                        <div class="form-group col-lg-12">
+                                            <label >Mahasiswa *</label>
                                             <select <?php if($record==NULL){ echo 'class="selectpicker form-control"';}?>
                                                 data-live-search="true" 
                                                 onchange="showDetailForm(this.value)" 
                                                 name="nim" 
                                                 <?php if($record!=NULL){ echo 'hidden="true"'; $nimselected=$record->NIM;}?>
-                                                required>
+                                                required data-error="Mahasiswa harus dipilih"
+                                                >
                                                 <option value="">Pilih Mahasiswa</option>
                                                 <?php
                                                     if(isset($dd_mahasiswa_m)) :
@@ -57,9 +37,10 @@
                                                 ?>
                                             </select>
                                             <?php if($record!=NULL){echo '<p class="form-control-static">'.$nimselected.' '.$namamselected.'</p>';}?>
+                                            <div class='help-block with-errors'></div>
                                         </div>
                                         <?php if($record!=NULL): ?>
-                                        <div class="form-group">
+<!--                                        <div class="form-group col-lg-12">
                                             <label >Komponen Biaya Kuliah</label>
                                             <div class="table-responsive">
                                                 <table id="<?php echo $table;?>" class="table table-striped table-bordered table-hover">
@@ -109,20 +90,23 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="form-inline">
+                                        <div class="form-inline form-group col-lg-6">
                                             <label> Total dibayar: </label>
                                             <input type="text" class="form-control" size="20" name="total" value="<?php if($record!=NULL){ echo $record->NOMINALPBK;} else{ echo 0;}?>"/>
-                                        </div>
-
+                                        </div>-->
                                         <?php else:?>
                                         <div id="txtHint"></div>
                                         <?php endif;?>
-                                        <div class="form-group">
-                                            <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                            <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
+                                        <div class="col-lg-3">
+                                            <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary active">Submit</button>
+                                            <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger " >Reset Field</button>
                                             <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
                                         </div>
-                                    </div>
+                                        <div class="col-lg-6">
+                                            *&nbsp;&nbsp; Wajib diisi<br>
+                                            **&nbsp; Wajib dipilih minimal 1
+                                        </div>
+                                    <!--</div>-->
                                 </div>
                                 <!-- /.row (nested) -->
                             </form>

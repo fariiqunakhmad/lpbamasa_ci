@@ -1,6 +1,6 @@
             <div class="row">
                 <div class="col-lg-12">
-                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Add</a>
+                    <a href="<?php echo base_url().$this->uri->slash_segment(1); ?>load_form">Tambah</a>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Daftar
@@ -19,8 +19,9 @@
                                         <tr>
                                             <th data-halign="center"    data-sortable="true"    data-align="center" >No.</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="left" >ID</th>
-                                            <th data-halign="center"    data-sortable="true"    data-align="left" >Tahun Min</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="right" >Masa Abdi Minimal</th>
                                             <th data-halign="center"    data-sortable="true"    data-align="right" >Tunjangan Abdi</th>
+                                            <th data-halign="center"    data-sortable="true"    data-align="center" >Status</th>
                                             <th data-halign="center"    data-sortable="false"    data-align="center" >Control</th>
                                         </tr>
                                     </thead>
@@ -29,9 +30,20 @@
                                         <tr class="gradeA">
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $row->IDMA; ?></td>
-                                            <td><?php echo $row->TAHUNMINMA; ?></td>
+                                            <td><?php echo $row->TAHUNMINMA.' Tahun'; ?></td>
                                             <td><?php echo '<div class="pull-left">Rp </div>'.number_format($row->NOMINALTA,2,',','.'); ?></td>
-                                            <td><?php echo anchor($this->uri->slash_segment(1)."delete/$row->IDMA", 'Delete'); ?> | <?php echo anchor($this->uri->slash_segment(1)."load_form/$row->IDMA", 'Update'); ?></td>
+                                            <td><?php if($row->STATR==0){echo 'Aktif';}else{echo 'Non Aktif';} ?></td>
+                                            <td>
+                                                <?php
+                                                if($row->STATR==0){
+                                                    echo anchor($this->uri->slash_segment(1)."delete/$row->IDMA", 'Delete');
+                                                    echo " | ";
+                                                    echo anchor($this->uri->slash_segment(1)."load_form/$row->IDMA", 'Update');
+                                                }else{
+                                                    echo anchor($this->uri->slash_segment(1)."restore/$row->IDMA", 'Aktifkan Kembali');
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else : ?> 

@@ -4,8 +4,7 @@ class Mahasiswa_m extends MY_Model{
     public $_table = 'mahasiswa';
     public $primary_key = 'NIM';
     
-    function dropdown_selected( $nimselected)
-    {
+    function dropdown_selected( $nimselected){
         $key = $this->primary_key;
         $value= 'NAMAM';
 

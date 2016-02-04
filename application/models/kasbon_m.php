@@ -16,11 +16,15 @@ class Kasbon_m extends MY_Model{
     function hard_delete($param) {
         $this->_database->delete($this->_table, array($this->primary_key => $param));
     }
-    function get_sah() {
+    function get_sah($nip=NULL) {
         $this->_database->join('kas', "kas.IDKAS = kasbon.IDKAS");
         $this->_database->where('kas.NIP != ""');
         $this->_database->where('kasbon.STATR = "0"');
-        return $this->with_deleted()->get_many_by('STATKB',0);
+        if($nip==NULL){
+            return $this->with_deleted()->get_many_by('STATKB',0);
+        }else{
+            return $this->with_deleted()->get_many_by(['STATKB'=>0, 'kasbon.NIP'=>$nip]);
+        }
     }
 }
 /* End of file Kasbon_m.php */

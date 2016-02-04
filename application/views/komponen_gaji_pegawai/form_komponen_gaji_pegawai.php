@@ -8,7 +8,7 @@
                             Form<?php echo $tab; ?>
                         </div>
                         <div class="panel-body">
-                            <form id="form1" name="form1" onsubmit="javascript: insert(event); return false;" >
+                            <form data-toggle="validator" id="form1" name="form1" onsubmit="javascript: insert(event); return false;" >
                                 <div class="row">
                                     <div class="col-lg-12 ">
                                         <div <?php if($record==NULL){echo 'hidden="true"';}?>  class="form-group col-lg-6">
@@ -39,14 +39,14 @@
                                         </div>
                                     
                                         <div class="form-group col-lg-6">
-                                            <label>Komponen</label>
+                                            <label>Komponen *</label>
                                             <!--document.getElementById('nip').value-->
                                             <select <?php if($record!=NULL){echo 'readonly="true"';}?>
                                                 data-live-search="true" 
                                                 class="form-control selectpicker" 
                                                 onchange="getGajiSatuan($('select[name=nip]').val(), this.value); " 
                                                 name="idkg" id="idkg" 
-                                                <?php if($record!=NULL){ echo ''; $idkgselected=$record->IDKG;}?>>
+                                                <?php if($record!=NULL){ echo ''; $idkgselected=$record->IDKG;}?> required>
                                                 <?php if($record==NULL){echo '<option value="">Pilih Komponen</option>';}?>
 <?php 
     if(isset($dd_kg_m)) :
@@ -76,15 +76,22 @@
     endif;
 ?>
                                             </select>
+                                            <div class='help-block with-errors'></div>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <label>Gaji satuan</label>
-                                            <input class="form-control" type="text" name="gajisatuan" id="gajisatuan" <?php if($record!=NULL){ echo 'value= "'.$record->GAJISATUAN.'"';}?>>
+                                            <label>Gaji satuan *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Rp</span>
+                                                <input required pattern="^[0-9]{1,}$" class="form-control text-right" type="text" name="gajisatuan" id="gajisatuan" <?php if($record!=NULL){ echo 'value= "'.$record->GAJISATUAN.'"';}?>>
+                                                <span class="input-group-addon">,00</span>
+                                            </div>
+                                            <div class='help-block with-errors'></div>
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <button onclick="" type="submit" name="submit" value="submit"  class="btn btn-sm btn-primary">Submit</button>
                                             <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
                                             <button type="button" class="btn btn-sm btn-warning" onclick="showFormI('')">Cancel</button>
+                                            &nbsp;&nbsp;*&nbsp;&nbsp; Wajib diisi
                                         </div>
                                     </div>
                                 </div>

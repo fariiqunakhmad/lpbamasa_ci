@@ -6,14 +6,15 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <form name="form1" method="post" action="<?php echo $action; ?>">
+                                <form data-toggle="validator" enctype="multipart/form-data" name="form1" method="post" action="<?php echo $action; ?>">
                                     <div class="form-group col-lg-12">
-                                        <label>Uraian</label>
-                                        <input class="form-control" type="text" name="uraiantsl" id="uraiantsl" <?php if($record!=NULL){ echo 'value="'.$record->URAIANTSL.'"' ;}?> required="">
+                                        <label>Uraian *</label>
+                                        <input class="form-control" type="text" name="uraiantsl" id="uraiantsl" <?php if($record!=NULL){ echo 'value="'.$record->URAIANTSL.'"' ;}?> required data-error="uraian transaksi harus diisi">
+                                        <div class='help-block with-errors'></div>
                                     </div>
                                     <div class="form-group col-lg-5">
-                                        <label>Kelompok</label>
-                                        <select data-live-search="true" class="selectpicker form-control" name="idkk" id="idkk" <?php if($record!=NULL){ echo ''; $idaselected=$record->kas->IDKK;}?> required="" >
+                                        <label>Kelompok *</label>
+                                        <select data-live-search="true" class="selectpicker form-control" name="idkk" id="idkk" <?php if($record!=NULL){ echo ''; $idaselected=$record->kas->IDKK;}?> required data-error="Kelompok transaki harus dipilih">
                                             <option value="">Pilih Kelompok</option>
 <?php 
 if(isset($dd_kk_m)) :
@@ -34,28 +35,33 @@ else :
 endif;
 ?>
                                         </select>
+                                        <div class='help-block with-errors'></div>
                                     </div>
 
                                     <div class="form-group col-lg-2">
-                                        <label>D/K</label>
+                                        <label>D/K *</label>
                                         <div>
-                                            <input type="radio" name="dktsl" id="dktsl" value="1" <?php if($record!=NULL && $record->kas->DKKAS==1){ echo 'checked';}?> required="">Debet &nbsp;&nbsp;&nbsp;&nbsp;
-                                        
-                                            <input type="radio" name="dktsl" id="dktsl" value="2" <?php if($record!=NULL && $record->kas->DKKAS==2){ echo 'checked';}?> required="">Kredit
+                                            <input type="radio" name="dktsl" id="dktsl" value="1" <?php if($record!=NULL && $record->kas->DKKAS==1){ echo 'checked';}?> required data-error="D/K harus dipilih">Debet &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="radio" name="dktsl" id="dktsl" value="2" <?php if($record!=NULL && $record->kas->DKKAS==2){ echo 'checked';}?> required data-error="D/K harus dipilih">Kredit
                                         </div>
+                                        <div class='help-block with-errors'></div>
                                     </div>
                                     <div class="form-group col-lg-5">
-                                        <label>Nominal</label>
+                                        <label>Nominal *</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">Rp.</span>
-                                            <input class="form-control" type="text" name="nominaltsl" id="nominaltsl" <?php if($record!=NULL){ echo 'value="'.$record->kas->NOMINALKAS.'"' ;}?> required="">
+                                            <input class="form-control text-right" type="text" name="nominaltsl" id="nominaltsl" <?php if($record!=NULL){ echo 'value="'.$record->kas->NOMINALKAS.'"' ;}?> pattern="^[0-9]{1,}$" required data-error="Nominal harus diisi dengan format bilangan bulat">
                                             <span class="input-group-addon">,00</span>
                                         </div>
+                                        <div class='help-block with-errors'></div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary">Submit</button>
-                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger" >Reset Field</button>
+                                    <div class="col-lg-3">
+                                        <button type="submit" name="submit" value="submit" class="btn btn-sm btn-primary active">Submit</button>
+                                        <button type="reset" name="reset" value="clear form" class="btn btn-sm btn-danger " >Reset Field</button>
                                         <button class="btn btn-sm btn-warning" onclick="window.history.back()">Cancel</button>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        *&nbsp;&nbsp; Wajib diisi
                                     </div>
                                 </form>
                             </div>

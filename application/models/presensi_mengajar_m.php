@@ -13,9 +13,13 @@ class Presensi_mengajar_m extends MY_Model{
             )
         );
     function rekap_per_dosen($bulan) {
-        
         $this->_database->select('NIP, COUNT(NIP) AS JUMLAHHADIR');
         $this->_database->group_by('NIP');
+        $this->_database->like('TGLMENGAJAR', $bulan);
+        return $this->get_all();
+    }
+    function get_data_for_ta($bulan) {
+        $this->_database->select('NIP, TGLMENGAJAR as TGL');
         $this->_database->like('TGLMENGAJAR', $bulan);
         return $this->get_all();
     }

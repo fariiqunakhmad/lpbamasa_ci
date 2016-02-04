@@ -57,6 +57,17 @@ class Tsl extends MY_Transaction {
         }
         return $value;
     }
+    public function insert() {
+        if(can_access($this->obj.'/'.$this->uri->segment(2))){
+            $value = $this->get_data_from_form();
+            $this->kas->insert($value['kas']);
+            $this->mdl->insert($value['data']);
+            $this->kas->update($value['kas']['IDKAS'], ['REFKAS'=>$value['idtrans']]);
+            redirect($this->obj.'/nota/'.$value['idtrans'], 'refresh');
+        } else {
+            show_error("Mohon maaf, peran anda tidak diizinkan untuk mengakses fungsi ini..");	
+        }
+    }
     public function accept($idtrans) {
         parent::accept($idtrans);
         $rec = $this->mdl->with('kas')->get($idtrans);
