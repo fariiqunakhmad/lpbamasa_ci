@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logo.png"/>
         <title><?php echo $title; ?></title>
-
+        <?php //echo base_url(); ?>
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 

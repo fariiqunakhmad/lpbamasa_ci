@@ -257,12 +257,12 @@
                                 </li>
                             </ul>
                         </li>
-<!--                        <li>
+                        <li>
                             <a href="<?php echo base_url(); ?>kas">
                                 <i class="fa fa-book fa-fw"></i>
                                 Kas
                             </a> 
-                        </li>-->
+                        </li>
                         <li>
                             <a href="<?php echo base_url(); ?>kas/load_form_laporan">
                                 <i class="fa fa-files-o fa-fw"></i>

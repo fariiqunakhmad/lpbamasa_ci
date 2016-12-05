@@ -1,6 +1,8 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * 
+ */
 class Home extends CI_Controller{
     private $data;
     private $view;
@@ -20,7 +22,7 @@ class Home extends CI_Controller{
         $this->view['sidenav']='template/sidenav'.$this->data['useras']['id'];
         $this->view['topnav'] ='template/topnav';
         $this->view['js']     =[];
-        $this->view['css']     =[];
+        $this->view['css']    =[];
     }
     function index() {
         $this->data['title']  ='Dasboard';
